@@ -2,5 +2,5 @@
 server {
     listen      80  default_server;
     server_name __;
-    rewrite ^(.*) http://www.60s.ooo/ permanent;
+    rewrite ^(.*) https://www.60s.ooo/ permanent;
 }
