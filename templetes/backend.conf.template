@@ -5,6 +5,6 @@ server {
     location / {
         proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header Host            $http_host;
-        proxy_pass https://advertise-backend-trsauqgpta-as.a.run.app/admin/;
+        proxy_pass https://malaysia-backend-ipit43q4oq-as.a.run.app/admin/;
     }
 }
