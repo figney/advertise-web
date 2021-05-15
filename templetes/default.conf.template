@@ -1,9 +1,6 @@
 # default configuration, if server name dosen't match then redirect to official site.
-#server {
-#    listen      80  default_server;
-#    server_name __;
-#    proxy_set_header Host $host;
-#    proxy_set_header X-Real-Ip $remote_addr;
-#    proxy_set_header X-Forwarded-For $remote_addr;
-#    rewrite ^(.*) https://www.60s.ooo/ permanent;
-#}
+server {
+    listen      80  default_server;
+    server_name __;
+    rewrite ^(.*) https://www.60s.ooo/ permanent;
+}
