@@ -1,0 +1,979 @@
+@import "base";
+@import "animate";
+@import "~vue-snotify/styles/material";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;400;700&display=swap');
+
+@font-face {
+  font-family: 'puhuiti_heavy';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('../assets/fonts/puhuiti_heavy.ttf');
+}
+
+@font-face {
+  font-family: 'din-pro';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('../assets/fonts/DINPro-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'din-pro';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('../assets/fonts/DINPro-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'din-pro';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('../assets/fonts/DINPro-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'din-pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../assets/fonts/DINPro-Black.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Orbitron.ttf");
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Montserrat-Regular.ttf") format('ttf');
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url("../assets/fonts/Montserrat-Bold.ttf") format('ttf');
+}
+
+html, body {
+  font-family: 'Noto Sans SC', sans-serif;
+  margin: 0 auto;
+  color: #212328;
+  background: #F1F1F1;
+  line-height: 1.5;
+  user-select: none;
+}
+
+#app {
+  font-size: 14px;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.montserrat {
+  font-family: Montserrat, sans-serif;
+}
+
+.din-pro {
+  font-family: 'din-pro', sans-serif;
+}
+
+.num-font {
+  font-family: 'Orbitron', sans-serif;
+}
+
+img {
+  vertical-align: middle;
+}
+
+
+.fs-8 {
+  font-size: 8px;
+}
+
+.fs-10 {
+  font-size: 10px;
+}
+
+.fs-12 {
+  font-size: 12px;
+}
+
+.fs-13 {
+  font-size: 13px;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.fs-15 {
+  font-size: 15px;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-17 {
+  font-size: 17px;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.fs-19 {
+  font-size: 19px;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.fs-22 {
+  font-size: 22px;
+}
+
+.fs-24 {
+  font-size: 24px;
+}
+
+.fs-25 {
+  font-size: 25px;
+}
+
+.fs-26 {
+  font-size: 26px;
+}
+
+.fs-28 {
+  font-size: 28px;
+}
+
+.fs-30 {
+  font-size: 30px;
+}
+
+.fs-40 {
+  font-size: 40px;
+}
+
+.fs-48 {
+  font-size: 48px;
+}
+
+.fs-50 {
+  font-size: 50px;
+}
+
+.font-100 {
+  font-weight: 100;
+}
+
+.font-900 {
+  font-weight: 900;
+}
+
+.font-400 {
+  font-weight: 400;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+/**************/
+.fc-fff {
+  color: white;
+}
+
+.fc-ec4416 {
+  color: #EC4416;
+}
+
+.fc-44b4fe {
+  color: #44b4fe;
+}
+
+.fc-primary {
+  color: #fed32a;
+}
+
+.fc-accent {
+  color: #FF8900;
+}
+
+.fc-accent2 {
+  color: #F2D1A9;
+}
+
+.fc-accent3 {
+  color: #F8D333;
+}
+
+.fc-default {
+  color: rgba(33,35,40,1) !important;
+}
+
+.fc-secondary {
+  color: rgba(33,35,40,0.6) !important;
+}
+
+.fc-coin {
+  color: #FF8900;
+}
+
+.fc-coin-light {
+  color: #e5d873;
+}
+
+.fc-error {
+  color: #FF0000;
+}
+
+.fc-success {
+  color: #25DE1C;
+}
+
+.fc-blue {
+  color: #4252FC;
+}
+
+//**************
+
+.border-radius-xl {
+  border-radius: 20px !important;
+}
+
+.border-radius {
+  border-radius: 10px !important;
+}
+
+.border-radius-sm {
+  border-radius: 8px !important;
+}
+
+.border-radius-xs {
+  border-radius: 5px !important;
+}
+
+.border-radius-bottom-xl {
+  border-radius: 0 0 20px 20px !important;
+}
+
+.border-radius-bottom {
+  border-radius: 0 0 10px 10px !important;
+}
+
+.border-radius-bottom-sm {
+  border-radius: 0 0 8px 8px !important;
+}
+
+.border-radius-bottom-xs {
+  border-radius: 0 0 5px 5px !important;
+}
+
+.border-radius-top-xl {
+  border-radius: 20px 20px 0 0 !important;
+}
+
+.border-radius-top {
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.border-radius-top-sm {
+  border-radius: 8px 8px 0 0 !important;
+}
+
+.border-radius-top-xs {
+  border-radius: 5px 5px 0 0 !important;
+}
+
+.border-radius-left-xl {
+  border-radius: 20px 0 0 20px !important;
+}
+
+.border-radius-left {
+  border-radius: 10px 0 0 10px !important;
+}
+
+.border-radius-left-sm {
+  border-radius: 8px 0 0 8px !important;
+}
+
+.border-radius-left-xs {
+  border-radius: 5px 0 0 5px !important;
+}
+
+.border-radius-right-xl {
+  border-radius: 0 20px 20px 0 !important;
+}
+
+.border-radius-right {
+  border-radius: 0 10px 10px 0 !important;
+}
+
+.border-radius-right-sm {
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.border-radius-right-xs {
+  border-radius: 0 5px 5px 0 !important;
+}
+
+.border-radius-50 {
+  border-radius: 50%;
+}
+
+.no-border {
+  border: none;
+}
+
+.no-border-bar {
+  &::after {
+    display: none;
+  }
+}
+
+.shadow {
+  box-shadow: 0 3px 23px 3px rgba(168, 166, 150, 0.25);
+}
+
+/****************************/
+.white-view {
+  background-color: white;
+}
+
+.bg-dark {
+  background-color: #212328 !important;
+}
+
+.bg-view {
+  background-color: #f1f1f1;
+}
+
+.bg-e8e8e8 {
+  background-color: #e8e8e8;
+}
+
+.bg-ccc {
+  background-color: #ccc;
+}
+
+.bg-primary {
+  background-color: #fed32a;
+}
+
+.bg-secondary {
+  background-color: #FF8900;
+}
+
+.bg-cfa972 {
+  background-color: #cfa972;
+}
+
+.bg-error {
+  background-color: #FF0000;
+}
+
+.bg-success {
+  background-color: #25DE1C;
+}
+
+.bg-blue {
+  background-color: #4252FC;
+}
+
+.bg-ecd8af {
+  background-color: #ecd8af;
+}
+
+.bg-fef3ee {
+  background-color: #fef3ee;
+}
+
+.bg-f1f1f1 {
+  background-color: #f1f1f1;
+}
+
+.bg-field {
+  background-color: #f4f8fa;
+}
+
+.no-bg {
+  background-color: rgba(0, 0, 0, 0) !important;
+  box-shadow: none !important;
+}
+
+.border-top {
+  border-top: 1px solid #EAEAEA;
+}
+
+
+.border-bottom {
+  border-bottom: 1px solid #EAEAEA;
+}
+
+//***********************
+
+.van-overlay {
+  background-color: rgba(54, 54, 54, 0.8);
+}
+
+.van-popup__close-icon {
+  color: rgba(33,35,40,0.4) !important;
+}
+
+.van-empty__image {
+  width: 3.616rem !important;
+  height: 2.352rem !important;
+}
+
+.app-navbar {
+  padding-bottom: 60px; //50
+}
+
+.app-appbar {
+  padding-top: 46px;
+}
+
+
+.bounce {
+  animation: bounce .3s infinite alternate;
+}
+
+.render-html {
+  white-space: pre-wrap;
+
+  * {
+    max-width: 100%;
+  }
+
+  p {
+    display: inline;
+    line-height: 1.8;
+  }
+}
+
+.three-lines {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.wrap-btn {
+  height: unset;
+  min-height: 40px;
+  padding: 0.14rem;
+  line-height: 1.4;
+}
+
+@keyframes bounce {
+  from {
+    transform: scale(0.99);
+  }
+  to {
+    transform: scale(1.02);
+  }
+}
+
+.van-nav-bar__left i {
+  color: #212328 !important;
+}
+
+.base-header {
+  z-index: 2;
+  background: #FED32A !important;
+
+  .van-nav-bar__left i {
+    color: #fff !important;
+  }
+}
+
+
+.avatar {
+  border: 2px solid #e7eaf1;
+  background: #e7eaf1;
+  object-fit: cover;
+}
+
+.size-72 {
+  width: 72px;
+  height: 72px;
+}
+
+.size-64 {
+  width: 64px;
+  height: 64px;
+}
+
+.size-60 {
+  width: 60px;
+  height: 60px;
+}
+
+.size-52 {
+  width: 52px;
+  height: 52px;
+}
+
+.size-50 {
+  width: 50px;
+  height: 50px;
+}
+
+.size-48 {
+  width: 48px;
+  height: 48px;
+}
+
+.size-46 {
+  width: 46px;
+  height: 46px;
+}
+
+.size-45 {
+  width: 45px;
+  height: 45px;
+}
+
+.size-43 {
+  width: 43px;
+  height: 43px;
+}
+
+.size-40 {
+  width: 40px;
+  height: 40px;
+}
+
+.size-36 {
+  width: 36px;
+  height: 36px;
+}
+
+.size-32 {
+  width: 32px;
+  height: 32px;
+}
+
+.size-30 {
+  width: 30px;
+  height: 30px;
+}
+
+.size-29 {
+  width: 29px;
+  height: 29px;
+}
+
+.size-27 {
+  width: 27px;
+  height: 27px;
+}
+
+.size-25 {
+  width: 25px;
+  height: 25px;
+}
+
+.size-20 {
+  width: 20px;
+  height: 20px;
+}
+
+.size-18 {
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+}
+
+.size-15 {
+  width: 15px;
+  height: 15px;
+}
+
+.size-13 {
+  width: 13px;
+  height: 13px;
+}
+
+.size-10 {
+  width: 10px;
+  height: 10px;
+}
+
+.size-8 {
+  width: 8px;
+  height: 8px;
+}
+
+.size-6 {
+  width: 6px;
+  height: 6px;
+}
+
+.size-5 {
+  width: 5px;
+  height: 5px;
+}
+
+.opacity-0 {
+  opacity: 0 !important;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-60 {
+  opacity: 0.6;
+}
+
+.opacity-70 {
+  opacity: 0.7;
+}
+
+.opacity-80 {
+  opacity: 0.8;
+}
+
+.opacity-90 {
+  opacity: 0.9;
+}
+
+.vw-50 {
+  width: 50vw;
+}
+
+.vw-60 {
+  width: 60vw;
+}
+
+.vw-70 {
+  width: 70vw;
+}
+
+.vw-80 {
+  width: 80vw;
+}
+
+.vw-90 {
+  width: 90vw;
+}
+
+.vw-100 {
+  width: 100vw;
+  max-width: 750px;
+}
+
+.vh-50 {
+  height: 50vh;
+}
+
+.vh-60 {
+  height: 60vh;
+}
+
+.vh-70 {
+  height: 70vh;
+}
+
+.vh-80 {
+  height: 80vh;
+}
+
+.vh-90 {
+  height: 90vh;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+.object-fit-contain {
+  object-fit: contain;
+}
+
+.border-primary {
+  border: 1px solid #FED32A;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/*
+.RM {
+  .money-number::before {
+    content: "RM";
+  }
+}
+
+.USD {
+  .money-number::before {
+    content: "$";
+  }
+}
+
+.RMB {
+  .money-number::after {
+    content: "元";
+  }
+}
+*/
+
+.md-toast .md-popup {
+  z-index: 3700;
+}
+
+#nprogress .spinner {
+  display: none !important;
+}
+
+.snotifyToast {
+
+  background: linear-gradient(180deg, #FFFBDE 0%, #FFFFFF 100%);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 10px;
+
+  .snotifyToast__inner {
+    min-height: auto;
+    padding: 0;
+  }
+}
+
+.grow-animate {
+  transition: all 0.36s !important;
+}
+
+.van-icon {
+  width: fit-content;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+
+.van-badge {
+  border-width: 0 !important;
+}
+
+.van-tabs__nav {
+  background: unset !important;
+}
+
+.snotifyToast {
+  background: linear-gradient(180deg, #e6e8FF 0%, #FFFFFF 100%) !important;
+}
+
+.md-toast-content {
+  .md-icon-fail {
+    display: none;
+  }
+
+  .md-toast-text {
+    white-space: pre-wrap;
+    text-overflow: unset;
+    overflow: visible;
+  }
+}
+
+.money-unit {
+  font-size: 100%;
+  margin-left: 0.08rem;
+  font-family: 'din-pro', 'Noto Sans SC', sans-serif;
+}
+
+.close-icon {
+  position: absolute;
+  right: 0.28rem;
+  top: 0.28rem;
+  font-weight: bold;
+}
+
+// driver.js
+#driver-popover-item {
+  border-radius: 0.2667rem !important;
+  word-break: break-all;
+  background: #FED32A !important;
+
+  .driver-popover-tip {
+    border-color: transparent transparent #fed32a !important;
+  }
+
+  .driver-popover-title {
+    font-size: 16px !important;
+    font-weight: bold;
+  }
+
+  .driver-popover-description {
+    font-size: 14px !important;
+  }
+
+  .driver-prev-btn, .driver-next-btn {
+    background: #FFFFFF !important;
+    border-radius: 0.43rem !important;
+    border: 1px solid #212328 !important;
+    //color: #fff !important;
+    text-shadow: none !important;
+  }
+
+  .driver-next-btn {
+    padding: 0.16rem 0.5rem !important;
+  }
+
+  .driver-prev-btn {
+    display: none !important;
+  }
+
+  .driver-disabled {
+    background: #fff !important;
+    border-color: #ccc !important;
+    color: #888 !important;
+  }
+
+  .driver-close-btn {
+    display: none !important;
+  }
+}
+
+// 修改引导的 popover 层的样式
+#driver-popover-item.custom-driver-popover {
+  background: rgba(0,0,0,0) !important;
+  box-shadow: none;
+  color: #FED32A;
+
+  .driver-popover-title, .driver-popover-description {
+    color: #FED32A;
+  }
+
+  .driver-popover-tip {
+    display: none;
+  }
+}
+
+.absolute-typing-model {
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#nprogress .bar {
+  height: 3px;
+  background: #FFEB3B !important; //自定义颜色
+  z-index: 3000 !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #FFEB3B, 0 0 5px #FFEB3B;
+}
+
+.grecaptcha-badge {
+  display: none;
+}
+
+.no-animation-delay {
+  animation-delay: 0s !important;
+}
+
+// 呼吸按钮效果
+.breath-btn {
+  animation-delay: 1s;
+  animation-name: shadow-pulse;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shadow-pulse {
+  0% {
+    box-shadow: 0 0 0 0px #FED32A;
+  }
+  100% {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+  }
+}
+
+.fade-in-down {
+  animation: fadeInUp 0.3s linear 1;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.3rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.flash-text {
+  animation: flashText 0.8s linear infinite;
+}
+
+@keyframes flashText {
+  0%,100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.flash-btn {
+  animation: flashBtn 1s linear infinite;
+}
+
+@keyframes flashBtn {
+  0%,100% {
+    background: #FED32A;
+  }
+  50% {
+    background: #ff8900;
+  }
+}
+
+.rotate {
+  animation: rotate 0.5s linear infinite;
+}
+
+@keyframes rotate {
+  0%,100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(360deg);
+  }
+}
