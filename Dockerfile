@@ -12,7 +12,7 @@ FROM  nginx:1.19.10
 
 COPY --from=builder /scripts/dist /usr/share/nginx/html
 
-ADD templetes /etc/nginx/templates
+# ADD templetes /etc/nginx/templates
 
 EXPOSE 80
 
