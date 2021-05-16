@@ -12,8 +12,6 @@ FROM  nginx:1.19.10
 
 COPY --from=builder /scripts/dist /usr/share/nginx/html
 
-# ADD templetes /etc/nginx/templates
-
 EXPOSE 80
 
 CMD [ "nginx", "-g", "daemon off;" ]
