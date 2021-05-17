@@ -101,6 +101,8 @@ export default {
     this.$bus.on('readNotify', this.onReadNotify)
     this.$bus.on('getForceNotifications', this.getUnReadForceNotifications)
     this.$socket.on("notification", this.onNotify);
+    this.$socket.on("user_invite", this.onInvite);
+    this.$socket.on("ad_task_click", this.onAdTaskClick);
     this.$socket.on("rate_quotation", this.onRateQuotation);
     this.$socket.on("reload", this.onReload);
     this.$socket.on("version", this.onVersion);
@@ -129,7 +131,28 @@ export default {
           && this.forceNotifications.length!=0
           && this.$route.name != 'Notification'
     },
+    onInvite(msg) {
+      this.updateUserInfo(msg)
+    },
+    onAdTaskClick(msg) {
+      this.updateUserInfo(msg)
+      this.$bus.emit('taskClick',{
+        id: msg.ad_task_id,
+        now_click_number: msg.now_click_number,
+        complete_click_number: complete_click_number,
+      })
+    },
     onNotify(msg) {
+      this.updateUserInfo(msg)
+
+      // 强弱提醒
+      if (msg.forced) {
+        this.addForceNotify(msg)
+      } else {
+        this.showLiteNotify(msg);
+      }
+    },
+    updateUserInfo(msg) {
       // 更新用户信息
       if (msg.user_info && msg.user_info.hash) {
         this.$store.dispatch('updateUser',JSON.parse(JSON.stringify(msg.user_info)))
@@ -141,13 +164,6 @@ export default {
       // 更新未读通知数量
       if (msg.notifications_count != undefined) {
         this.$store.commit("updateUnreadNotificationCount", msg.notifications_count);
-      }
-
-      // 强弱提醒
-      if (msg.forced) {
-        this.addForceNotify(msg)
-      } else {
-        this.showLiteNotify(msg);
       }
     },
     onRateQuotation(data) {
@@ -255,9 +271,11 @@ export default {
       this.startGuide()
       delete this.forceMap[this.popData.id]
       this.popData = data
-      this.notifyComponent = this.notifyModels.get(data.type)
-      this.showPop = true
-      this.freezePop = true
+      if (data.type!='UserEarningsNotification') {
+        this.notifyComponent = this.notifyModels.get(data.type)
+        this.showPop = true
+        this.freezePop = true
+      }
     },
     closePop() {
       this.$closeModel(this.$refs.baseSocketNotify.$el)

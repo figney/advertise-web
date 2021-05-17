@@ -1,7 +1,7 @@
 <template>
   <div class="vip-commission-notify flex flex-direction align-center padding padding-top-xs">
     <img src="../../assets/images/icon_27@2x.png" class="margin-bottom-xs" style="height:2.18rem">
-    <div class="font-bold fs-18 margin-bottom">
+    <div class="font-bold fs-18 margin-bottom text-center">
       <span v-if="notify.params.is_no_commission">{{$t('CAN_NOT_GET_COMMISSION','无法获得佣金')}}</span>
       <span v-else>{{$t('COMMISSION_ARRIVED_NOTIFY','佣金到账通知')}}</span>
     </div>
@@ -9,11 +9,16 @@
     <!-- 没有获得下级的广告任务佣金 -->
     <div class="margin-bottom flex flex-direction bg-fef3ee border-radius-sm" v-if="notify.params.is_no_commission" style="width:100%">
       <div class="flex align-center justify-between padding-lr padding-tb-sm border-bottom">
-        <span class="fs-12">{{$t('YOUR_FRIEND_BUY_VIP_SPEND','您的N级好友N购买VIP花费了')}}</span>
+        <span class="fs-12">{{$t('YOUR_FRIEND_BUY_VIP_N',[notify.params.level.toString(),notify.params.buy_vip_level.toString()],'您的N级好友购买了VIP_N')}}</span>
         <money-number :value="notify.params.buy_money" class="money-number font-bold text-nowrap margin-left-xs"/>
       </div>
       <div class="flex align-center justify-between padding-lr padding-tb-sm border-bottom">
-        <span class="fs-12">{{$t('BECAUSE_YOU_DO_NOT_BUY_VIP','由于您没有购买VIP')}}</span>
+        <template v-if="notify.params.my_vip_level">
+          <span class="fs-12">{{$t('BECAUSE_YOU_VIP_LEVEL_IS','由于您的VIP等级是')}}</span>
+          <span class="font-bold">{{notify.params.my_vip_level}}</span>
+        </template>
+
+        <span class="fs-12" v-else>{{$t('BECAUSE_YOU_DO_NOT_BUY_VIP','由于您没有购买VIP')}}</span>
       </div>
       <div class="flex align-center justify-between padding-lr padding-tb-sm">
         <span class="fs-12">{{$t('SO_YOU_CANNOT_GOT_IT','所以您无法获得佣金')}}</span>
@@ -24,7 +29,7 @@
     <!-- 获得下级全部的广告任务佣金 -->
     <div class="margin-bottom flex flex-direction bg-fef3ee border-radius-sm" v-else-if="notify.params.is_get_all_commission" style="width:100%">
       <div class="flex align-center justify-between padding-lr padding-tb-sm border-bottom">
-        <span>{{$t('YOUR_FRIEND_BUY_VIP_SPEND','您的N级好友N购买VIP花费了')}}</span>
+        <span class="fs-12">{{$t('YOUR_FRIEND_BUY_VIP_N',[notify.params.level.toString(),notify.params.buy_vip_level.toString()],'您的N级好友购买了VIP_N')}}</span>
         <money-number :value="notify.params.buy_money" class="money-number font-bold text-nowrap margin-left-xs"/>
       </div>
       <div class="flex align-center justify-between padding-lr padding-tb-sm">
@@ -36,7 +41,7 @@
     <!-- 获得下级部分的广告任务佣金 -->
     <div class="margin-bottom flex flex-direction bg-fef3ee border-radius-sm" v-else style="width:100%">
       <div class="flex align-center justify-between padding-lr padding-tb-sm border-bottom">
-        <span class="fs-12">{{$t('YOUR_FRIEND_BUY_VIP_SPEND','您的N级好友N购买VIP花费了')}}</span>
+        <span class="fs-12">{{$t('YOUR_FRIEND_BUY_VIP_N',[notify.params.level.toString(),notify.params.buy_vip_level.toString()],'您的N级好友购买了VIP_N')}}</span>
         <money-number :value="notify.params.buy_money" class="money-number font-bold text-nowrap margin-left-xs"/>
       </div>
       <div class="flex align-center justify-between padding-lr padding-tb-sm border-bottom">
@@ -53,7 +58,7 @@
       </div>
     </div>
 
-    <van-button class="font-bold border-radius-sm bg-dark fc-fff margin-bottom-sm" block @click="startNow">
+    <van-button class="font-bold border-radius-sm bg-dark fc-fff margin-bottom-sm wrap-btn" block @click="startNow">
       <span v-if="notify.params.is_no_commission">{{$t('BUY_VIP','开通VIP')}}</span>
       <span v-else-if="!notify.params.is_get_all_commission">{{$t('UPGRADE_VIP','升级VIP')}}</span>
       <span v-else>{{$t('INVITE_FRIEND_GET_MORE_AWARD','邀请好友获取更多奖励')}}</span>

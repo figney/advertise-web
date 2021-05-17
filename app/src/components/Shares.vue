@@ -125,6 +125,9 @@ export default {
       if (this.user.l_id) {
         url += `&cl=${this.user.l_id}`
       }
+      if (this.user.id) {
+        url += `&t=${this.user.id}`
+      }
       return url
     },
     showShare() {

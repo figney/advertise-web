@@ -131,6 +131,10 @@ const routes = [
   },
 ];
 
+if (process.env.NODE_ENV === 'production') {
+  routes.splice(routes.length - 2, 1)
+}
+
 const router = new VueRouter({
   base: process.env.BASE_URL,
   scrollBehavior(to, from, savedPosition) {

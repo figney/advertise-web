@@ -38,19 +38,19 @@
       </div>
       <div class="flex align-stretch justify-between">
         <div
-            class="flex flex-direction align-center margin-right-sm"
+            class="flex flex-direction align-center justify-between margin-right-sm"
             style="width:30%;flex-grow:1"
         >
           <div class="fs-19 margin-bottom-xs text-nowrap">
             <money-number class="font-bold money-number" :value="wallet.balance"/>
           </div>
           <div class="margin-bottom-sm fc-secondary">{{$t('ACCOUNT_BALANCE','账户余额')}}</div>
-          <van-button class="border-radius-sm bg-dark" block style="margin-left:-0.05rem" @click="$toRouter({name:'Withdraw'})">
+          <van-button class="border-radius-sm bg-dark padding-lr-xs" block style="margin-left:-0.05rem" @click="$toRouter({name:'Withdraw'})">
             <span class="font-bold fs-16 fc-fff">{{$t('WITHDRAW_WEB','提现')}}</span>
           </van-button>
         </div>
         <div
-            class="flex flex-direction align-center margin-left-sm"
+            class="flex flex-direction align-center justify-between margin-left-sm"
             style="width:30%;flex-grow:1"
         >
           <div class="fs-19 margin-bottom-xs text-nowrap">
@@ -58,8 +58,8 @@
 <!--            <money-number class="font-bold money-number" :value="wallet.wallet_count.balance_earnings"/>-->
           </div>
           <div class="margin-bottom-sm fc-secondary">{{$t('TOTAL_EARNINGS','累计收益')}}</div>
-          <van-button class="border-radius-sm bg-dark" block style="margin-right:-0.05rem" @click="$toRouter({name:'Deposit'})">
-            <span class="font-bold fs-16 fc-fff">{{$t('DEPOSIT_WEB','充值')}}</span>
+          <van-button class="border-radius-sm bg-dark padding-lr-xs" block style="margin-right:-0.05rem" @click="$toRouter({name:'Deposit'})">
+            <span class="font-bold fs-16 fc-fff">{{$t('BUY_VIP','购买VIP')}}</span>
           </van-button>
         </div>
       </div>

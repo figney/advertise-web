@@ -24,80 +24,85 @@
       </div>
     </div>
 
-    <div class="margin-lr margin-bottom border-radius bg-dark fc-primary font-bold fs-12 padding-lr padding-tb-sm position-re" style="min-height:1.52rem">
+    <div class="margin-lr margin-bottom-sm border-radius bg-dark fc-primary font-bold fs-12 padding-lr padding-tb-sm position-re" style="min-height:1.52rem">
       <loading-view v-if="loadingAbout" iconTheme="light" :vertical="false"/>
       <div class="render-html three-lines" v-html="aboutContent.content" v-else/>
     </div>
 
-    <div class="margin-lr margin-bottom border-radius shadow white-view">
-      <van-tabs color="#fed32a" line-width="50%" v-model="activeTab">
-        <van-tab name="day_data">
-          <template #title>
-            <div class="font-bold fs-16">{{$t('DAY_DATA','每日数据')}}</div>
-          </template>
-          <template #default>
-            <div class="flex flex-direction">
-              <div class="flex align-stretch">
-                <div class="flex flex-direction padding" style="width:50%">
-                  <div class="flex flex-direction margin-bottom-sm">
-                    <money-number class="font-bold fs-18 margin-bottom-xs money-number" :value="user.day_interest.today"/>
-                    <span class="fc-secondary fs-12">{{$t('TODAY_PROFIT','今日收益')}}</span>
-                  </div>
-                  <div class="flex flex-direction margin-bottom-sm" @click="$toRouter({name:'MyTask'})">
-                    <div class="font-bold fs-18 margin-bottom-xs" v-if="user.ad_task_data">{{user.ad_task_data.today_finished_count}}</div>
-                    <span class="fc-secondary fs-12">{{$t('TODAY_TASK','今日任务数')}}</span>
-                  </div>
-                </div>
-                <div class="flex flex-direction padding" style="width:50%">
-                  <div class="flex flex-direction margin-bottom-sm">
-                    <money-number class="font-bold fs-18 margin-bottom-xs money-number" :value="wallet.wallet_count.balance_earnings"/>
-                    <span class="fc-secondary fs-12">{{$t('TODAY_PROFIT','累计收益')}}</span>
-                  </div>
-                  <div class="flex flex-direction margin-bottom-sm">
-                    <div class="font-bold fs-18 margin-bottom-xs">{{user.invite.total}}</div>
-                    <span class="fc-secondary fs-12">{{$t('TODAY_TASK','邀请人数')}}</span>
-                  </div>
-                </div>
-              </div>
-              <van-button class="margin-lr margin-bottom bg-primary font-bold fs-14" round @click="$toRouter({name:'Task'})">{{$t('DO_TASK','做任务')}}</van-button>
-            </div>
-          </template>
-        </van-tab>
-        <van-tab name="task_data">
-          <template #title>
-            <div class="font-bold fs-16">{{$t('TASK_DATA','任务数据')}}</div>
-          </template>
-          <template #default>
-            <div class="flex flex-direction padding">
-              <div class="flex align-center justify-between margin-bottom">
-                <span class="fc-secondary">{{$t('FREE_TASK_COUNT','免费任务次数')}}</span>
-                <div class="font-bold flex align-center fc-secondary">
-                  <span class="fc-accent">{{free_task_num - getFinishedCount(0)}}</span>
-                  <span class="margin-lr-xs">/</span>
-                  <span>{{free_task_num}}</span>
-                </div>
-              </div>
-              <template v-for="(info,i) in userVipInfo">
-                <div class="flex align-center justify-between margin-bottom" :key="'user-vipinfo-'+i" v-if="info.vip_info">
-                  <span class="fc-secondary">{{info.vip_info.title}} {{$t('TASK_COUNT','任务次数')}}</span>
-                  <div class="font-bold flex align-center fc-secondary">
-                    <span class="fc-accent">{{info.task_num - getFinishedCount(0)}}</span>
-                    <span class="margin-lr-xs">/</span>
-                    <span>{{info.task_num}}</span>
-                  </div>
-                </div>
-              </template>
-              <div class="margin-tb text-center fc-secondary fs-16" v-if="userVipInfo.length==0">
-                {{$t('YOU_NOT_BUY_VIP','您暂未开通VIP')}}
-              </div>
-              <van-button class="bg-primary font-bold fs-14 padding-tb-xs line-height-15 wrap-btn" style="min-height:1.17334rem;height:unset" round @click="$toRouter({name:'HomeVip'})">{{$t('GET_MORE_COUNT','开通VIP获取更多次数')}}</van-button>
-            </div>
-          </template>
-        </van-tab>
-      </van-tabs>
+    <div class="margin-lr margin-bottom-sm border-radius shadow-sm white-view">
+      <div class="flex flex-direction padding-sm">
+        <div class="font-bold fs-16 margin-bottom">{{$t('DAY_DATA','每日数据')}}</div>
+        <div class="flex align-stretch">
+          <div class="flex flex-direction padding-lr-xs" style="width:50%">
+            <money-number class="font-bold fs-18 margin-bottom-xs money-number" :value="user.day_interest.today"/>
+            <span class="fc-secondary fs-12">{{$t('TODAY_PROFIT','今日收益')}}</span>
+          </div>
+          <div class="flex flex-direction padding-lr-xs" style="width:50%">
+            <money-number class="font-bold fs-18 margin-bottom-xs money-number" :value="wallet.wallet_count.balance_earnings"/>
+            <span class="fc-secondary fs-12">{{$t('TOTAL_PROFIT','累计收益')}}</span>
+          </div>
+        </div>
+      </div>
+<!--      <van-tabs color="#fed32a" line-width="50%" v-model="activeTab">-->
+<!--        <van-tab name="day_data">-->
+<!--          <template #title>-->
+<!--            <div class="font-bold fs-16">{{$t('DAY_DATA','每日数据')}}</div>-->
+<!--          </template>-->
+<!--          <template #default>-->
+<!--            <div class="flex flex-direction">-->
+<!--              <div class="flex align-stretch">-->
+<!--                <div class="flex flex-direction padding" style="width:50%">-->
+<!--                  <div class="flex flex-direction">-->
+<!--                    <money-number class="font-bold fs-18 margin-bottom-xs money-number" :value="user.day_interest.today"/>-->
+<!--                    <span class="fc-secondary fs-12">{{$t('TODAY_PROFIT','今日收益')}}</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="flex flex-direction padding" style="width:50%">-->
+<!--                  <div class="flex flex-direction margin-bottom-sm">-->
+<!--                    <money-number class="font-bold fs-18 margin-bottom-xs money-number" :value="wallet.wallet_count.balance_earnings"/>-->
+<!--                    <span class="fc-secondary fs-12">{{$t('TOTAL_PROFIT','累计收益')}}</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <van-button class="margin-lr margin-bottom bg-primary font-bold fs-14 wrap-btn" round @click="$toRouter({name:'Task'})">{{$t('DO_TASK_NOW','做任务')}}</van-button>-->
+<!--            </div>-->
+<!--          </template>-->
+<!--        </van-tab>-->
+<!--        <van-tab name="task_data">-->
+<!--          <template #title>-->
+<!--            <div class="font-bold fs-16">{{$t('TASK_DATA','任务数据')}}</div>-->
+<!--          </template>-->
+<!--          <template #default>-->
+<!--            <div class="flex flex-direction padding">-->
+<!--              <div class="flex align-center justify-between margin-bottom">-->
+<!--                <span class="fc-secondary">{{$t('FREE_TASK_COUNT','免费任务次数')}}</span>-->
+<!--                <div class="font-bold flex align-center fc-secondary">-->
+<!--                  <span class="fc-accent">{{free_task_num - getFinishedCount(0)}}</span>-->
+<!--                  <span class="margin-lr-xs">/</span>-->
+<!--                  <span>{{free_task_num}}</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <template v-for="(info,i) in userVipInfo">-->
+<!--                <div class="flex align-center justify-between margin-bottom" :key="'user-vipinfo-'+i" v-if="info.vip_info">-->
+<!--                  <span class="fc-secondary">{{info.vip_info.title}} {{$t('TASK_COUNT','任务次数')}}</span>-->
+<!--                  <div class="font-bold flex align-center fc-secondary">-->
+<!--                    <span class="fc-accent">{{info.task_num - getFinishedCount(0)}}</span>-->
+<!--                    <span class="margin-lr-xs">/</span>-->
+<!--                    <span>{{info.task_num}}</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </template>-->
+<!--              <div class="margin-tb text-center fc-secondary fs-16" v-if="userVipInfo.length==0">-->
+<!--                {{$t('YOU_NOT_BUY_VIP','您暂未开通VIP')}}-->
+<!--              </div>-->
+<!--              <van-button class="bg-primary font-bold fs-14 padding-tb-xs line-height-15 wrap-btn" style="min-height:1.17334rem;height:unset" round @click="$toRouter({name:'HomeVip'})">{{$t('GET_MORE_COUNT','开通VIP获取更多次数')}}</van-button>-->
+<!--            </div>-->
+<!--          </template>-->
+<!--        </van-tab>-->
+<!--      </van-tabs>-->
     </div>
 
-    <div class="flex align-center margin-lr margin-bottom">
+    <div class="flex align-center margin-lr margin-bottom-sm">
       <div class="fs-18 font-bold">{{$t('RECOMMEND_TASK','推荐任务')}}</div>
       <div class="flex-sub"/>
       <div class="flex align-center fc-secondary" @click="toMoreTask" id="guide-index-step-1">
@@ -106,9 +111,9 @@
       </div>
     </div>
 
-    <div class="flex flex-direction margin-lr">
+    <div class="flex flex-direction margin-lr margin-bottom">
       <template v-for="(ad,i) in hotTasks">
-        <ad-card :key="'index-ad-'+i" class="margin-bottom" :ad="ad"/>
+        <ad-card :key="'index-ad-'+i" class="margin-bottom-sm shadow-sm" :ad="ad"/>
       </template>
     </div>
 
@@ -230,7 +235,7 @@ export default {
     getHotTasks() {
       if (!this.hotTasks.length) {
         this.$http.get('v1/adTaskList',{
-          params: { tag: 'hot', page_size: 3 }
+          params: { tag: 'hot', page_size: 10 }
         }).then(res=>{
           this.$store.commit('setState',{key:'hotTasks',value: res.data.list})
         }).catch(err=>{

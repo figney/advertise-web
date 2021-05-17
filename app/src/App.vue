@@ -25,8 +25,15 @@
       <sign-in-up/>
       <base-socket/>
 
+      <template v-if="!['TaskShare','Beginner'].includes($route.name)">
+        <contact/>
+      </template>
+
+      <template v-if="$route.name && $route.name.startsWith('Home') && $route.name !== 'HomeVip'">
+        <pwa-banner/>
+      </template>
+
       <template v-if="$route.name && $route.name.startsWith('Home')">
-        <pwa-banner style="z-index:1"/>
         <app-bottom-nav-bar style="z-index:1"/>
       </template>
 
@@ -47,9 +54,11 @@ import Shares from "./components/Shares"
 import BaseSocket from "./components/BaseSocket";
 import FirstTask from "./components/guide/FirstTask";
 import PwaBanner from "./components/PwaBanner";
+import Contact from "./components/Contact";
 
 export default {
   components: {
+    Contact,
     PwaBanner,
     FirstTask,
     BaseSocket,

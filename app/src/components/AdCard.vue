@@ -31,8 +31,8 @@
             <template v-if="ad.total">
 <!--              <span class="font-bold fc-default">{{ad.total - ad.rest}}</span>-->
               <num-change class="font-bold fc-default" :value="ad.total - ad.rest" :from="ad.total"/>
-              <span style="margin:0 0.04rem">/</span>
-              <span class="font-bold">{{ad.total}}</span>
+<!--              <span style="margin:0 0.04rem">/</span>-->
+<!--              <span class="font-bold">{{ad.total}}</span>-->
             </template>
             <template v-else>
               <span class="fc-default">{{$t('NOT_LIMIT','无限制')}}</span>

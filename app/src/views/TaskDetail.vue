@@ -47,16 +47,16 @@
 
           <template v-if="task.rest_count || user_ad_task.status=='InProgress'">
             <div class="flex justify-between align-center margin-bottom-xs">
-              <span class="fs-12">{{$t('TOTAL_TASK','总任务数')}}</span>
+              <span class="fs-12">{{$t('TOTAL_TASK','需要人数')}}</span>
               <span class="font-bold" v-if="task.total">{{task.total}}</span>
               <span class="font-bold" v-else>{{$t('NOT_LIMIT','无限制')}}</span>
             </div>
             <div class="flex justify-between align-center margin-bottom-xs" v-if="task.rest_count>0">
-              <span class="fs-12">{{$t('REST_TASK','剩余任务数')}}</span>
+              <span class="fs-12">{{$t('REST_TASK','剩余人数')}}</span>
               <span class="font-bold">{{task.rest_count}}</span>
             </div>
             <div class="flex justify-between align-center">
-              <span class="fs-12">{{$t('TASK_TIME','任务时间')}}</span>
+              <span class="fs-12">{{$t('TASK_TIME','代言时间')}}</span>
               <span class="font-bold">
                 <span>{{task.valid_hour}}</span>
                 <span style="margin-left:0.05rem">h</span>
@@ -116,7 +116,7 @@
           </div>
 
           <!-- 步骤3 -->
-          <div :class="['task-step-item',{'task-step-item__active':(activeStep>1)}]" id="task-step-3">
+          <div :class="['task-step-item',{'task-step-item__active':(activeStep>1)},{'flash-share':(showFlashShare)}]" id="task-step-3">
             <div class="font-bold flex align-start margin-bottom-sm">
               <div class="size-18 bg-dark fc-fff border-radius-50 flex align-center justify-center fs-10 margin-right-xs" style="margin-top:0.04rem">3</div>
               <span>{{$t('MANUAL_CONTROL_TO_SHARE','手动或点击 whatsaapp fb等一键分享图标进行 分享。')}}</span>
@@ -133,7 +133,7 @@
                 <img src="../assets/images/icon_19@2x.png" style="height:1.4rem" @click="copyPlat('tg')">
               </div>
             </div>
-            <div class="margin-top fc-error text-center font-bold bounce" v-if="showShareDetail">{{$t('CLICK_TO_QUICK_SHARE','点击图标快速分享给朋友')}}</div>
+            <div class="margin-top fc-error text-center font-bold bounce" v-if="showShareDetail">{{$t('CLICK_TO_QUICK_SHARE','您还没有分享给好友您的代言信息，快点分享给好友领取代言奖金吧')}}</div>
           </div>
 
           <!-- 步骤4 -->
@@ -147,13 +147,23 @@
               <div class="flex align-center justify-between bg-fef3ee padding-tb-sm padding-lr-sm margin-bottom-xs border-radius-xs" style="width:100%">
                 <span class="fc-secondary">{{$t('TASK_END_COUNT_DOWN','任务结束倒计时')}}</span>
                 <div class="flex-sub"/>
-                <van-count-down :time="user_ad_task.expired_time*1000" @finish="taskExpired" class="font-bold" style="color:#FF0018;font-size:0.48rem"/>
+                <van-count-down millisecond :time="user_ad_task.expired_time*1000" @finish="taskExpired" class="font-bold" style="color:#FF0018;font-size:0.48rem" format="HH:mm:ss:S"/>
               </div>
 
               <div class="flex align-center justify-between bg-fef3ee padding-tb-sm padding-lr-sm margin-bottom-xs border-radius-xs" style="width:100%">
                 <span class="fc-secondary">{{$t('CAN_GET_AWARD','可获得奖金')}}</span>
                 <div class="flex-sub"/>
                 <money-number class="font-bold fs-18 money-number bounce" :value="task.money"/>
+              </div>
+
+              <div class="flex align-center justify-between bg-fef3ee padding-tb-sm padding-lr-sm margin-bottom-xs border-radius-xs" style="width:100%">
+                <span class="fc-secondary">{{$t('CLICKED_NUM','已点击次数')}}</span>
+                <div class="flex-sub"/>
+                <div class="font-bold fs-18 flex align-center montserrat">
+                  <span class="fc-secondary">{{now_click_number}}</span>
+                  <span class="margin-lr-xs">/</span>
+                  <span>{{task.complete_click_number}}</span>
+                </div>
               </div>
 
               <div class="margin-bottom"/>
@@ -165,7 +175,7 @@
           </div>
         </template>
         <div class="margin-bottom margin-lr-xs">
-          <van-button class="bg-dark fc-fff border-radius-xs font-bold" block @click="viewOtherTasks">{{$t('DO_OTHER_GET_MORE_PROFIT','我要代言更多品牌')}}</van-button>
+          <van-button class="bg-dark fc-fff border-radius-xs font-bold" block @click="viewOtherTasks(false)">{{$t('DO_OTHER_GET_MORE_PROFIT','我要代言更多品牌')}}</van-button>
         </div>
       </div>
     </div>
@@ -177,13 +187,40 @@
             size="0.52rem"
             name="cross"
             class="position-ab close-icon"
-            @click="showStartSuccess=false"
+            @click="closeStartSuccess"
         />
 
         <img src="../assets/images/icon_11@2x.png" alt="" class="margin-bottom size-52">
         <div class="font-bold fs-18 margin-bottom-xs text-center">{{$t('RECEIVE_SUCCESS','接取成功')}}</div>
-        <div class="fs-16 margin-bottom fc-accent text-center">{{$t('FINISHED_TASK_CAN_GET_N',[task.money.toString()],'完成任务可获得N')}}</div>
-        <van-button class="bg-dark fc-fff border-radius-sm" block @click="showStartSuccess=false">{{$t('CONTINUE','继续')}}</van-button>
+        <div class="fs-16 margin-bottom fc-accent text-center">
+          <span>{{$t('FINISHED_TASK_CAN_GET_N',[''],'完成任务可获得')}} </span>
+          <money-number class="money-number font-bold" :value="task.money"/>
+        </div>
+        <van-button class="bg-dark fc-fff border-radius-sm" block @click="closeStartSuccess">{{$t('CONTINUE','继续')}}</van-button>
+      </div>
+    </van-popup>
+
+    <!-- 还未分享，确定跳转 -->
+    <van-popup v-model="showConfirmJump" class="vw-90 border-radius-sm">
+      <div class="padding flex flex-direction align-center position-re">
+        <van-icon
+            size="0.52rem"
+            name="cross"
+            class="position-ab close-icon"
+            @click="showConfirmJump=false"
+        />
+        <img src="../assets/images/warning.png" alt="" class="margin-bottom size-52">
+        <div class="font-bold margin-bottom text-center flex flex-direction">
+          <span>{{$t('TASK_NOT_SHARED','当前代言任务尚未完成分享，是否确定查看其他代言信息?')}}</span>
+        </div>
+        <div class="flex align-stretch justify-between" style="width:100%">
+          <div style="width:40%" class="padding-right-xs">
+            <van-button class="border-radius-xs font-bold" style="border:1px solid #ccc" block @click="viewOtherTasks(true)">{{$t('CONTINUE','继续')}}</van-button>
+          </div>
+          <div class="flex-sub" style="width:60%">
+            <van-button class="bg-secondary fc-fff border-radius-xs font-bold" block @click="flashShareStep(true)">{{$t('GO_SHARE','去分享')}}</van-button>
+          </div>
+        </div>
       </div>
     </van-popup>
 
@@ -299,12 +336,18 @@ export default {
       showLessThenLevel: false,
       showShortCount: false,
       showShareDetail: true,
+      now_click_number: 0,
       activeStep: 1,
       user_ad_task: {},
       showGuide: false,
+      showGuide2: false,
       driver: null,
+      driver2: null,
       randomTasks: [],
       showRandomTask: false,
+      clickedShareIcon: false,
+      showConfirmJump: false,
+      showFlashShare: false,
       task: {
         vip_level: '',
         complete_click_number: '',
@@ -325,6 +368,9 @@ export default {
     }
   },
   mounted() {
+    this.$bus.on('taskClick',(data)=>{
+      this.friendClicked(data)
+    })
     this.$bus.on('taskFinished',(id)=>{
       if (id == this.task.id) {
         this.$bus.off('taskFinished')
@@ -334,10 +380,30 @@ export default {
   },
   beforeDestroy() {
     try {
-      this.driver.reset()
+      this.$bus.off('taskFinished')
+      this.$bus.off('taskClick')
+      if (this.driver) {
+        this.driver.reset()
+      }
+      if (this.driver2) {
+        this.driver2.reset()
+      }
     } catch (e) {}
   },
   methods: {
+    flashShareStep(op) {
+      if (op) {
+        this.showConfirmJump = false
+      }
+      this.toStep(3)
+      this.showFlashShare = true
+      this.showShareDetail = true
+    },
+    friendClicked (data) {
+      if (data.id == this.task.id) {
+        this.now_click_number = data.now_click_number || 0
+      }
+    },
     addStyle(selector,cls) {
       let el = document.querySelector(selector)
       try {
@@ -362,21 +428,8 @@ export default {
         this.guideRandomTasks()
       } else {
         // not click the share icon
-        this.guideShareStep()
+        this.flashShareStep()
       }
-    },
-    guideShareStep() {
-      this.addStyle('#task-step-3','flash-card')
-      let el = document.getElementById('task-step-3')
-      if (el) {
-        window.scrollTo({
-          top: el.offsetTop - 60,
-          behavior: 'smooth'
-        })
-      }
-      setTimeout(()=>{
-        this.showShareDetail = true
-      },500)
     },
     guideRandomTasks() {
       this.showRandomTask = true
@@ -391,10 +444,9 @@ export default {
       })
     },
     startGuide() {
-    if (!localStorage.getItem('GuideTaskDetail')) {
+      if (!localStorage.getItem('GuideTaskDetail')) {
         localStorage.setItem('GuideTaskDetail',true)
         this.showGuide = true
-        this.getRandomTasks()
         setTimeout(()=>{
           this.driver = new Driver({
             allowClose: false,
@@ -419,7 +471,6 @@ export default {
             onReset: ()=>{
               this.$webEvent('点击我知道了',this.$route.name+'页面')
               this.showGuide = false
-              this.startLastGuide()
             }
           });
 
@@ -441,7 +492,49 @@ export default {
                 className: 'custom-driver-popover',
                 position: 'bottom-center'
               },
+            }
+          ]);
+          try {
+            this.driver.start()
+          } catch (err) {
+            console.log(err)
+          }
+        }, 500)
+      }
+    },
+    startGuide2() {
+      if (!localStorage.getItem('GuideTaskDetail2')) {
+        localStorage.setItem('GuideTaskDetail2',true)
+        this.getRandomTasks()
+        setTimeout(()=>{
+          this.driver2 = new Driver({
+            allowClose: false,
+            opacity: 0.7,
+            padding: 5,
+            nextBtnText: this.$t('NEXT',"下一步"),
+            prevBtnText: this.$t('PREVOUS',"上一步"),
+            doneBtnText: this.$t('I_SEE',"我知道了"),
+            closeBtnText: this.$t('JUMP',"跳过"),
+            onNext: ()=>{
+              this.$webEvent('点击下一步',this.$route.name+'页面')
+              console.log(this.driver.currentStep)
+              if (this.driver.currentStep==0) {
+                this.addStyle('#guide-task-detail-step-2','flash-btn')
+              } else if (this.driver.currentStep==1) {
+                this.removeStyle('#guide-task-detail-step-2','flash-btn')
+                this.addStyle('#guide-task-detail-step-3','flash-btn')
+              } else if (this.driver.currentStep==2) {
+                this.removeStyle('#guide-task-detail-step-3','flash-btn')
+              }
             },
+            onReset: ()=>{
+              this.$webEvent('点击我知道了',this.$route.name+'页面')
+              this.showGuide2 = false
+              this.startLastGuide()
+            }
+          });
+
+          this.driver2.defineSteps([
             {
               element: '#guide-task-detail-step-3',
               popover: {
@@ -472,11 +565,11 @@ export default {
             }
           ]);
           try {
-            this.driver.start()
+            this.driver2.start()
           } catch (err) {
             console.log(err)
           }
-        }, 1000)
+        }, 500)
       }
     },
     toUpgradeLevel(level) {
@@ -500,7 +593,13 @@ export default {
         this.$set(this.task,'rest_count', this.task.total - this.task.rest)
         this.user_ad_task = this.task.user_ad_task || {}
         if (scroll && this.user_ad_task && this.user_ad_task.status=='InProgress') {
-          this.toStep(4)
+          this.now_click_number = this.user_ad_task.now_click_number
+
+          if (!this.now_click_number) {
+            this.flashShareStep()
+          } else {
+            this.shared = true
+          }
         }
         setTimeout(()=>{
           this.startGuide()
@@ -517,8 +616,16 @@ export default {
     toMyTasks() {
       this.$toRouter({name:'MyTask'})
     },
-    viewOtherTasks() {
-      this.$toRouter({name: 'Task',query: {tag:'vip'}})
+    viewOtherTasks(confirm) {
+      if (confirm) {
+        this.showConfirmJump = false
+      }
+
+      if (this.shared || confirm) {
+        this.$toRouter({name: 'Task'})
+      } else {
+        this.showConfirmJump = true
+      }
     },
     // 滚动到顶部
     scrollToTop() {
@@ -559,8 +666,9 @@ export default {
         Toast.hide()
         this.user_ad_task = res.data.user_ad_task
         if (this.showGuide) {
-          Toast.info(this.$t('RECEIVE_SUCCESS','接取成功'))
-          this.driver.moveNext()
+          // Toast.info(this.$t('RECEIVE_SUCCESS','接取成功'))
+          this.beforeGuideStep2()
+          this.showGuide = false
         } else {
           this.showStartSuccess = true
         }
@@ -568,9 +676,6 @@ export default {
         this.toStep(2)
       }).catch(err=>{
         if (this.showGuide) {
-          try {
-            this.driver.reset()
-          } catch (e) {}
           this.showGuide = false
         }
         if (err.data.message == '10001') {
@@ -583,6 +688,19 @@ export default {
           Toast.failed(err.data.message)
         }
       })
+    },
+    beforeGuideStep2() {
+      try {
+        this.driver.reset()
+      } catch (e) {}
+      this.showGuide2 = true
+      this.showStartSuccess = true
+    },
+    closeStartSuccess() {
+      this.showStartSuccess=false
+      if (this.showGuide2) {
+        this.startGuide2()
+      }
     },
     copyPlat(plat) {
       if (this.activeStep==1) {
@@ -598,8 +716,8 @@ export default {
         this.$copyText(this.task.data.share_content + ' ' + url)
       }
 
-      if (this.showGuide) {
-        this.driver.moveNext()
+      if (this.showGuide2) {
+        this.driver2.moveNext()
       }
 
       // 跳转对应的平台
@@ -639,8 +757,8 @@ export default {
       }
       this.toStep(3)
 
-      if (this.showGuide) {
-        this.driver.moveNext()
+      if (this.showGuide2) {
+        this.driver2.moveNext()
       }
     },
     getShareUrl(type='cp') {
@@ -653,6 +771,9 @@ export default {
       }
       if (this.user.l_id) {
         url += `&cl=${this.user.l_id}`
+      }
+      if (this.user.id) {
+        url += `&t=${this.user.id}`
       }
       return url
     },
@@ -669,10 +790,10 @@ export default {
                 behavior: 'smooth'
               })
             }
-          },100)
+          },50)
           setTimeout(()=>{
             this.activeStep = n
-          },500)
+          },350)
         }
       }
     },
@@ -800,6 +921,33 @@ export default {
     }
     50% {
       background: #f4f8fa;
+    }
+  }
+
+  .flash-share {
+    border-radius: 4px;
+    animation: flashShare 1.5s ease-in infinite;
+
+    #guide-task-detail-step-4>div {
+      animation:  flashShareIcon 1.5s ease-in infinite;
+    }
+  }
+
+  @keyframes flashShare {
+    0%,100% {
+      border: 2px solid #ffd8d8;
+    }
+    50% {
+      border: 2px solid #f67373;
+    }
+  }
+
+  @keyframes flashShareIcon {
+    0%,100% {
+      background: #fff;
+    }
+    30%,70% {
+      background: #fdc8c8;
     }
   }
 }

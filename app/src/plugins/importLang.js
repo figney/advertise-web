@@ -22,12 +22,12 @@ let lang_map = {
     "TASK_NUM": "代言次数",
     "DAY_PROFIT": "日收益",
     "YEAR_PROFIT": "年收益",
-    "PROMOTE_COMMISSION": "佣金",
+    "PROMOTE_COMMISSION": "奖励",
     "REST": "剩余",
     "NOT_LIMIT": "无限制",
     "FINISH_TASK": "完成代言",
     "DO_AGAIN": "再做一次",
-    "RECEIVE_TASK": "立刻开始代言",
+    "RECEIVE_TASK": "立刻代言",
     "WELCOME_TO_PROMOTE_PLATFORM": "欢迎来到全民代言平台",
     "SHARE_AD_EVERY_DAY_CAN_MAKE_MONEY": "全球各大知名品牌商都集中在这里，每天代言5分钟，即可享受免费领取100年代言费的资格。赶紧开始代言形象大使之旅吧！",
     "GET_FIRST_AWARD_NOW": "现在立刻开始赚第一桶金",
@@ -56,7 +56,7 @@ let lang_map = {
     "DO_TASK_MAKE_MONEY": "立即代言赚钱",
     "BUY_VIP": "购买VIP",
     "YESTERDAY_PROFIT_NOTIFY": "昨日收益通知",
-    "YOU_GOT_COMMISSION_YESTERDAY": "您昨日获得了佣金",
+    "YOU_GOT_COMMISSION_YESTERDAY": "您昨日获得了收入",
     "DO_TASK_GET_MORE_AWARD": "代言获得更多收入",
     "AD_TASK_AWARD_ARRIVED": "恭喜您获得代言收入",
     "COMMISSION_HAS_ARRIVED": "佣金已到账",
@@ -166,7 +166,7 @@ let lang_map = {
     "HIGH_LEVEL_HIGH_GAINED": "等级越高,赚的越多",
     "INVITE_FRIEND_TOGETHER": "邀请好友一起赚",
     "RANKING": "排行榜",
-    "CONTACT_US": "在线客服",
+    "CONTACT_US": "联系支持",
     "HELP": "帮助中心",
     "TASK_CENTER": "代言中心",
     "MY_TASK": "我的代言",
@@ -190,7 +190,7 @@ let lang_map = {
     "COPY_SHARE_TEXT": "复制您的专属代言词",
     "MANUAL_CONTROL_TO_SHARE": "手动或点击 whatsaapp fb等一键分享图标进行 分享。",
     "CLICK_TO_QUICK_SHARE": "点击图标快速分享给朋友",
-    "TASK_AUTO_FINISHED_N_FRIEND": "分享后，有{0}个好友点击观看后，即可自动获取奖金。",
+    "TASK_AUTO_FINISHED_N_FRIEND": "分享后，有{0}个好友点击观看即可自动获取奖金。",
     "TASK_END_COUNT_DOWN": "任务结束倒计时",
     "CAN_GET_AWARD": "可获得奖金",
     "TIP_LET_YOUR_FRIEND_CLICK_YOUR_LINK": "小提示：让您的好友快快浏览下您分享过去的内容链接，即可快速获得奖金",
@@ -235,9 +235,9 @@ let lang_map = {
     "TRANSFER_CERTIFICATION": "汇款凭证",
     "SEE_DEMO": "查看示例",
     "SUBMIT_USER_INFO_CERTIFICATION": "提交转账凭证",
-    "SUBMIT_SUCCESS": "提交成功",
+    "SUBMIT_SUCCESS": "您的汇款记录已提交",
     "ABOUT_5_MINS_ARRIVE": "预计1-5分钟到账，请您耐心等待",
-    "CONTACT_CUSTOM_SERVICE_QUICKLY": "联系客服快速验证入账",
+    "CONTACT_CUSTOM_SERVICE_QUICKLY": "联系支持",
     "SEE_DEPOSIT_DETAIL": "查看存款明细",
     "BANK_CHANNEL_UNAVAILABLE": "银行户口转账暂不可用",
     "ENTER_TRANSFEROR_NAME_AGAIN": "请重新输入您的汇款人姓名",
@@ -298,8 +298,18 @@ let lang_map = {
     "WITHDRAW_SURE": "提现确认",
     "WILL_DEDUCE_N_GIFT_MONEY": "将扣除{0}赠送金",
     "GIFT_BALANCE": "赠送金余额",
-    "PLEASE_FILL_ALL_ACCOUNT_INFO": "请将收款信息填写完整"
+    "PLEASE_FILL_ALL_ACCOUNT_INFO": "请将收款信息填写完整",
+    "AFTER_RECEIVE_TASK_N_HOURS": "开始代言任务后，请在{0}个小时内进行分享，点击下方按钮进行复制",
+    "CLICKED_NUM": "已点击次数",
+    "BECAUSE_YOU_VIP_LEVEL_IS": "由于您的VIP等级是",
+    "YOUR_FRIEND_BUY_VIP_N": "您的{0}级好友购买了VIP{1}",
+    "WAIT_CHECK_TO_ARRIVE": "请耐心等待,审核后会自动入账",
+    "CHECK_TIME_WEEKDAY": "审核时间: 工作日 9:00 - 24:00",
+    "PLEASE_CONTACT_US": "请联系客服快速入账",
+    "ARRIVE_AT": "到账时间"
 }
+
+
 
 const importOne = function (path,describe) {
     http.post('v1/importLang',{

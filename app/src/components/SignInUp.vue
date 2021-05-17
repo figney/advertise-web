@@ -27,20 +27,20 @@
                 v-model="register.nickName"
                 :placeholder="$t('ENTER_NICK_NAME', '请输入昵称')"
               >
-                <template #right-icon>
+<!--                <template #right-icon>-->
 
-                  <van-button
-                      class="text-nowrap no-border padding-0 no-bg"
-                      :loading="isGetting"
-                      :disabled="isGetting"
-                      size="small"
-                      style="height:unset"
-                      @click="getRandomNickname"
-                  >
-  <!--                  <span>{{ $t("RANDOM", "随机") }}</span>-->
-                    <van-icon name="replay" size="18"/>
-                  </van-button>
-                </template>
+<!--                  <van-button-->
+<!--                      class="text-nowrap no-border padding-0 no-bg"-->
+<!--                      :loading="isGetting"-->
+<!--                      :disabled="isGetting"-->
+<!--                      size="small"-->
+<!--                      style="height:unset"-->
+<!--                      @click="getRandomNickname"-->
+<!--                  >-->
+<!--  &lt;!&ndash;                  <span>{{ $t("RANDOM", "随机") }}</span>&ndash;&gt;-->
+<!--                    <van-icon name="replay" size="18"/>-->
+<!--                  </van-button>-->
+<!--                </template>-->
               </van-field>
             </div>
 
@@ -548,9 +548,9 @@ export default {
           phone: "",
           password: "",
         }
-        if (!this.register.nickName) {
-          this.getRandomNickname()
-        }
+        // if (!this.register.nickName) {
+        //   this.getRandomNickname()
+        // }
       } else {
         this.register = {
           phone: "",

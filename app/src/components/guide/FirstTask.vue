@@ -10,11 +10,11 @@
 
         <div class="flex flex-direction padding bg-primary border-radius-top">
 <!--          <div class="text-center fs-16 font-bold margin-bottom-sm">{{$t('WELCOME_TO_PLATFORM','欢迎来到A2广告分享平台')}}</div>-->
-          <div class="text-center fs-16 font-bold margin-bottom-sm">
-            <span>{{$t('WELCOME_TO_PROMOTE_PLATFORM','欢迎来到全民代言平台')}}</span>
+          <div class="text-center fs-16 font-bold margin-bottom-xs">
+            <span class="platform-name" v-html="$t('WELCOME_TO_PROMOTE_PLATFORM','欢迎来到全民代言平台')"/>
           </div>
-          <div class="">
-            <span>{{$t('SHARE_AD_EVERY_DAY_CAN_MAKE_MONEY','全球各大知名品牌商都集中在这里，每天代言5分钟，即可享受免费领取100年代言费的资格。赶紧开始代言形象大使之旅吧！')}}</span>
+          <div class="fs-13">
+            <span>{{$t('SHARE_AD_EVERY_DAY_CAN_MAKE_MONEY','全球各大知名品牌商都集中在这里，每天代言5分钟，即可享受免费领取100年收入的资格。赶紧开始代言形象大使之旅吧！')}}</span>
           </div>
         </div>
         <div class="flex flex-direction padding-lr padding-top-xs">
@@ -104,6 +104,15 @@ export default {
 
 <style lang="scss">
 .first-task {
+
+  .platform-name {
+    b {
+      font-size: 120%;
+      font-weight: 700;
+      color: #f62525;
+      margin: 0 0.1rem;
+    }
+  }
 
   .flash-title {
     animation-delay: 1s;

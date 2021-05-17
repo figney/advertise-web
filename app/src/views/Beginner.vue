@@ -3,9 +3,9 @@
     <div class="beginner-page">
       <div class="beginner-title fs-24">{{$app_name}}</div>
       <div class="beginner-subtitle fc-fff">
-        <span class="fs-24">{{$t('FREE_GET_MONEY','免费领钱')}}</span>
-        <span class="margin-lr-sm fc-primary fs-40">100</span>
-        <span class="fs-24">{{$t('YEAR','年')}}</span>
+        <span class="fs-18">{{$t('FREE_GET_MONEY','免费领钱')}}</span>
+        <span class="margin-lr-sm fc-primary fs-24">100</span>
+        <span class="fs-18">{{$t('YEAR','年')}}</span>
       </div>
 
       <div class="beginner-describe">{{$t('PROMOTE_BEGINNER_DESC','代言一个品牌即可获得 $20, 门槛低, 秒提现')}}</div>
@@ -310,29 +310,35 @@ export default {
 
   .beginner-title {
     position: absolute;
-    top: 0.22rem;
-    left: 0.6rem;
+    top: 0.2rem;
+    left: 0.4rem;
     color: #FFFFFF;
     font-weight: bold;
+    text-shadow: 0.02rem 0.02rem 3px rgba(50, 50, 51, 0.32),
+    -0.02rem -0.02rem 3px rgba(50, 50, 51, 0.32),
+    0.02rem -0.02rem 3px rgba(50, 50, 51, 0.32),
+    -0.02rem 0.02rem 3px rgba(50, 50, 51, 0.52);
+    -webkit-text-stroke: unset;
   }
 
   .beginner-subtitle {
     position: absolute;
     //text-align: center;
-    left: 0.6rem;
-    right: 0.6rem;
-    top: 0.88rem;
+    left: 0.4rem;
+    right: 0.4rem;
+    top: 1.25rem;
     font-weight: bold;
     white-space: nowrap;
+    line-height: 1;
     text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
   }
 
   .beginner-describe {
     position: absolute;
     //text-align: center;
-    left: 0.6rem;
-    right: 0.6rem;
-    top: 2.8rem;
+    left: 0.4rem;
+    right: 0.4rem;
+    top: 2.4rem;
     font-weight: bold;
     color: #f1f1f1;
   }

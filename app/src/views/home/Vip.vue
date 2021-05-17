@@ -7,16 +7,17 @@
       :style="'min-height:1.653rem;background-image:url('+currentVip.bg_image+')'"
     >
       <div class="flex align-center margin-right-sm">
-        <img :src="currentVip.icon" style="height:0.96rem">
+        <img :src="myCurrentVip.icon" style="height:0.96rem" v-if="myCurrentVip">
       </div>
-
-      <template v-if="isBuyVip(currentVip.level)">
+      <template v-if="userVipInfo.length">
         <div class="flex flex-direction justify-center flex-sub">
-          <span class="font-bold" style="margin-bottom:0.07rem">{{$t('HELLO_VIP_N',[currentVip.level.toString()],'已开通 VIPN!')}}</span>
-          <div class="fs-12 fc-secondary">
-            <span class="margin-right-xs">{{$t('OWEN_DAY_TASK_AMOUNT','已拥有每日任务次数')}}:</span>
-            <span>{{'10'}}</span>
-          </div>
+          <span class="font-bold" style="margin-bottom:0.07rem" v-if="myCurrentVip">
+            {{$t('HELLO_VIP_N',[myCurrentVip.level.toString()],'已开通 VIPN!')}}
+          </span>
+<!--          <div class="fs-12 fc-secondary">-->
+<!--            <span class="margin-right-xs">{{$t('OWEN_DAY_TASK_AMOUNT','已拥有每日任务次数')}}:</span>-->
+<!--            <span>{{'10'}}</span>-->
+<!--          </div>-->
         </div>
 
 <!--        <van-icon name="arrow"/>-->
@@ -25,15 +26,16 @@
 
       <template v-else>
         <div class="flex flex-direction justify-center">
-          <span class="font-bold" style="margin-bottom:0.07rem">{{$t('NOT_BUY_VIP_N',[currentVip.level.toString()],'暂未开通 VIPN')}}</span>
+          <span class="font-bold" style="margin-bottom:0.07rem">{{$t('YOU_RE_FREE_VIP_NOW','您当前属于免费VIP')}}</span>
+<!--          <span class="font-bold" style="margin-bottom:0.07rem">{{$t('NOT_BUY_VIP_N',[currentVip.level.toString()],'暂未开通 VIPN')}}</span>-->
         </div>
       </template>
     </div>
 
     <div class="margin-lr margin-bottom flex align-center">
       <van-tabs
-        style="width:100%"
-        class="border-radius bg-fef3ee"
+        style="width:100%;background:#fff3e8"
+        class="border-radius"
         color="rgba(0,0,0,0)"
         line-width="33%"
         v-model="currentVipTab"
@@ -53,18 +55,18 @@
             </span>
           </template>
           <template #default>
-            <div class="flex flex-direction border-radius overflow-hidden">
-              <div class="margin-lr-sm padding-sm flex flex-direction border-radius" style="background:#F76800">
+            <div class="flex flex-direction border-radius overflow-hidden shadow-sm">
+              <div class="padding-tb-sm padding-lr-sm flex flex-direction border-radius" style="background:#ff791a">
                 <div class="flex align-stretch fc-fff">
-                  <div class="flex flex-direction align-center flex-sub" style="width:30%">
-                    <span class="opacity-90 fs-12 margin-bottom-xs">{{$t('DO_TASK_LEVEL','可接任务等级')}}</span>
+                  <div class="flex flex-direction justify-between flex-sub" style="width:30%">
+                    <span class="opacity-90 fs-12 margin-bottom-sm">{{$t('DO_TASK_LEVEL','可接任务等级')}}</span>
                     <span class="fs-16 font-bold">{{$t('VIP_N_AND_BELOW',[vip.level.toString()],'VIP_N及以下')}}</span>
                   </div>
 
-                  <div class="bg-e8e8e8 opacity-50" style="width:0.015rem"></div>
+                  <div class="bg-e8e8e8 opacity-50 margin-lr-xs" style="width:0.01rem"></div>
 
-                  <div class="flex flex-direction align-center flex-sub" style="width:30%">
-                    <span class="opacity-90 fs-12 margin-bottom-xs">{{$t('DAY_TASK_NUM','每日任务次数')}}</span>
+                  <div class="flex flex-direction justify-between padding-left-xs flex-sub" style="width:30%">
+                    <span class="opacity-90 fs-12 margin-bottom-sm">{{$t('DAY_TASK_NUM','每日任务次数')}}</span>
                     <num-change class="fs-16 font-bold" :value="vip.task_num * amount"/>
                   </div>
                 </div>
@@ -77,10 +79,20 @@
                   <num-change class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>
                 </div>
                 <div class="flex align-center" style="padding: 0.0667rem 0">
-                  <span class="fs-12 fc-secondary margin-right-sm">{{$t('PREDICT_TOTAL_PROFIT','预估总收益')}}:</span>
-<!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>-->
-                  <num-change class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>
+                  <span class="fs-12 fc-secondary margin-right-sm">{{$t('PREDICT_MONTH_PROFIT','预估月收益')}}:</span>
+                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
+                  <num-change class="money-number fs-16 font-bold" :value="(vip.task_profit * 30 * vip.task_num * amount) || 0"/>
                 </div>
+                <div class="flex align-center" style="padding: 0.0667rem 0">
+                  <span class="fs-12 fc-secondary margin-right-sm">{{$t('PREDICT_YEAR_PROFIT','预估年收益')}}:</span>
+                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
+                  <num-change class="money-number fs-16 font-bold" :value="(vip.task_profit * 365 * vip.task_num * amount) || 0"/>
+                </div>
+<!--                <div class="flex align-center" style="padding: 0.0667rem 0">-->
+<!--                  <span class="fs-12 fc-secondary margin-right-sm">{{$t('PREDICT_TOTAL_PROFIT','预估总收益')}}:</span>-->
+<!--&lt;!&ndash;                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>&ndash;&gt;-->
+<!--                  <num-change class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>-->
+<!--                </div>-->
               </div>
             </div>
           </template>
@@ -89,13 +101,14 @@
     </div>
 
 
-    <div class="font-bold fs-16 margin-lr margin-bottom-sm">{{$t('SELECT_BUY_TIME','选择开通时长')}}</div>
+<!--    <div class="font-bold fs-16 margin-lr margin-bottom-sm">{{$t('SELECT_BUY_TIME','选择开通时长')}}</div>-->
 
     <div class="flex flex-direction justify-between margin-lr margin-bottom-xs">
+<!--      {'vip-time-item__active':(currentTimeItem.day==item.day)}-->
       <div
         v-for="(item,j) in currentVip.task_num_money_list"
         :key="'task-num-'+j"
-        :class="['vip-time-item border-radius margin-bottom-sm ',{'vip-time-item__active':(currentTimeItem.day==item.day)}]"
+        :class="['vip-time-item border-radius margin-bottom-sm ']"
         @click="currentTimeItem=item"
       >
         <span class="fs-16">{{$t('N_DAY',[item.day.toString()],'N天')}}</span>
@@ -117,26 +130,26 @@
       </div>
     </div>
 
-    <div class="flex align-center justify-between margin-lr margin-bottom">
-      <div class="fs-16 font-bold">{{$t('PACKAGE_NUM','叠加次数')}}</div>
-      <div class="flex align-center">
-        <div class="flex align-center justify-center border-radius-xs bg-dark size-27" @click="subAmount">
-          <van-icon color="#ffffff" name="minus" />
-        </div>
+<!--    <div class="flex align-center justify-between margin-lr margin-bottom">-->
+<!--      <div class="fs-16 font-bold">{{$t('PACKAGE_NUM','叠加次数')}}</div>-->
+<!--      <div class="flex align-center">-->
+<!--        <div class="flex align-center justify-center border-radius-xs bg-dark size-27" @click="subAmount">-->
+<!--          <van-icon color="#ffffff" name="minus" />-->
+<!--        </div>-->
 
-        <van-field
-            v-model="amount"
-            type="digit"
-            size="small"
-            :formatter="formatBuyAmount"
-            class="margin-lr-xs padding-0 border-radius-xs"
-        />
+<!--        <van-field-->
+<!--            v-model="amount"-->
+<!--            type="digit"-->
+<!--            size="small"-->
+<!--            :formatter="formatBuyAmount"-->
+<!--            class="margin-lr-xs padding-0 border-radius-xs"-->
+<!--        />-->
 
-        <div class="flex align-center justify-center border-radius-xs bg-dark size-27" @click="addAmount">
-          <van-icon color="#ffffff" name="plus" />
-        </div>
-      </div>
-    </div>
+<!--        <div class="flex align-center justify-center border-radius-xs bg-dark size-27" @click="addAmount">-->
+<!--          <van-icon color="#ffffff" name="plus" />-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <div class="margin-lr margin-bottom-xs flex align-center justify-between padding-lr-xs">
       <span class="fs-12 fc-secondary">{{$t('AVAILABLE','可用余额')}}</span>
@@ -229,10 +242,19 @@ export default {
       amount: 1,
       showBuySuccess: false,
       showShortBalance: false,
+      myCurrentVip: {
+        level: 'FREE',
+        icon: require('../../assets/images/icon_s_member_1@2x.png')
+      }
     }
   },
+  watch: {
+    userVipInfo() {
+      this.calcMyCurrentVip()
+    },
+  },
   computed: {
-    ...mapState(["vips","userVipInfo","buyVipRule"])
+    ...mapState(["vips","userVipInfo","buyVipRule"]),
   },
   mixins: [Base],
   activated() {
@@ -247,6 +269,17 @@ export default {
     this.getBuyVipContent()
   },
   methods: {
+    calcMyCurrentVip() {
+      try {
+        if (this.userVipInfo.length) {
+          let lv = this.userVipInfo[this.userVipInfo.length-1].level
+          let vip = this.vipMap[lv.toString()]
+          if (vip) {
+            this.myCurrentVip = vip
+          }
+        }
+      } catch (e) {}
+    },
     getBuyVipContent() {
       if (!this.buyVipRule.content) {
         this.$http.post('v1/getArticle',{
@@ -279,9 +312,11 @@ export default {
       }
     },
     doTask() {
-      localStorage.setItem('TaskBackHome',true)
       this.showBuySuccess = false
-      this.$toRouter({name:'Task',query: {lv:this.currentVip.level}})
+      setTimeout(()=>{
+        localStorage.setItem('TaskBackHome',true)
+        this.$toRouter({name:'Task',query: {lv:this.currentVip.level}})
+      },200)
     },
     formatBuyAmount(v) {
       if (!v) {
@@ -316,6 +351,7 @@ export default {
         this.vipToMap()
         this.isLoading = false
       }
+      this.calcMyCurrentVip()
     },
     vipToMap() {
       for (let vip of this.vips) {
@@ -334,6 +370,7 @@ export default {
             vips[i].task_profit = parseFloat(vips[i].attrs[j].value)
           } else {}
         }
+        vips[i].task_num_money_list = [vips[i].task_num_money_list[0]]
       }
       return vips
     },
@@ -367,10 +404,13 @@ export default {
     },
     toDeposit() {
       this.showShortBalance = false
-      localStorage.setItem('NextAction','Vip')
-      localStorage.setItem('NextId',this.currentVip.id)
-      localStorage.setItem('NextData',JSON.stringify({number:this.amount,day:this.currentTimeItem.day}))
-      this.$toRouter({name:'Deposit'})
+      setTimeout(()=>{
+        localStorage.setItem('NextAction','Vip')
+        localStorage.setItem('NextId',this.currentVip.id)
+        localStorage.setItem('NeedMoney', this.amount * this.currentTimeItem.money)
+        localStorage.setItem('NextData',JSON.stringify({number:this.amount,day:this.currentTimeItem.day}))
+        this.$toRouter({name:'Deposit'})
+      },200)
     }
   }
 }
@@ -415,14 +455,15 @@ export default {
   }
 
   .vip-time-item {
-    color: rgba(33, 35, 40, 0.6);
+    //color: rgba(33, 35, 40, 0.6);
+    color: rgba(33, 35, 40, 1);
     font-weight: bold;
-    min-height: 1.68rem;
+    min-height: 1.5rem;
     display: flex;
     align-items: center;
     border-radius: 6px;
-    border: 2px solid #e5e5e5;
-    padding: 0.1333rem 0.32rem ;
+    border: 2px solid rgba(0,0,0,0.375);
+    padding: 0.1rem 0.32rem ;
   }
 }
 </style>

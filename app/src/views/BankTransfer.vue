@@ -177,9 +177,9 @@
               :max-count="1"
               class="margin-right"
           />
-          <div class="flex align-center">
-            <van-button plain size="small" color="#FF7214" @click="startShowDemo">{{$t('SEE_DEMO','查看示例')}}</van-button>
-          </div>
+<!--          <div class="flex align-center">-->
+<!--            <van-button plain size="small" color="#FF7214" @click="startShowDemo">{{$t('SEE_DEMO','查看示例')}}</van-button>-->
+<!--          </div>-->
         </div>
       </div>
 
@@ -199,19 +199,32 @@
       <img
           class="margin-bottom"
           src="../assets/images/icon_21@2x.png"
-          style="width:2rem"
+          style="width:1.8rem"
       />
-      <div class="margin-bottom-sm font-bold fs-22 text-center">
-        {{ $t("SUBMIT_SUCCESS", "提交成功") }}
+      <div class="margin-bottom font-bold fs-20 text-center">
+        {{ $t("SUBMIT_SUCCESS", "您的汇款记录已提交") }}
       </div>
-      <div class="margin-bottom fc-888 text-center padding-lr">
-        {{ $t("ABOUT_5_MINS_ARRIVE", "预计1-5分钟到账，请您耐心等待") }}
+      <div class="margin-bottom-xs fc-secondary text-center padding-lr">
+        {{ $t("WAIT_CHECK_TO_ARRIVE", "请耐心等待,审核后会自动入账") }}
       </div>
+      <div class="margin-bottom-xs fc-secondary text-center padding-lr">
+        {{ $t("CHECK_TIME_WEEKDAY", "审核时间: 工作日 9:00 - 24:00") }}
+      </div>
+
+      <div class="margin-bottom-sm text-center padding-lr padding-tb-sm fc-error font-bold flash-text" v-if="!showPleaseContact">
+        {{$t('PLEASE_CONTACT_US','请联系客服快速入账')}}
+      </div>
+
+      <div class="margin-bottom-sm fc-error text-center padding-lr padding-tb-sm flex align-center" v-else>
+        <span class="margin-right-sm" style="font-size:0.46rem;font-family:monospace">{{ $t("ARRIVE_AT", "到账时间") }}</span>
+        <van-count-down :time="300000" format="mm:ss" style="color:#ff0000;font-family:monospace;font-size:0.52rem" class="font-bold" @finish="countDownFinished"/>
+      </div>
+
       <div class="margin-bottom flex flex-direction" style="width:8.2rem">
         <van-button class="border-radius-sm bg-dark fc-fff margin-bottom-sm" block @click="contact">
-          {{$t('CONTACT_CUSTOM_SERVICE_QUICKLY','联系客服快速验证入账')}}
+          {{$t('CONTACT_CUSTOM_SERVICE_QUICKLY','联系支持')}}
         </van-button>
-        <van-button class="border-radius-sm margin-bottom-sm" block @click="toDepositDetail">
+        <van-button class="border-radius-sm margin-bottom-sm" style="border: 1px solid #5d5d62" block @click="toDepositDetail">
           {{$t('SEE_DEPOSIT_DETAIL','查看存款明细')}}
         </van-button>
       </div>
@@ -288,7 +301,7 @@ import {
   Icon,
   Uploader,
   Button,
-  Dialog,
+  Dialog, CountDown,
 } from "vant";
 import { Base } from "@/mixins";
 import { Toast } from "mand-mobile";
@@ -304,6 +317,7 @@ export default {
     [Icon.name]: Icon,
     [Uploader.name]: Uploader,
     [Button.name]: Button,
+    [CountDown.name]: CountDown,
     [Dialog.Component.name]: Dialog.Component,
   },
   data: () => {
@@ -312,6 +326,7 @@ export default {
       currentDate: new Date(),
       showSelectDate: false,
       showSubmitSuccess: false,
+      showPleaseContact: false,
       transferor: {
         name: "",
         account: "",
@@ -361,6 +376,9 @@ export default {
     });
   },
   methods: {
+    countDownFinished() {
+      this.showPleaseContact = true
+    },
     startShowDemo() {
       this.showDemo = true
     },

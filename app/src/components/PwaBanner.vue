@@ -89,6 +89,7 @@ export default {
 }
 
 .pwa-banner {
+  z-index: 4;
   position: fixed;
   bottom: 1.6rem;
   left: 0.5rem;

@@ -1,7 +1,7 @@
 <template>
   <div class="task-commission-notify flex flex-direction align-center padding padding-top-xs">
     <img src="../../assets/images/icon_27@2x.png" class="margin-bottom-xs" style="height:2.18rem">
-    <div class="font-bold fs-18 margin-bottom-sm">
+    <div class="font-bold fs-18 margin-bottom-sm text-center">
       <span v-if="notify.params.is_no_commission">{{$t('CAN_NOT_GET_COMMISSION','无法获得佣金')}}</span>
       <span v-else>{{$t('CONGRATULATIONS_YOU_GOT_COMMISSION','恭喜您获得了佣金')}}</span>
     </div>

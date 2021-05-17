@@ -66,6 +66,14 @@
   src: url("../assets/fonts/Montserrat-Bold.ttf") format('ttf');
 }
 
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../assets/fonts/Montserrat-ExtraBold.ttf") format('ttf');
+}
+
 html, body {
   font-family: 'Noto Sans SC', sans-serif;
   margin: 0 auto;
@@ -357,6 +365,10 @@ img {
 
 .shadow {
   box-shadow: 0 3px 23px 3px rgba(168, 166, 150, 0.25);
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 5px 1px rgba(168, 166, 150, 0.15);
 }
 
 /****************************/

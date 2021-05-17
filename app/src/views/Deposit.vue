@@ -41,8 +41,8 @@
 
         <div class="fs-16 font-bold margin-bottom-sm">{{$t('DEPOSIT_AMOUNT','充值金额')}}</div>
 
-          <div class="flex align-center margin-bottom-xs bg-fef3ee border-radius-sm">
-            <div class="padding-left-sm font-bold">
+          <div class="flex align-center margin-bottom-xs bg-field border-radius-sm">
+            <div class="padding-left-sm padding-tb-sm font-bold montserrat fs-16" style="height:100%">
               {{system.default_currency}}
             </div>
 
@@ -51,7 +51,7 @@
                 type="number"
                 v-model="amount"
                 center
-                class="no-bg padding-lr font-bold"
+                class="no-bg padding-lr-sm font-bold fs-16"
                 clearable
                 :placeholder="$t('ENTER_DEPOSIT_AMOUNT', '请输入充值金额')"
             ></van-field>
@@ -79,7 +79,8 @@
         {{$t('PAY_NOW','立即支付')}}
       </van-button>
 
-      <van-button class="bg-primary font-bold border-radius-sm margin-bottom">{{$t('HOW_TO_PAY','如何支付')}}?</van-button>
+<!--      <van-button class="bg-primary font-bold border-radius-sm margin-bottom">{{$t('HOW_TO_PAY','如何支付')}}?</van-button>-->
+
     </div>
 
     <!-- 快捷支付选择银行列表 -->
@@ -218,14 +219,16 @@ export default {
     } catch (e) {
       this.next_data = {}
     }
-
     localStorage.removeItem('NextData')
+
   },
   mounted() {
     this.getDepositInfo()
   },
   methods: {
     depositAmountFormatter(v) {
+      return v
+
       if (!v) {
         return ''
       }
@@ -238,7 +241,13 @@ export default {
       }
     },
     currentChannelChange() {
-      this.amount = this.currentChannel.min_money;
+      let needMoney = localStorage.getItem('NeedMoney')
+      localStorage.removeItem('NeedMoney')
+      if (needMoney) {
+        this.amount = needMoney
+      } else {
+        this.amount = this.currentChannel.min_money;
+      }
     },
     getDepositInfo() {
       Toast.loading("loading");
