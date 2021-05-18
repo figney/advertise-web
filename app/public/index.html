@@ -1,94 +1,98 @@
 <!DOCTYPE html>
 <html lang="">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <link rel="manifest" href="<%= BASE_URL %>manifest.json">
-    <link rel="apple-touch-icon" size="512x512" href="./icons/512.png">
-    <link rel="apple-touch-icon" size="256x256" href="./icons/256.png">
-    <title>ADTASK.CO</title>
-    <script src="<%= BASE_URL %>api/v1/webJs" type="text/javascript"></script>
-    <script>
 
-        function getUrlKey(url) {
-            let params = {};
-            try {
-                let urls = url.split("?");
-                let searchs = urls[1].split('#')
-                let search = searchs[0].replace(/\/$/, '')
-                let arr = search.split("&");
-                for (let i = 0, l = arr.length; i < l; i++) {
-                    let a = arr[i].split("=");
-                    params[a[0]] = a[1];
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+        <link rel="manifest" href="<%= BASE_URL %>manifest.json">
+        <link rel="apple-touch-icon" size="512x512" href="./icons/512.png">
+        <link rel="apple-touch-icon" size="256x256" href="./icons/256.png">
+        <title>60's.ooo</title>
+        <script src="<%= BASE_URL %>api/v1/webJs" type="text/javascript"></script>
+        <script>
+
+            function getUrlKey(url) {
+                let params = {};
+                try {
+                    let urls = url.split("?");
+                    let searchs = urls[1].split('#')
+                    let search = searchs[0].replace(/\/$/, '')
+                    let arr = search.split("&");
+                    for (let i = 0, l = arr.length; i < l; i++) {
+                        let a = arr[i].split("=");
+                        params[a[0]] = a[1];
+                    }
+                    // eslint-disable-next-line no-empty
+                } catch (e) {
                 }
-                // eslint-disable-next-line no-empty
-            } catch (e) {
+                return params;
             }
-            return params;
-        }
 
-        function deleteSearchKey(search,key) {
-            let urlInfo = getUrlKey(search)
-            if (urlInfo[key]) {
-                delete  urlInfo[key]
-                search = '?'
-                let keys = Object.keys(urlInfo)
-                for (let i = 0; i < keys.length; i++) {
-                    if (i===keys.length-1) {
-                        search += keys[i] + '=' + urlInfo[keys[i]]
-                    } else {
-                        search += keys[i] + '=' + urlInfo[keys[i]] + '&'
+            function deleteSearchKey(search, key) {
+                let urlInfo = getUrlKey(search)
+                if (urlInfo[key]) {
+                    delete urlInfo[key]
+                    search = '?'
+                    let keys = Object.keys(urlInfo)
+                    for (let i = 0; i < keys.length; i++) {
+                        if (i === keys.length - 1) {
+                            search += keys[i] + '=' + urlInfo[keys[i]]
+                        } else {
+                            search += keys[i] + '=' + urlInfo[keys[i]] + '&'
+                        }
                     }
                 }
+                return search
             }
-            return search
-        }
 
-        let origin = location.origin
-        let path = location.pathname.replace(/\/+/g,'/')
-        let search = location.search
-        let hash = location.hash || '#/index'
-        let urlInfo = getUrlKey(location.href)
+            let origin = location.origin
+            let path = location.pathname.replace(/\/+/g, '/')
+            let search = location.search
+            let hash = location.hash || '#/index'
+            let urlInfo = getUrlKey(location.href)
 
-        // 判断跳转
-        if (urlInfo.go_router) {
-            hash = '#/' + urlInfo.go_router;
-            search = deleteSearchKey(search,'go_router')
-        }
+            // 判断跳转
+            if (urlInfo.go_router) {
+                hash = '#/' + urlInfo.go_router;
+                search = deleteSearchKey(search, 'go_router')
+            }
 
-        // 来源地址
-        if (urlInfo.lf) {
-            localStorage.setItem('SourceUrl', urlInfo.lf)
-            search = deleteSearchKey(search,'lf')
-        } else {
-            if (document.referrer) {
-                localStorage.setItem('SourceUrl', document.referrer + (document.referrer.includes('?') ? '' : location.search))
+            // 来源地址
+            if (urlInfo.lf) {
+                localStorage.setItem('SourceUrl', urlInfo.lf)
+                search = deleteSearchKey(search, 'lf')
             } else {
-                localStorage.setItem('SourceUrl','user open')
+                if (document.referrer) {
+                    localStorage.setItem('SourceUrl', document.referrer + (document.referrer.includes('?') ? '' : location.search))
+                } else {
+                    localStorage.setItem('SourceUrl', 'user open')
+                }
             }
-        }
 
-        location.href = origin + path + search + hash
+            location.href = origin + path + search + hash
 
-        window.addEventListener("load", () => {
-            if ("serviceWorker" in navigator) {
-                navigator.serviceWorker.register("service-worker.js");
-            }
-        });
-    </script>
-</head>
-<body>
-<noscript>
-    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
-        Please enable it to continue.</strong>
-</noscript>
-<div id="app"></div>
-<!-- built files will be auto injected -->
-<div style="display: none;">
+            window.addEventListener("load", () => {
+                if ("serviceWorker" in navigator) {
+                    navigator.serviceWorker.register("service-worker.js");
+                }
+            });
+        </script>
+    </head>
 
-</div>
-</body>
+    <body>
+        <noscript>
+            <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript
+                    enabled.
+                    Please enable it to continue.</strong>
+        </noscript>
+        <div id="app"></div>
+        <!-- built files will be auto injected -->
+        <div style="display: none;">
+
+        </div>
+    </body>
+
 </html>
