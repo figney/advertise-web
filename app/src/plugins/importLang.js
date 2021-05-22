@@ -311,7 +311,9 @@ let lang_map =
     "CHECK_TIME_WEEKDAY": "审核时间: 工作日 9:00 - 24:00",
     "PLEASE_CONTACT_US": "请联系客服快速入账",
     "ARRIVE_AT": "到账时间",
-    "YOU_RE_FREE_VIP_NOW": "普通会员"
+    "YOU_RE_FREE_VIP_NOW": "普通会员",
+    "TASK_NOT_SHARED": "任务未分享",
+    "GO_SHARE": "去分享"
 }
 
 let lang_backend =
