@@ -6,15 +6,15 @@ const resolve = file => path.resolve(__dirname, file);
 module.exports = {
     lintOnSave: false,
     outputDir: 'dist',
-    publicPath: process.env.NODE_ENV === 'production' ? '/' : '/ad_base',
+    publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
     devServer: {
         disableHostCheck: true,
-        // proxy: {
-        //     "/api": {
-        //         target: "http://192.168.5.178",
-        //         changeOrigin: true,
-        //     }
-        // }
+        proxy: {
+            "/api": {
+                target: "http://localhost",
+                changeOrigin: true,
+            }
+        }
     },
     chainWebpack: config => {
         // 移除 prefetch 插件
