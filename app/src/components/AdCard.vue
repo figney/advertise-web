@@ -78,12 +78,14 @@
             <div class="margin-right-xs task-progress">
               <div
                 class="finished-line"
-                :style="'width:' + Math.floor((100 * ad.rest) / ad.total) + '%'"
+                :style="
+                  'width:' + ((ad.rest / ad.total) * 100).toFixed(3) + '%'
+                "
                 v-if="ad.rest"
               />
             </div>
             <span class="fc-fff font-bold fs-8"
-              >{{ Math.floor((100 * ad.rest) / ad.total) }}%</span
+              >{{ ((ad.rest / ad.total) * 100).toFixed(3) }}%</span
             >
           </div>
           <div style="padding-top: 0.085rem" v-else></div>
