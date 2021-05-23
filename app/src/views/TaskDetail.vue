@@ -249,9 +249,9 @@
               <!--              </div>-->
               <div class="border-radius-sm padding-sm margin-lr-sm bg-f1f1f1">
                 <img
-                  src="../assets/images/zalo.png"
+                  src="../assets/images/line.jpg"
                   style="height: 1.4rem"
-                  @click="copyPlat('za')"
+                  @click="copyPlat('line')"
                 />
               </div>
               <div class="border-radius-sm padding-sm margin-lr-sm bg-f1f1f1">
@@ -1073,6 +1073,10 @@ export default {
         case "wa":
           this.$webEvent("Whatsapp分享点击", "分享活动页");
           this.$openLink(`whatsapp://send?text=${encodeUrl}`);
+          break;
+        case "line":
+          this.$webEvent("Line分享点击", "分享活动页");
+          this.$openLink(`line://msg/text/${encodeUrl}`);
           break;
       }
 

@@ -8,8 +8,6 @@ $t("YOUR_FRIEND", "你的好友");
 $t("SHARED_WITH_YOU", "分享给你");
 $t("HE_ALREADY_EARNED_AT", "他已经在");
 $t("EARNED_MONEY", "赚钱了");
-$t("HE_ALREADY_EARNED_AT", "他已经在");
-$t("EARNED_MONEY", "赚钱了");
 $t("CLICK_ABOVE_MAKE_MONEY", "加入我是代言人，每天领取1000，免费领取一百年");
 $t("START_MAKE_MONEY_FREE", "立刻加入代言人");
 $t("NEED_PAY", "开通价格");
