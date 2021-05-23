@@ -15,11 +15,9 @@
         :is-round-up="false"
       />
       <span style="margin-left: 0.05rem" v-if="showK">{{ unit }}</span>
-      <span
-        style="margin-right: 0.1rem; font-size: 100%"
-        v-if="!showCurrency"
-        >{{ system.default_currency }}</span
-      >
+      <span style="margin-right: 0.1rem; font-size: 100%" v-if="showCurrency">{{
+        system.default_currency
+      }}</span>
     </template>
   </span>
 </template>
@@ -70,6 +68,7 @@ export default {
       unit: "",
       calcValue: 0,
       showK: false,
+      showCurrency: true,
       showTransition: false,
       showDuration: 3000,
       inited_secs: false,
