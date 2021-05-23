@@ -471,12 +471,22 @@ export default {
     if (this.$route.query.lv) {
       let lv = this.$route.query.lv - 1;
       this.currentVipTab = isNaN(lv) ? 0 : lv;
+      if (lv < this.vips.length) {
+        this.selectVip(this.vips[lv]);
+      }
     }
   },
   mounted() {
     this.getVipList();
     this.getUserVipInfo();
     this.getBuyVipContent();
+    if (this.$route.query.lv) {
+      let lv = this.$route.query.lv - 1;
+      this.currentVipTab = isNaN(lv) ? 0 : lv;
+      if (lv < this.vips.length) {
+        this.selectVip(this.vips[lv]);
+      }
+    }
   },
   methods: {
     calcMyCurrentVip() {

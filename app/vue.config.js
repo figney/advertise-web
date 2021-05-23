@@ -7,15 +7,15 @@ module.exports = {
     lintOnSave: false,
     outputDir: 'dist',
     publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
-    // devServer: {
-    //     disableHostCheck: true,
-    //     proxy: {
-    //         "/api": {
-    //             target: "https://www.60s.pw",
-    //             changeOrigin: true,
-    //         }
-    //     }
-    // },
+    devServer: {
+        disableHostCheck: true,
+        proxy: {
+            "/api": {
+                target: "https://www.60s.pw",
+                changeOrigin: true,
+            }
+        }
+    },
     chainWebpack: config => {
         // 移除 prefetch 插件
         config.plugins.delete('preload')
