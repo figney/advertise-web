@@ -1,10 +1,12 @@
 <template>
-  <span class="num-change" :id="elId"/>
+  <div>
+    <span class="num-change" :id="elId" />
+  </div>
 </template>
 
 <script>
 import stringRandom from "string-random";
-import { CountUp } from "countup.js"
+import { CountUp } from "countup.js";
 
 export default {
   props: {
@@ -19,44 +21,44 @@ export default {
     duration: {
       type: Number,
       default: 2,
-    }
+    },
   },
-  data: ()=> {
+  data: () => {
     return {
       elId: stringRandom(),
-    }
+    };
   },
   watch: {
     value(newVal, oldVal) {
-      this.startCountUp(oldVal,newVal)
-    }
+      this.startCountUp(oldVal, newVal);
+    },
   },
   mounted() {
-    this.$nextTick(()=>{
-      this.startCountUp(this.from,this.value)
-    })
+    this.$nextTick(() => {
+      this.startCountUp(this.from, this.value);
+    });
   },
   methods: {
-    startCountUp(start=0,end=0) {
+    startCountUp(start = 0, end = 0) {
       if (isNaN(start)) {
-        start = 0
+        start = 0;
       }
       if (isNaN(end)) {
-        end = 0
+        end = 0;
       }
       let options = {
         startVal: start,
         duration: this.duration,
-      }
-      let countUp = new CountUp(this.elId,end,options)
+      };
+      let countUp = new CountUp(this.elId, end, options);
       if (!countUp.error) {
-        countUp.start()
+        countUp.start();
       } else {
-        console.error('countUp error:',countUp.error)
+        console.error("countUp error:", countUp.error);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">
