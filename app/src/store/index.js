@@ -48,7 +48,7 @@ export default new Vuex.Store({
     inviteContent: {},
     buyVipRule: {},
     // 免费会员一次任务多少钱
-    free_task_money: 1800,
+    free_task_money: 5,
   },
   getters: {
     version() {
