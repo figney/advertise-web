@@ -11,7 +11,7 @@ export default {
       elId: randomString(),
       counter: null,
       counterInterval: null,
-      defaultNum: 21057005,
+      defaultNum: 210570,
     };
   },
   mounted() {
@@ -23,7 +23,7 @@ export default {
       this.counter = new Counter(selector, {
         direction: "rtl",
         delay: 100,
-        digits: 8,
+        digits: 5,
       });
       this.countCurrentNum();
       this.counterInterval = setInterval(this.countCurrentNum, 3000);
