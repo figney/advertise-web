@@ -6,168 +6,173 @@
 
     <template v-else>
       <md-amount
-          :value="calcValue"
-          :has-separator="true"
-          :separator="separator"
-          :transition="showTransition"
-          :duration="parseFloat(showDuration)"
-          :precision="calcPrecision"
-          :is-round-up="false"
+        :value="calcValue"
+        :has-separator="true"
+        :separator="separator"
+        :transition="showTransition"
+        :duration="parseFloat(showDuration)"
+        :precision="calcPrecision"
+        :is-round-up="false"
       />
-      <span style="margin-left:0.05rem" v-if="showK">{{unit}}</span>
+      <span style="margin-left: 0.05rem" v-if="showK">{{ unit }}</span>
+      <span
+        style="margin-right: 0.1rem; font-size: 100%"
+        v-if="!showCurrency"
+        >{{ system.default_currency }}</span
+      >
     </template>
   </span>
 </template>
 
 <script>
-import {Amount} from "mand-mobile"
-import {mapState} from "vuex"
-import random from 'string-random'
-import { CountUp } from 'countup.js'
-import {Base} from "@/mixins";
+import { Amount } from "mand-mobile";
+import { mapState } from "vuex";
+import random from "string-random";
+import { CountUp } from "countup.js";
+import { Base } from "@/mixins";
 
 export default {
   components: {
-    [Amount.name]:Amount,
+    [Amount.name]: Amount,
   },
   props: {
     value: {
-      type: [Number,String],
-      default: 0
+      type: [Number, String],
+      default: 0,
     },
     transition: {
       type: Boolean,
-      default: false
+      default: false,
     },
     duration: {
-      type: [Number,String],
-      default: 3000
+      type: [Number, String],
+      default: 3000,
     },
     precision: {
-      type: [Number,String],
+      type: [Number, String],
       default: 0,
     },
     separator: {
       type: String,
-      default: ','
+      default: ",",
     },
     day_dynamic: {
       type: Boolean,
-      default: false
+      default: false,
     },
     ck: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
-  data: ()=> {
+  data: () => {
     return {
-      unit: '',
+      unit: "",
       calcValue: 0,
       showK: false,
       showTransition: false,
       showDuration: 3000,
       inited_secs: false,
-      countToId: random(12)
-    }
+      countToId: random(12),
+    };
   },
   mixins: [Base],
   watch: {
     left_secs() {
       if (this.day_dynamic && !this.inited_secs) {
-        this.inited_secs = true
-        this.calcDayDynamic()
+        this.inited_secs = true;
+        this.calcDayDynamic();
       }
     },
     value() {
-      this.$nextTick(()=>{
-        this.updateShowValue()
+      this.$nextTick(() => {
+        this.updateShowValue();
         if (this.day_dynamic) {
-          this.calcDayDynamic()
+          this.calcDayDynamic();
         }
-      })
+      });
     },
     transition() {
-      this.showTransition = this.transition
+      this.showTransition = this.transition;
     },
     duration() {
-      this.showDuration = this.duration
+      this.showDuration = this.duration;
     },
     day_dynamic() {
       if (this.day_dynamic) {
-        this.calcDayDynamic()
+        this.calcDayDynamic();
       }
-    }
+    },
   },
   computed: {
-    ...mapState(['left_secs']),
+    ...mapState(["left_secs"]),
     calcPrecision() {
-      let s = this.calcValue.toString()
-      if (s.indexOf('.') == -1) {
-        return 0
+      let s = this.calcValue.toString();
+      if (s.indexOf(".") == -1) {
+        return 0;
       } else {
-        let len = s.substring(s.indexOf('.')+1).length
-        return len < parseInt(this.precision) ? len : this.precision
+        let len = s.substring(s.indexOf(".") + 1).length;
+        return len < parseInt(this.precision) ? len : this.precision;
       }
-    }
+    },
   },
   mounted() {
-    this.$nextTick(()=>{
-      this.updateShowValue()
+    this.$nextTick(() => {
+      this.updateShowValue();
       if (this.day_dynamic) {
-        this.calcDayDynamic()
+        this.calcDayDynamic();
       }
-    })
+    });
   },
   methods: {
     updateShowValue() {
-      let value = parseFloat(this.value)
+      let value = parseFloat(this.value);
       // if (this.system.show_suffix && this.value >= 1000000) {
       //   this.calcValue = this.value / 1000000
       //   this.showK = true
       //   this.unit = 'M'
       // }
       if (this.system.show_suffix && value >= 1000) {
-        this.calcValue = value / 1000
-        this.showK = true
-        this.unit = 'K'
+        this.calcValue = value / 1000;
+        this.showK = true;
+        this.unit = "K";
       } else {
-        this.calcValue = value
-        this.unit = ''
+        this.calcValue = value;
+        this.unit = "";
       }
     },
     calcDayDynamic() {
       let total = this.value,
-          step = total / 86400,
-          passed = 86400 - this.left_secs,
-          startVal = passed * step,
-          decimalPlaces = this.calcDecimalPlaces(step);
+        step = total / 86400,
+        passed = 86400 - this.left_secs,
+        startVal = passed * step,
+        decimalPlaces = this.calcDecimalPlaces(step);
 
-      const countUp = new CountUp(this.countToId,this.value,{
+      const countUp = new CountUp(this.countToId, this.value, {
         startVal: startVal,
         duration: this.left_secs,
         useEasing: false,
-        decimalPlaces: decimalPlaces
-      })
+        decimalPlaces: decimalPlaces,
+      });
 
       if (!countUp.error) {
-        countUp.start()
+        countUp.start();
       } else {
         // console.log(countUp.error)
       }
     },
     calcDecimalPlaces(n) {
       let count = this.precision;
-      for (let i = 0; i<this.precision; i++) {
-        if (n>=(1/10**i)) {
-          count = i
-          break
+      for (let i = 0; i < this.precision; i++) {
+        if (n >= 1 / 10 ** i) {
+          count = i;
+          break;
         }
       }
-      return count
-    }
-  }
-}
+      return count;
+    },
+  },
+};
 </script>
 
 <style lang="scss">
