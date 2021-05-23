@@ -7,7 +7,11 @@
     <div
       class="margin-lr margin-bottom-sm padding-sm border-radius bg-field flex align-stretch"
       :style="
-        'min-height:1.653rem;background-image:url(' + currentVip.bg_image + ')'
+        currentVip.bg_image === undefined
+          ? 'min-height:1.653rem;'
+          : 'min-height:1.653rem;background-image:url(' +
+            currentVip.bg_image +
+            ')'
       "
     >
       <div class="flex align-center margin-right-sm">
