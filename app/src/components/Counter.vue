@@ -6,52 +6,52 @@
 import Counter from "../plugins/numCounter";
 import randomString from "string-random";
 export default {
-  data: ()=> {
+  data: () => {
     return {
       elId: randomString(),
       counter: null,
       counterInterval: null,
-      defaultNum: 1057005,
-    }
+      defaultNum: 21057005,
+    };
   },
   mounted() {
-    this.startCounter()
+    this.startCounter();
   },
   methods: {
     startCounter() {
-      const selector = '.numCounter'
+      const selector = ".numCounter";
       this.counter = new Counter(selector, {
-        direction: 'rtl',
+        direction: "rtl",
         delay: 100,
-        digits: 7,
-      })
-      this.countCurrentNum()
-      this.counterInterval = setInterval(this.countCurrentNum, 3000)
+        digits: 8,
+      });
+      this.countCurrentNum();
+      this.counterInterval = setInterval(this.countCurrentNum, 3000);
     },
     countCurrentNum() {
-      let t = Date.now() % 86400000
-      let v = Math.floor(t / 36) + this.defaultNum
-      this.counter.count(v)
+      let t = Date.now() % 86400000;
+      let v = Math.floor(t / 36) + this.defaultNum;
+      this.counter.count(v);
     },
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">
-$digitHeight : 1.375rem;
-$speed       : .5s;
+$digitHeight: 1.375rem;
+$speed: 0.5s;
 
-.numCounter{
+.numCounter {
   display: inline-block;
   height: $digitHeight;
   line-height: $digitHeight;
-  text-shadow: 0 0 2px #FFF;
+  text-shadow: 0 0 2px #fff;
   font-weight: bold;
   white-space: normal;
-  font-family: din-pro,sans-serif;
+  font-family: din-pro, sans-serif;
 
-  > div{
-    width: 0.9rem;
+  > div {
+    width: 0.76rem;
     display: inline-block;
     vertical-align: top;
     height: 100%;
@@ -59,9 +59,9 @@ $speed       : .5s;
     overflow: hidden;
     //margin: 0 0.02rem;
     border-radius: 0.1rem;
-    box-shadow: 0 0 1px rgba(0,0,0,0.1) inset;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1) inset;
 
-    > b{
+    > b {
       width: 100%;
       position: relative;
       height: $digitHeight * 10;
@@ -69,7 +69,7 @@ $speed       : .5s;
       text-align: center;
       display: flex;
       flex-direction: column;
-      transition: $speed cubic-bezier(.75, .15,.6, 1.15), text-shadow 150ms;
+      transition: $speed cubic-bezier(0.75, 0.15, 0.6, 1.15), text-shadow 150ms;
 
       > div {
         width: 100%;
@@ -77,36 +77,34 @@ $speed       : .5s;
         border-radius: 0.1rem;
       }
 
-      &.blur{
+      &.blur {
         background: rgba(#ff0000, 0.3);
-        opacity: .3;
+        opacity: 0.3;
         div {
-          text-shadow: 2px 1px 3px rgba(#fff, .2),
-          0 .1em 2px rgba(#ff0000, .2),
-          0 .3em 3px rgba(#ff0000, .1),
-          0 -.1em 2px rgba(#ff0000, .2),
-          0 -.3em 3px rgba(#ff0000, .1);
+          text-shadow: 2px 1px 3px rgba(#fff, 0.2),
+            0 0.1em 2px rgba(#ff0000, 0.2), 0 0.3em 3px rgba(#ff0000, 0.1),
+            0 -0.1em 2px rgba(#ff0000, 0.2), 0 -0.3em 3px rgba(#ff0000, 0.1);
         }
       }
 
-      @for $i from 1 through 9{
-        &[data-value="#{$i}"]{
+      @for $i from 1 through 9 {
+        &[data-value="#{$i}"] {
           transform: translate(0, -$digitHeight * $i);
         }
       }
     }
 
-    //&:nth-last-child(3n):not(:first-child){
-    //  &::before{
-    //    font-family: sans-serif;
-    //    position: absolute;
-    //    left: 0;
-    //    transform: translate(-50%,0);
-    //    content:",";
-    //    display:inline;
-    //    opacity: .6;
-    //  }
-    //}
+    &:nth-last-child(3n):not(:first-child) {
+      &::before {
+        font-family: sans-serif;
+        position: fixed;
+        //left: 0;
+        transform: translate(-200%, 0);
+        content: ",";
+        display: inline;
+        opacity: 0.6;
+      }
+    }
   }
 }
 </style>

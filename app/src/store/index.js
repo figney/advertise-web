@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import config from "@/config";
 import model from "./model";
 import http from "@/plugins/axios"
-import {Toast} from "mand-mobile";
+import { Toast } from "mand-mobile";
 
 let systemInterval = null
 
@@ -30,6 +30,7 @@ export default new Vuex.Store({
     products: model.products,
     vips: model.vips,
     ifPwa: false,
+    showPwa: true,
     productSep: 100,
     userVipInfo: [],
     userVipFinishedCount: {},
@@ -46,6 +47,8 @@ export default new Vuex.Store({
     aboutContent: {},
     inviteContent: {},
     buyVipRule: {},
+    // 免费会员一次任务多少钱
+    free_task_money: 1800,
   },
   getters: {
     version() {
@@ -57,16 +60,16 @@ export default new Vuex.Store({
   },
   mutations: {
     // 更新未读消息的数量
-    updateUnreadNotificationCount(state,count) {
+    updateUnreadNotificationCount(state, count) {
       state.user.unread_notifications_count = count
     },
-    updateMoneyRate(state,rate) {
+    updateMoneyRate(state, rate) {
       if (rate) {
         state.system.usdt_money_rate = rate
       }
     },
-    setVipTask(state,{level,tasks}) {
-      state.vipTasks['vip'+level] = tasks
+    setVipTask(state, { level, tasks }) {
+      state.vipTasks['vip' + level] = tasks
     },
     setState(state, data) {
       state[data.key] = data.value
@@ -76,61 +79,61 @@ export default new Vuex.Store({
     // 更新用户对象
     updateUser(ctx, user) {
       if (user && user.hash) {
-        ctx.commit('setState',{key:'wallet', value: user.wallet})
-        ctx.commit('setState',{key:'money_bao', value: user.money_bao})
-        ctx.commit('setState',{key:'all_property', value: user.all_property})
-        ctx.commit('setState',{key:'product_data', value: user.product_data})
+        ctx.commit('setState', { key: 'wallet', value: user.wallet })
+        ctx.commit('setState', { key: 'money_bao', value: user.money_bao })
+        ctx.commit('setState', { key: 'all_property', value: user.all_property })
+        ctx.commit('setState', { key: 'product_data', value: user.product_data })
         delete user.wallet
         delete user.money_bao
         delete user.all_property
         delete user.product_data
-        ctx.commit('setState',{key:'user',value: user})
+        ctx.commit('setState', { key: 'user', value: user })
       }
     },
     refreshVipInfo(ctx) {
       http.get('v1/userVipInfo')
-        .then(res=>{
-          ctx.commit('setState',{key:'userVipInfo',value: res.data.vip})
-          ctx.commit('setState',{key:'userVipFinishedCount',value: res.data.ad_task_data || {}})
+        .then(res => {
+          ctx.commit('setState', { key: 'userVipInfo', value: res.data.vip })
+          ctx.commit('setState', { key: 'userVipFinishedCount', value: res.data.ad_task_data || {} })
         })
-        .catch(err=>{
-          console.log('refresh user vip info:',err)
+        .catch(err => {
+          console.log('refresh user vip info:', err)
         })
     },
     refreshUser(ctx) {
       http.get('v1/user')
-          .then(res=>{
-            ctx.dispatch('updateUser',res.data.user)
-          })
-          .catch(err=>{
-            console.log('refresh user:',err)
-          })
+        .then(res => {
+          ctx.dispatch('updateUser', res.data.user)
+        })
+        .catch(err => {
+          console.log('refresh user:', err)
+        })
     },
     refreshFinishedTasks(ctx) {
       http.get('v1/userVipInfo')
-          .then(res=>{
-            ctx.commit('setState',{key:'userVipInfo',value: res.data.vip})
-            ctx.commit('setState',{key:'userVipFinishedCount',value: res.data.ad_task_data || {}})
-          })
-          .catch(err=>{
-            console.log('refresh finished tasks:',err)
-          })
+        .then(res => {
+          ctx.commit('setState', { key: 'userVipInfo', value: res.data.vip })
+          ctx.commit('setState', { key: 'userVipFinishedCount', value: res.data.ad_task_data || {} })
+        })
+        .catch(err => {
+          console.log('refresh finished tasks:', err)
+        })
     },
     startSystemTimer(ctx) {
       if (systemInterval) {
         clearInterval(systemInterval)
         systemInterval = null
       }
-      ctx.commit('setState',{key:'init', value: true})
+      ctx.commit('setState', { key: 'init', value: true })
 
-      systemInterval = setInterval(()=>{
-        if (ctx.state.left_secs>0) {
-          ctx.commit('setState',{key:'left_secs',value: ctx.state.left_secs - 1})
+      systemInterval = setInterval(() => {
+        if (ctx.state.left_secs > 0) {
+          ctx.commit('setState', { key: 'left_secs', value: ctx.state.left_secs - 1 })
         } else {
-          ctx.commit('setState',{key:'left_secs',value: 86400})
+          ctx.commit('setState', { key: 'left_secs', value: 86400 })
           ctx.dispatch('refreshUser')
         }
-      },1000)
+      }, 1000)
     },
   },
   modules: {

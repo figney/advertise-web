@@ -51,6 +51,7 @@ export default {
           Toast.failed(err.data.message);
         });
     },
+
     updateLang() {
       let lang_map = {
         SIGN_UP_AND_GET_MONEY_NOW: "เป็นตัวแทนทันที",
@@ -430,6 +431,18 @@ export default {
         COPY_SUCCESS: "คัดลอกสำเร็จ",
         COPY_FAILED: "คัดลอกล้มเหลว",
         YOU_RE_FREE_VIP_NOW: "สมาชิกสามัญ",
+        YOUR_FRIEND: "Bạn của bạn ",
+        SHARED_WITH_YOU: "Chia sẻ với bạn ",
+        HE_ALREADY_EARNED_AT: "Anh ấy đã ",
+        EARNED_MONEY: "kiếm được ",
+        CLICK_ABOVE_MAKE_MONEY:
+          "Tham gia I'm SuperStar, nhận 1000 mỗi ngày, miễn phí để nhận được một trăm năm ",
+        START_MAKE_MONEY_FREE: "Tham gia SuperStar ngay. ",
+        NEED_PAY: "Giá bán ",
+        YOU_RE_FREE_VIP_NOW: "Hiện tại của bạn thuộc về VIP miễn phí ",
+        FREE_VIP: "VIP miễn phí ",
+        YOUR_NEW_FRIEND_JOINED:
+          "Bạn có những người bạn mới tham gia, nhận phần thưởng số tiền {0} sau khi nâng cấp VIP ",
       };
 
       for (let k of Object.keys(lang_map)) {

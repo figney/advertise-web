@@ -1,7 +1,17 @@
+
 import http from "./axios"
 
-let lang_map =
-{
+let lang_map = {
+    "YOUR_FRIEND": "你的好友",
+    "SHARED_WITH_YOU": "分享给你",
+    "HE_ALREADY_EARNED_AT": "他已经在",
+    "EARNED_MONEY": "赚钱了",
+    "CLICK_ABOVE_MAKE_MONEY": "加入我是代言人，每天领取1000，免费领取一百年",
+    "START_MAKE_MONEY_FREE": "立刻加入代言人",
+    "NEED_PAY": "开通价格",
+    "YOU_RE_FREE_VIP_NOW": "您当前属于普通VIP",
+    "FREE_VIP": "普通VIP",
+    "YOUR_NEW_FRIEND_JOINED": "您有新的好友加入，开通VIP后即可获得 {0} 金额奖励",
     "SIGN_UP_AND_GET_MONEY_NOW": "立即成为代理人",
     "NICK_NAME": "昵称",
     "ENTER_NICK_NAME": "请输入昵称",
