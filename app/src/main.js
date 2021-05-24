@@ -13,7 +13,7 @@ import "./styles/main.scss";
 import http from "./plugins/axios";
 import * as filters from "./plugins/filters";
 import setClip from "./plugins/clip";
-import {Toast} from "vant";
+import { Toast } from "vant";
 import config from "./config";
 
 
@@ -30,7 +30,7 @@ Vue.use(Snotify, {
     maxOnScreen: 1,
   },
   toast: {
-    position: SnotifyPosition.centerTop,
+    position: SnotifyPosition.rightTop,
     showProgressBar: false,
     timeout: 4000,
   },
@@ -53,35 +53,35 @@ Vue.prototype.$fixed = (number, digits = 8) => {
 Vue.prototype.$formatTime = (str = store.state.system.time_format, time) => {
   let t = time ? new Date(time) : new Date()
   let yyyy = t.getFullYear(),
-      mm = (t.getMonth() + 1) > 9 ? (t.getMonth() + 1) : '0' + (t.getMonth() + 1),
-      dd = t.getDate() > 9 ? t.getDate() : '0' + t.getDate(),
-      HH = t.getHours() > 9 ? t.getHours() : '0' + t.getHours(),
-      MM = t.getMinutes() > 9 ? t.getMinutes() : '0' + t.getMinutes(),
-      SS = t.getSeconds() > 9 ? t.getSeconds() : '0' + t.getSeconds();
+    mm = (t.getMonth() + 1) > 9 ? (t.getMonth() + 1) : '0' + (t.getMonth() + 1),
+    dd = t.getDate() > 9 ? t.getDate() : '0' + t.getDate(),
+    HH = t.getHours() > 9 ? t.getHours() : '0' + t.getHours(),
+    MM = t.getMinutes() > 9 ? t.getMinutes() : '0' + t.getMinutes(),
+    SS = t.getSeconds() > 9 ? t.getSeconds() : '0' + t.getSeconds();
 
   if (isNaN(yyyy)) {
     return time
   }
 
   return str
-      .replace('yyyy', yyyy)
-      .replace('mm', mm)
-      .replace('dd', dd)
-      .replace('HH', HH)
-      .replace('MM', MM)
-      .replace('SS', SS)
+    .replace('yyyy', yyyy)
+    .replace('mm', mm)
+    .replace('dd', dd)
+    .replace('HH', HH)
+    .replace('MM', MM)
+    .replace('SS', SS)
 }
 
 // 复制文字
 Vue.prototype.$copyText = (text) => {
-  setClip(text).then(copied=>{
+  setClip(text).then(copied => {
     if (copied) {
-      Toast(i18n.t('COPY_SUCCESS','复制成功'))
+      Toast(i18n.t('COPY_SUCCESS', '复制成功'))
     } else {
-      Toast(i18n.t('COPY_FAILED','复制失败'))
+      Toast(i18n.t('COPY_FAILED', '复制失败'))
     }
-  }).catch(err=>{
-    Toast(i18n.t('COPY_FAILED','复制失败'))
+  }).catch(err => {
+    Toast(i18n.t('COPY_FAILED', '复制失败'))
   })
 }
 
@@ -112,28 +112,28 @@ Vue.prototype.$webEvent = (rt, ev = "event") => {
         untitled_url: location.href,
       });
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 
 // 提交Facebook行为事件
-Vue.prototype.$fbq = (track,action,params)=>{
+Vue.prototype.$fbq = (track, action, params) => {
   if ('fbq' in window) {
     try {
-      window.fbq(track,action,params)
-    } catch (e) {}
+      window.fbq(track, action, params)
+    } catch (e) { }
   }
 }
 
 // socket io
 Vue.prototype.$socket = require("socket.io-client")(
-    '',
-    // "ws://192.168.5.178:7001",
-    {
-      transports: ["websocket"]
-    },
-    {
-      reconnection: true
-    }
+  '',
+  // "ws://192.168.5.178:7001",
+  {
+    transports: ["websocket"]
+  },
+  {
+    reconnection: true
+  }
 );
 
 // 跳转外部窗口
@@ -153,14 +153,14 @@ Vue.prototype.$toRouter = (rt) => {
   }
 }
 
-const NO_AUTH_URL = ['TaskShare','Beginner']
+const NO_AUTH_URL = ['TaskShare', 'Beginner']
 
 // 新人进入时
-router.beforeEach((to, from, next)=>{
+router.beforeEach((to, from, next) => {
   if (!localStorage.getItem('TOKEN') && !NO_AUTH_URL.includes(to.name)) {
     next({ name: 'Beginner' })
-  } else if (localStorage.getItem('TOKEN') && to.name=='Beginner') {
-    next({name:'HomeIndex'})
+  } else if (localStorage.getItem('TOKEN') && to.name == 'Beginner') {
+    next({ name: 'HomeIndex' })
   } else {
     next()
   }
@@ -171,7 +171,7 @@ router.afterEach((to, from) => {
   // 记录页面访问轨迹
   try {
     localStorage.setItem("TOROUTENAME", to.name);
-    setTimeout(()=>{
+    setTimeout(() => {
       if (process.env.NODE_ENV === 'production') {
         http.post("v1/deviceLog", {
           type: "page",
@@ -180,7 +180,7 @@ router.afterEach((to, from) => {
           untitled_url: location.href,
         });
       }
-    },1000)
+    }, 1000)
   } catch (e) {
     console.log(e);
   }

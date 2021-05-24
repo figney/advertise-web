@@ -1,6 +1,17 @@
+
 import http from "./axios"
 
 let lang_map = {
+    "YOUR_FRIEND": "你的好友",
+    "SHARED_WITH_YOU": "分享给你",
+    "HE_ALREADY_EARNED_AT": "他已经在",
+    "EARNED_MONEY": "赚钱了",
+    "CLICK_ABOVE_MAKE_MONEY": "加入我是代言人，每天领取1000，免费领取一百年",
+    "START_MAKE_MONEY_FREE": "立刻加入代言人",
+    "NEED_PAY": "开通价格",
+    "YOU_RE_FREE_VIP_NOW": "您当前属于普通VIP",
+    "FREE_VIP": "普通VIP",
+    "YOUR_NEW_FRIEND_JOINED": "您有新的好友加入，开通VIP后即可获得 {0} 金额奖励",
     "SIGN_UP_AND_GET_MONEY_NOW": "立即成为代理人",
     "NICK_NAME": "昵称",
     "ENTER_NICK_NAME": "请输入昵称",
@@ -186,6 +197,7 @@ let lang_map = {
     "TASK_DESC": "代理任务描述",
     "TASK_REQUIREMENTS": "代理要求",
     "TASK_REQUIREMENTS_CONTENT_N_CLICK": "分享完成之后{0}个有效好友点击链接即可完成任务，奖励将自动发放到您的账户",
+    "TASK_REQUIREMENTS_CONTENT": "分享完成之后{0}个有效好友点击链接即可完成任务，奖励将自动发放到您的账户",
     "TASK_STEPS": "代理任务步骤",
     "CLICK_RECEIVE_TASK": "点击下方按钮开始代理",
     "HAS_RECEIVED": "正在代理...",
@@ -308,10 +320,14 @@ let lang_map = {
     "WAIT_CHECK_TO_ARRIVE": "请耐心等待,审核后会自动入账",
     "CHECK_TIME_WEEKDAY": "审核时间: 工作日 9:00 - 24:00",
     "PLEASE_CONTACT_US": "请联系客服快速入账",
-    "ARRIVE_AT": "到账时间"
+    "ARRIVE_AT": "到账时间",
+    "YOU_RE_FREE_VIP_NOW": "普通会员",
+    "TASK_NOT_SHARED": "任务未分享",
+    "GO_SHARE": "去分享"
 }
 
-let lang_backend = {
+let lang_backend =
+{
     "ACC_NAME": "持卡人姓名",
     "ACC_NO": "银行卡号",
     "AWARD": "奖励",
@@ -348,7 +364,11 @@ let lang_backend = {
     "CAN_NOT_BUY": "无法购买",
     "CAN_NOT_DOWNGRADE": "无法降级",
     "TEST_NOTICE": "测试通知奖励",
-    "MAX_STACKS_EXCEEDED": "超出最大叠加数量"
+    "MAX_STACKS_EXCEEDED": "超出最大叠加数量",
+    "TASK_REQUIREMENTS_CONTENT": "代理商规则：代理商希望获得更多收入。 必须与朋友分享特殊链接 在指定的时间内完成工作 将获得额外的收入 奖励将自动计入您的帐户。",
+    "IMMEDIATELY_COMPLETE_TASK": "现在去做",
+    "COPY_SUCCESS": "复制成功",
+    "COPY_FAILED": "复制失败"
 }
 
 
@@ -357,6 +377,7 @@ const importOne = function (path, describe) {
     http.post('v1/importLang', {
         name: describe,
         slug: path,
+        type: 'client',
         group: 'Client'
     }).catch(err => {
         console.log('import lang error:', err)
@@ -367,6 +388,7 @@ const importBackend = function (path, describe) {
     http.post('v1/importLang', {
         name: describe,
         slug: path,
+        type: 'serve',
         group: 'Backend'
     }).catch(err => {
         console.log('import lang error:', err)

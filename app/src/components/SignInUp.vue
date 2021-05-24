@@ -1,23 +1,28 @@
 <template>
   <van-popup
     class="sign-in-up no-bg"
-    style="overflow:visible"
+    style="overflow: visible"
     v-model="show"
     closeable
   >
-    <div class="flex flex-direction vw-90 padding border-radius-sm bounceInDown white-view">
+    <div
+      class="flex flex-direction vw-90 padding border-radius-sm bounceInDown white-view"
+    >
       <template v-if="currentType == 'register'">
         <div class="flex flex-direction">
           <div class="margin-bottom">
             <div class="font-bold fs-18 text-center padding-lr">
-              {{$t('SIGN_UP_AND_GET_MONEY_NOW','立即注册,免费领钱100年')}}
+              {{ $t("SIGN_UP_AND_GET_MONEY_NOW", "立即注册,免费领钱100年") }}
             </div>
           </div>
           <div
             class="flex-sub white-view padding-lr-xs padding-bottom-xs flex flex-direction signInUpModel"
           >
             <div class="margin-bottom-xs fc-secondary fs-12">
-              {{ $t("NICK_NAME", "昵称") }}
+              <span>{{ $t("NICK_NAME", "昵称") }}</span>
+              <span class="margin-left-xs opacity-60"
+                >({{ $t("LESS_4_MORE_32", "4到32个字符") }})</span
+              >
             </div>
             <div class="flex align-center margin-bottom-sm">
               <van-field
@@ -27,24 +32,26 @@
                 v-model="register.nickName"
                 :placeholder="$t('ENTER_NICK_NAME', '请输入昵称')"
               >
-<!--                <template #right-icon>-->
+                <!--                <template #right-icon>-->
 
-<!--                  <van-button-->
-<!--                      class="text-nowrap no-border padding-0 no-bg"-->
-<!--                      :loading="isGetting"-->
-<!--                      :disabled="isGetting"-->
-<!--                      size="small"-->
-<!--                      style="height:unset"-->
-<!--                      @click="getRandomNickname"-->
-<!--                  >-->
-<!--  &lt;!&ndash;                  <span>{{ $t("RANDOM", "随机") }}</span>&ndash;&gt;-->
-<!--                    <van-icon name="replay" size="18"/>-->
-<!--                  </van-button>-->
-<!--                </template>-->
+                <!--                  <van-button-->
+                <!--                      class="text-nowrap no-border padding-0 no-bg"-->
+                <!--                      :loading="isGetting"-->
+                <!--                      :disabled="isGetting"-->
+                <!--                      size="small"-->
+                <!--                      style="height:unset"-->
+                <!--                      @click="getRandomNickname"-->
+                <!--                  >-->
+                <!--  &lt;!&ndash;                  <span>{{ $t("RANDOM", "随机") }}</span>&ndash;&gt;-->
+                <!--                    <van-icon name="replay" size="18"/>-->
+                <!--                  </van-button>-->
+                <!--                </template>-->
               </van-field>
             </div>
 
-            <div class="margin-bottom-xs fc-secondary fs-12">{{ $t("PHONE", "手机号") }}</div>
+            <div class="margin-bottom-xs fc-secondary fs-12">
+              {{ $t("PHONE", "手机号") }}
+            </div>
 
             <div class="flex align-center margin-bottom-sm">
               <van-field
@@ -59,18 +66,18 @@
               >
                 <template #left-icon>
                   <van-popover
-                      v-model="showDropdown"
-                      class="flex align-center justify-center margin-right-xs"
-                      trigger="click"
-                      :actions="generateCountryCode"
-                      placement="bottom-start"
-                      @select="currentCountryChange"
+                    v-model="showDropdown"
+                    class="flex align-center justify-center margin-right-xs"
+                    trigger="click"
+                    :actions="generateCountryCode"
+                    placement="bottom-start"
+                    @select="currentCountryChange"
                   >
                     <template #reference>
                       <van-button
-                          class="no-border font-bold text-nowrap fc-secondary no-bg padding-0"
-                          style="height:unset"
-                      >+ {{ currentCallingCode }}</van-button
+                        class="no-border font-bold text-nowrap fc-secondary no-bg padding-0"
+                        style="height: unset"
+                        >+ {{ currentCallingCode }}</van-button
                       >
                     </template>
                   </van-popover>
@@ -93,7 +100,7 @@
                 </van-field>
                 <van-button
                   class="border-radius-sm text-nowrap bg-primary"
-                  style="padding: 0.265rem 0.4rem;height:unset"
+                  style="padding: 0.265rem 0.4rem; height: unset"
                   plain
                   v-if="sendTime > 0"
                 >
@@ -102,7 +109,7 @@
 
                 <van-button
                   class="border-radius-sm text-nowrap bg-primary"
-                  style="padding: 0.265rem 0.4rem;height:unset"
+                  style="padding: 0.265rem 0.4rem; height: unset"
                   :disabled="!register.phone"
                   :loading="isSending"
                   @click="sendVerifyCode"
@@ -125,44 +132,47 @@
               :placeholder="$t('ENTER_PASSWORD', '请输入密码')"
             ></van-field>
 
-<!--            <template v-if="!system.is_sms_reg">-->
-<!--              <div class="margin-bottom-xs fc-secondary fs-12">-->
-<!--                {{ $t("PASSWORD_AGAIN", "确认密码") }}-->
-<!--              </div>-->
-<!--              <van-field-->
-<!--                  type="password"-->
-<!--                  class="border-radius-sm bg-field margin-bottom-sm font-bold focus-effect"-->
-<!--                  style="padding: 0.186rem 0.4rem"-->
-<!--                  clearable-->
-<!--                  v-model="register.passwordAgain"-->
-<!--                  :placeholder="$t('ENTER_PASSWORD_AGAIN', '请输入确认密码')"-->
-<!--              ></van-field>-->
-<!--            </template>-->
+            <!--            <template v-if="!system.is_sms_reg">-->
+            <!--              <div class="margin-bottom-xs fc-secondary fs-12">-->
+            <!--                {{ $t("PASSWORD_AGAIN", "确认密码") }}-->
+            <!--              </div>-->
+            <!--              <van-field-->
+            <!--                  type="password"-->
+            <!--                  class="border-radius-sm bg-field margin-bottom-sm font-bold focus-effect"-->
+            <!--                  style="padding: 0.186rem 0.4rem"-->
+            <!--                  clearable-->
+            <!--                  v-model="register.passwordAgain"-->
+            <!--                  :placeholder="$t('ENTER_PASSWORD_AGAIN', '请输入确认密码')"-->
+            <!--              ></van-field>-->
+            <!--            </template>-->
 
-            <template v-if="source!='ad'">
+            <template v-if="source != 'ad'">
               <div class="margin-bottom-xs fc-secondary fs-12">
                 {{ $t("REFERRAL_CODE", "邀请码") }}
               </div>
               <van-field
-                  class="border-radius-sm bg-field margin-bottom-sm font-bold focus-effect"
-                  style="padding: 0.186rem 0.4rem"
-                  clearable
-                  :readonly="register.inviteReadonly"
-                  v-model="register.inviteCode"
-                  :placeholder="$t('ENTER_REFERRAL_CODE', '请输入邀请码')"
+                class="border-radius-sm bg-field margin-bottom-sm font-bold focus-effect"
+                style="padding: 0.186rem 0.4rem"
+                clearable
+                :readonly="register.inviteReadonly"
+                v-model="register.inviteCode"
+                :placeholder="$t('ENTER_REFERRAL_CODE', '请输入邀请码')"
               />
             </template>
 
-            <div class="margin-bottom-xs"/>
+            <div class="margin-bottom-xs" />
 
             <van-button
               :disabled="!allowRegister"
               :loading="loadingRegister"
-              :class="['margin-bottom-sm border-radius-sm font-bold no-border bg-primary wrap-btn ',{'breath-btn':(allowRegister && !loadingRegister)}]"
+              :class="[
+                'margin-bottom-sm border-radius-sm font-bold no-border bg-primary wrap-btn ',
+                { 'breath-btn': allowRegister && !loadingRegister },
+              ]"
               @click="startRegister"
             >
-  <!--            {{ $t("SIGN_UP", "注册") }}-->
-              {{$t('SIGN_UP_AND_GET_MONEY_NOW','立即注册,免费领钱100年')}}
+              <!--            {{ $t("SIGN_UP", "注册") }}-->
+              {{ $t("SIGN_UP_AND_GET_MONEY_NOW", "立即注册,免费领钱100年") }}
             </van-button>
 
             <van-button
@@ -186,33 +196,35 @@
           <div
             class="flex-sub white-view padding-lr-xs padding-bottom-xs flex flex-direction signInUpModel"
           >
-            <div class="margin-bottom-xs fc-secondary fs-12">{{ $t("PHONE", "手机号") }}</div>
+            <div class="margin-bottom-xs fc-secondary fs-12">
+              {{ $t("PHONE", "手机号") }}
+            </div>
 
             <div class="flex align-center margin-bottom-sm">
               <van-field
-                  type="tel"
-                  class="border-radius-sm bg-field font-bold focus-effect"
-                  style="padding: 0.186rem 0.4rem"
-                  v-model="login.phone"
-                  clearable
-                  :maxlength="15"
-                  :formatter="phoneFormatter"
-                  :placeholder="$t('ENTER_PHONE', '请输入手机号')"
+                type="tel"
+                class="border-radius-sm bg-field font-bold focus-effect"
+                style="padding: 0.186rem 0.4rem"
+                v-model="login.phone"
+                clearable
+                :maxlength="15"
+                :formatter="phoneFormatter"
+                :placeholder="$t('ENTER_PHONE', '请输入手机号')"
               >
                 <template #left-icon>
                   <van-popover
-                      v-model="showDropdown"
-                      class="flex align-center justify-center margin-right-xs"
-                      trigger="click"
-                      :actions="generateCountryCode"
-                      placement="bottom-start"
-                      @select="currentCountryChange"
+                    v-model="showDropdown"
+                    class="flex align-center justify-center margin-right-xs"
+                    trigger="click"
+                    :actions="generateCountryCode"
+                    placement="bottom-start"
+                    @select="currentCountryChange"
                   >
                     <template #reference>
                       <van-button
-                          class="no-border font-bold text-nowrap fc-secondary no-bg padding-0"
-                          style="height:unset"
-                      >+ {{ currentCallingCode }}</van-button
+                        class="no-border font-bold text-nowrap fc-secondary no-bg padding-0"
+                        style="height: unset"
+                        >+ {{ currentCallingCode }}</van-button
                       >
                     </template>
                   </van-popover>
@@ -237,8 +249,11 @@
             <van-button
               :disabled="!allowLogin"
               :loading="loadingLogin"
-              :class="['bg-primary margin-bottom-sm border-radius-sm font-bold no-border wrap-btn',{'breath-btn':(allowLogin && !loadingLogin)}]"
-              style="letter-spacing:0.05rem"
+              :class="[
+                'bg-primary margin-bottom-sm border-radius-sm font-bold no-border wrap-btn',
+                { 'breath-btn': allowLogin && !loadingLogin },
+              ]"
+              style="letter-spacing: 0.05rem"
               @click="startLogin"
             >
               {{ $t("SIGN_IN", "登录") }}
@@ -250,8 +265,8 @@
               plain
               @click="changeCurrentType('register')"
             >
-  <!--            {{ $t("SIGN_UP", "注册") }}-->
-              {{$t('SIGN_UP_AND_GET_MONEY_NOW','立即注册,免费领钱100年')}}
+              <!--            {{ $t("SIGN_UP", "注册") }}-->
+              {{ $t("SIGN_UP_AND_GET_MONEY_NOW", "立即注册,免费领钱100年") }}
             </van-button>
           </div>
         </div>
@@ -261,7 +276,7 @@
 </template>
 
 <script>
-import {Popup, Field, Button, Popover, Icon} from "vant";
+import { Popup, Field, Button, Popover, Icon } from "vant";
 import VuePhoneNumberInput from "vue-phone-number-input";
 import "vue-phone-number-input/dist/vue-phone-number-input.css";
 import { Base } from "@/mixins";
@@ -293,7 +308,7 @@ export default {
         password: "",
         passwordAgain: "",
         inviteCode: "",
-        inviteReadonly: false
+        inviteReadonly: false,
       },
       login: {
         phone: "",
@@ -301,7 +316,7 @@ export default {
       },
       loadingLogin: false,
       loadingRegister: false,
-      source: '',
+      source: "",
     };
   },
   watch: {
@@ -320,16 +335,20 @@ export default {
     allowRegister() {
       if (this.system.is_sms_reg) {
         return (
-            !!this.register.phone &&
-            !!this.register.verifyCode &&
-            !!this.register.nickName &&
-            !!this.register.password
+          !!this.register.phone &&
+          !!this.register.verifyCode &&
+          !!this.register.nickName &&
+          this.register.nickName.length >= 4 &&
+          this.register.nickName.length <= 32 &&
+          !!this.register.password
         );
       } else {
         return (
-            !!this.register.phone &&
-            !!this.register.nickName &&
-            !!this.register.password
+          !!this.register.phone &&
+          !!this.register.nickName &&
+          this.register.nickName.length >= 4 &&
+          this.register.nickName.length <= 32 &&
+          !!this.register.password
         );
       }
     },
@@ -348,55 +367,55 @@ export default {
   mixins: [Base],
   mounted() {
     this.$bus.on("login", () => {
-      this.show = true
+      this.show = true;
       // this.loadOpenAnimate()
       // 是否注册过，如果注册过显示登录，否则显示注册
       const hasAccount = localStorage.getItem("REGISTERED");
       if (hasAccount) {
         this.currentType = "login";
-        this.changeCurrentType('login',true)
+        this.changeCurrentType("login", true);
       } else {
-        this.changeCurrentType('register',true)
+        this.changeCurrentType("register", true);
       }
 
       // 来源, 如果来源是ad的话，不需要填写邀请码， 其他的情况注册需要填写邀请码
-      this.source = localStorage.getItem('Source')
+      this.source = localStorage.getItem("Source");
     });
 
-    this.$nextTick(()=>{
+    this.$nextTick(() => {
       if (this.system.country_code.length) {
         this.currentCallingCode = this.$getCallingCode(
-            this.system.country_code[0]
+          this.system.country_code[0]
         );
       }
-      this.register.inviteCode = localStorage.getItem('Invitation')
+      this.register.inviteCode = localStorage.getItem("Invitation");
       if (this.register.inviteCode) {
-        this.register.inviteReadonly=true
+        this.register.inviteReadonly = true;
       }
-    })
+    });
   },
   methods: {
     loadOpenAnimate() {
       //  .signInUpModel
-      this.$nextTick(()=>{
-        let els = document.querySelectorAll('.signInUpModel')
+      this.$nextTick(() => {
+        let els = document.querySelectorAll(".signInUpModel");
         try {
           for (let el of els) {
-            el.classList.add('bounce-up-btn')
-            setTimeout(()=>{
-              el.classList.remove('bounce-up-btn')
-            }, 1000)
+            el.classList.add("bounce-up-btn");
+            setTimeout(() => {
+              el.classList.remove("bounce-up-btn");
+            }, 1000);
           }
         } catch (err) {
           // console.log('add animate error',err)
         }
-      })
+      });
     },
     async sendVerifyCode() {
       if (this.sendTime > 0) {
         return;
       }
-      this.$webEvent(`点击发送验证码`, this.$route.name+'页面')
+      this.$webEvent(`点击发送验证码`, this.$route.name + "页面");
       this.isSending = true;
       this.$startRecaptcha("verify_code").then((g_token) => {
         if (g_token) {
@@ -466,8 +485,8 @@ export default {
       if (!this.allowLogin) {
         return;
       }
-      this.$webEvent(`点击登录`, this.$route.name+'页面')
-      this.loadingLogin = true
+      this.$webEvent(`点击登录`, this.$route.name + "页面");
+      this.loadingLogin = true;
       this.$startRecaptcha("login").then((g_token) => {
         if (g_token) {
           this.$http
@@ -478,17 +497,17 @@ export default {
               g_token: g_token,
             })
             .then((res) => {
-              localStorage.setItem('WELCOME_TO',true)
+              localStorage.setItem("WELCOME_TO", true);
               localStorage.setItem("REGISTERED", true);
               localStorage.setItem("TOKEN", res.data.token);
-              location.reload()
+              location.reload();
             })
             .catch((err) => {
               Toast.failed(err.data.message);
             })
-            .finally(()=>{
-              this.loadingLogin = false
-            })
+            .finally(() => {
+              this.loadingLogin = false;
+            });
         }
       });
     },
@@ -496,16 +515,16 @@ export default {
       if (!this.allowRegister) {
         return;
       }
-      this.$webEvent(`点击注册`, this.$route.name+'页面')
-      this.loadingRegister = true
+      this.$webEvent(`点击注册`, this.$route.name + "页面");
+      this.loadingRegister = true;
       this.$startRecaptcha("register").then((g_token) => {
         if (g_token) {
-          let inviteId = this.register.inviteCode
-          if (this.source=='ad') {
-            inviteId = localStorage.getItem('Invitation') || 0
+          let inviteId = this.register.inviteCode;
+          if (this.source == "ad") {
+            inviteId = localStorage.getItem("Invitation") || 0;
           }
-          if (!inviteId && this.source != 'ad') {
-            this.$webEvent(`注册时没有邀请ID`, this.$route.name+'页面')
+          if (!inviteId && this.source != "ad") {
+            this.$webEvent(`注册时没有邀请ID`, this.$route.name + "页面");
           }
           this.$http
             .post("v1/register", {
@@ -516,38 +535,41 @@ export default {
               sms_code: this.system.is_sms_reg ? this.register.verifyCode : 0,
               invite_id: inviteId || 0,
               source: this.source || 0,
-              channel_id: Number(localStorage.getItem('ChannelID') || 0),
-              link_id: Number(localStorage.getItem('PremoteLinkID') || 0),
+              channel_id: Number(localStorage.getItem("ChannelID") || 0),
+              link_id: Number(localStorage.getItem("PremoteLinkID") || 0),
               password: this.register.password,
               password_confirmation: this.register.password,
               g_token: g_token,
             })
             .then((res) => {
-              this.$fbq('Lead')
-              localStorage.setItem('WELCOME_TO',true)
+              this.$fbq("Lead");
+              localStorage.setItem("WELCOME_TO", true);
               localStorage.setItem("REGISTERED", "1");
               localStorage.setItem("TOKEN", res.data.token);
-              location.reload()
+              location.reload();
             })
             .catch((err) => {
               Toast.failed(err.data.message);
             })
-            .finally(()=>{
-              this.loadingRegister = false
-            })
+            .finally(() => {
+              this.loadingRegister = false;
+            });
         }
       });
     },
-    changeCurrentType(type,auto=false) {
+    changeCurrentType(type, auto = false) {
       if (!auto) {
-        this.$webEvent(`切换到${type=='register'?'注册':'登录'}`, this.$route.name+'页面')
+        this.$webEvent(
+          `切换到${type == "register" ? "注册" : "登录"}`,
+          this.$route.name + "页面"
+        );
       }
       this.currentType = type;
-      if (type=='register') {
+      if (type == "register") {
         this.login = {
           phone: "",
           password: "",
-        }
+        };
         // if (!this.register.nickName) {
         //   this.getRandomNickname()
         // }
@@ -557,7 +579,7 @@ export default {
           nickName: "",
           verifyCode: "",
           password: "",
-        }
+        };
       }
     },
   },
@@ -565,9 +587,7 @@ export default {
 </script>
 
 <style lang="scss">
-
 .sign-in-up {
-
   .van-popup__close-icon {
     color: currentColor;
     font-size: 18px;
@@ -578,7 +598,8 @@ export default {
     width: 2.4rem;
   }
 
-  .van-field__left-icon, .van-field__right-icon {
+  .van-field__left-icon,
+  .van-field__right-icon {
     display: flex;
     align-items: center;
     justify-content: center;
