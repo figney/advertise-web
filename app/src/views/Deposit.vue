@@ -80,6 +80,9 @@
       </van-button>
 
 <!--      <van-button class="bg-primary font-bold border-radius-sm margin-bottom">{{$t('HOW_TO_PAY','如何支付')}}?</van-button>-->
+      <div class="margin-lr margin-bottom">
+        <van-button class="border-radius-xs" color="#432af5" plain block @click="openVideo">{{$t('HOW_TO_DEPOSIT','如何充值')}}</van-button>
+      </div>
 
     </div>
 
@@ -100,6 +103,9 @@
             <money-number :value="amount" class="money-number"/>
           </div>
           <div class="flex flex-direction padding-bottom" style="overflow-y:auto">
+            <div class="margin-lr margin-bottom">
+              <van-button class="border-radius-xs" color="#432af5" plain block @click="openVideo">{{$t('HOW_TO_DEPOSIT','如何充值')}}</van-button>
+            </div>
             <div
                 class="flex flex-direction padding-tb-sm padding-lr bank-btn border-top"
                 @click="bankPay(bank)"
@@ -139,6 +145,25 @@
         <van-button class="bg-dark fc-fff font-bold no-border border-radius-xs" @click="showQuickPay=false">
           {{$t("CANCEL", "取消")}}
         </van-button>
+      </div>
+    </van-popup>
+
+    <!-- 嵌入的 Youtube 视频 -->
+    <van-popup position="bottom" v-model="showVideo">
+      <div class="white-view padding-top padding-lr flex flex-direction position-re vh-100 vw-100">
+        <van-icon
+            size="0.52rem"
+            name="cross"
+            color="#432af5"
+            class="position-ab close-icon"
+            @click="showVideo=false"
+        />
+        <div class="fs-18 font-bold text-center padding-bottom-sm margin-bottom" style="border-bottom:1px solid #EEECFA">{{$t('HOW_TO_DEPOSIT','如何充值')}}</div>
+        <div class="border-radius-xs bg-f2f2f6 van-overflow-hidden flex flex-direction">
+          <template>                        
+            <iframe :key="'Pay_video'" width="100%" height="195px" src="https://www.youtube.com/embed/v-TyB3flQCs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </template>
+        </div>        
       </div>
     </van-popup>
 
@@ -196,6 +221,7 @@ export default {
       currentBank: {},
       showSonBank: false,
       next_action: "Wallet",
+      showVideo: false,
       next_id: 0,
       next_data: {},
     }
@@ -239,6 +265,9 @@ export default {
       } else {
         return Math.floor(v)
       }
+    },
+    openVideo() {
+      this.showVideo = true
     },
     currentChannelChange() {
       let needMoney = localStorage.getItem('NeedMoney')
