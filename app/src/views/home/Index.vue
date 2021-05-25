@@ -77,7 +77,7 @@
                   >
                   <div class="font-bold flex align-center fc-secondary">
                     <span class="fc-accent">{{
-                      info.task_num - getFinishedCount(0)
+                      info.task_num - getFinishedCount(info.level)
                     }}</span>
                     <span class="margin-lr-xs">/</span>
                     <span>{{ info.task_num }}</span>
@@ -315,7 +315,7 @@ export default {
       try {
         this.driver.reset();
       } catch (e) {}
-      this.$toRouter({ name: "Task" });
+      this.$toRouter({ name: "HomeTasks" });
     },
   },
 };

@@ -12,6 +12,12 @@ const routes = [
     // component: () => import("@/views/SubmitCertifications"),
   },
   {
+    path: "/tasks",
+    name: "HomeTasks",
+    meta: { no_cache: true },
+    component: () => import("@/views/home/Task"),
+  },
+  {
     path: "/message",
     name: "HomeMessage",
     meta: { no_cache: true },
@@ -28,12 +34,6 @@ const routes = [
     name: "HomeUser",
     // meta: { no_cache: true },
     component: () => import("@/views/home/User"),
-  },
-  {
-    path: "/tasks",
-    name: "Task",
-    meta: { no_cache: true },
-    component: () => import("@/views/Task"),
   },
   {
     path: "/my_task",
@@ -74,7 +74,7 @@ const routes = [
   {
     path: "/wallet_history",
     name: "WalletHistory",
-    meta: {no_cache: true},
+    meta: { no_cache: true },
     component: () => import("@/views/WalletHistory"),
   },
   {
@@ -85,43 +85,43 @@ const routes = [
   {
     path: "/deposit",
     name: "Deposit",
-    meta: {no_cache: true},
+    meta: { no_cache: true },
     component: () => import("@/views/Deposit"),
   },
   {
     path: "/withdraw",
     name: "Withdraw",
-    meta: {no_cache: true},
+    meta: { no_cache: true },
     component: () => import("@/views/Withdraw"),
   },
   {
     path: "/order",
     name: "Order",
-    meta: {no_cache: true},
+    meta: { no_cache: true },
     component: () => import("@/views/Order"),
   },
   {
     path: '/bank_transfer',
     name: 'BankTransfer',
-    meta: {no_cache: true},
+    meta: { no_cache: true },
     component: () => import("@/views/BankTransfer")
   },
   {
     path: '/rank',
     name: 'Rank',
-    meta: {no_cache: true},
+    meta: { no_cache: true },
     component: () => import("@/views/Rank")
   },
   {
     path: '/about',
     name: 'About',
-    meta: {no_cache: true},
+    meta: { no_cache: true },
     component: () => import("@/views/About")
   },
   {
     path: '/tool',
     name: 'Tool',
-    meta: {no_cache: true},
+    meta: { no_cache: true },
     component: () => import("@/views/Tool")
   },
   {
