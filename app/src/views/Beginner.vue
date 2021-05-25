@@ -3,9 +3,11 @@
     <div class="beginner-page">
       <div class="beginner-title">{{ $app_name }}</div>
       <div class="beginner-subtitle fc-fff">
-        <span class="fs-18">{{ $t("FREE_GET_MONEY", "免费领钱") }}</span>
-        <span class="margin-lr-sm fc-primary fs-24">100</span>
-        <span class="fs-18">{{ $t("YEAR", "年") }}</span>
+        <span class="fs-18 text-wrap">{{
+          $t("FREE_GET_MONEY", "免费领钱")
+        }}</span>
+        <!-- <span class="margin-lr-sm fc-primary fs-24">100</span> -->
+        <!-- <span class="fs-18">{{ $t("YEAR", "年") }}</span> -->
       </div>
 
       <!--      <div class="beginner-describe">{{$t('PROMOTE_BEGINNER_DESC','代言一个品牌即可获得 $20, 门槛低, 秒提现')}}</div>-->
@@ -132,6 +134,7 @@
         <!--        </van-field>-->
         <!--        <van-button class="margin-bottom bg-primary fs-16 font-bold border-radius-sm no-border" @click="registerNow">{{$t('GET_CASH_NOW','秒拿现金')}}</van-button>-->
 
+        <contact :begginer="true" />
         <van-button
           class="bg-primary fs-16 font-bold border-radius-sm no-border breath-btn wrap-btn beginner-btn"
           @click="startNow"
@@ -152,11 +155,13 @@ import MoneyNumber from "../components/MoneyNumber";
 import { Button, Field, Icon, Popover } from "vant";
 import Counter from "../components/Counter";
 import NumChange from "../components/NumChange";
+import Contact from "../components/Contact";
 
 export default {
   components: {
     NumChange,
     Counter,
+    Contact,
     MoneyNumber,
     VueSeamlessScroll,
     [Button.name]: Button,
@@ -330,6 +335,9 @@ export default {
             Toast.failed(err.data.message);
           });
       }
+    },
+    contact() {
+      this.$openLink(this.system.service.url);
     },
   },
 };

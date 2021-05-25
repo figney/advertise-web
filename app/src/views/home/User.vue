@@ -31,7 +31,7 @@
               style="height: 0.42rem"
             />
           </div>
-          <!--          <van-button round size="mini" style="margin-top:0.04rem;margin-left:-0.05rem;background:rgba(255,255,255,0.85);width:fit-content" class="no-border padding-tb-xs" @click="$toRouter({name:'Task'})">-->
+          <!--          <van-button round size="mini" style="margin-top:0.04rem;margin-left:-0.05rem;background:rgba(255,255,255,0.85);width:fit-content" class="no-border padding-tb-xs" @click="$toRouter({name:'HomeTask'})">-->
           <!--            <div class="fc-accent padding-lr-sm flex align-center fs-10">-->
           <!--              <span>{{$t('GET_MORE_PROFIT','赚取更多收益')}}</span>-->
           <!--              <van-icon name="arrow" size="12" class="margin-left-xs"/>-->

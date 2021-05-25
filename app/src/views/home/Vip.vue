@@ -32,13 +32,15 @@
               $t("HELLO_VIP_N", [myCurrentVip.level.toString()], "已开通 VIPN!")
             }}
           </span>
-          <!--          <div class="fs-12 fc-secondary">-->
-          <!--            <span class="margin-right-xs">{{$t('OWEN_DAY_TASK_AMOUNT','已拥有每日任务次数')}}:</span>-->
-          <!--            <span>{{'10'}}</span>-->
-          <!--          </div>-->
+          <!-- <div class="fs-12 fc-secondary">
+            <span class="margin-right-xs"
+              >{{ $t("OWEN_DAY_TASK_AMOUNT", "已拥有每日任务次数") }}:</span
+            >
+            <span>{{ "10" }}</span>
+          </div> -->
         </div>
 
-        <!--        <van-icon name="arrow"/>-->
+        <!-- <van-icon name="arrow" /> -->
       </template>
 
       <template v-else>
@@ -46,9 +48,21 @@
           <span class="font-bold" style="margin-bottom: 0.07rem">{{
             $t("YOU_RE_FREE_VIP_NOW", "您当前属于普通VIP")
           }}</span>
-          <!--          <span class="font-bold" style="margin-bottom:0.07rem">{{$t('NOT_BUY_VIP_N',[currentVip.level.toString()],'暂未开通 VIPN')}}</span>-->
+          <!-- <span class="font-bold" style="margin-bottom: 0.07rem">{{
+            $t("NOT_BUY_VIP_N", [currentVip.level.toString()], "暂未开通 VIPN")
+          }}</span> -->
         </div>
       </template>
+      <!-- VIP点亮列表 -->
+      <!-- <template v-for="(vip, i) in vips" :name="i">
+        <div :key="'vip-tab' + i" class="margin-sm">
+          <img
+            src="../../assets/images/icon_15@2x.png"
+            v-if="myCurrentVip.level == vip.level"
+          />
+          <img width="40px" height="40px" :src="vip.icon" v-else />
+        </div>
+      </template> -->
     </div>
 
     <div class="margin-lr margin-bottom flex align-center">
@@ -118,17 +132,15 @@
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_DAY_PROFIT", "预估日收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="free_task_num * free_task_money * amount || 0"
                   />
                 </div>
-                <div class="flex align-center" style="padding: 0.0667rem 0">
+                <!-- <div class="flex align-center" style="padding: 0.0667rem 0">
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_MONTH_PROFIT", "预估月收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="free_task_num * free_task_money * 30 * amount || 0"
@@ -138,17 +150,19 @@
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_YEAR_PROFIT", "预估年收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="free_task_num * free_task_money * 365 * amount || 0"
                   />
+                </div> -->
+                <div class="flex align-center" style="padding: 0.0667rem 0">
+                  <span class="fs-12 fc-secondary margin-right-sm"
+                    >{{ $t("PREDICT_TOTAL_PROFIT", "预估总收益") }}:</span
+                  >
+                  <span class="fs-16 font-bold">{{
+                    $t("UNLIMIT", "无上限")
+                  }}</span>
                 </div>
-                <!--                <div class="flex align-center" style="padding: 0.0667rem 0">-->
-                <!--                  <span class="fs-12 fc-secondary margin-right-sm">{{$t('PREDICT_TOTAL_PROFIT','预估总收益')}}:</span>-->
-                <!--&lt;!&ndash;                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>&ndash;&gt;-->
-                <!--                  <num-change class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>-->
-                <!--                </div>-->
               </div>
             </div>
           </template>
@@ -217,17 +231,15 @@
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_DAY_PROFIT", "预估日收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="vip.task_profit * vip.task_num * amount || 0"
                   />
                 </div>
-                <div class="flex align-center" style="padding: 0.0667rem 0">
+                <!-- <div class="flex align-center" style="padding: 0.0667rem 0">
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_MONTH_PROFIT", "预估月收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="vip.task_profit * 30 * vip.task_num * amount || 0"
@@ -237,17 +249,25 @@
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_YEAR_PROFIT", "预估年收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="vip.task_profit * 365 * vip.task_num * amount || 0"
                   />
+                </div> -->
+                <div class="flex align-center" style="padding: 0.0667rem 0">
+                  <span class="fs-12 fc-secondary margin-right-sm"
+                    >{{ $t("PREDICT_TOTAL_PROFIT", "预估总收益") }}:</span
+                  >
+                  <num-change
+                    class="money-number fs-16 font-bold"
+                    :value="
+                      vip.task_profit *
+                        vip.task_num *
+                        amount *
+                        currentTimeItem.day || 0
+                    "
+                  />
                 </div>
-                <!--                <div class="flex align-center" style="padding: 0.0667rem 0">-->
-                <!--                  <span class="fs-12 fc-secondary margin-right-sm">{{$t('PREDICT_TOTAL_PROFIT','预估总收益')}}:</span>-->
-                <!--&lt;!&ndash;                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>&ndash;&gt;-->
-                <!--                  <num-change class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>-->
-                <!--                </div>-->
               </div>
             </div>
           </template>
@@ -548,7 +568,10 @@ export default {
       this.showBuySuccess = false;
       setTimeout(() => {
         localStorage.setItem("TaskBackHome", true);
-        this.$toRouter({ name: "Task", query: { lv: this.currentVip.level } });
+        this.$toRouter({
+          name: "HomeTask",
+          query: { lv: this.currentVip.level },
+        });
       }, 200);
     },
     formatBuyAmount(v) {

@@ -77,7 +77,7 @@
                   >
                   <div class="font-bold flex align-center fc-secondary">
                     <span class="fc-accent">{{
-                      info.task_num - getFinishedCount(0)
+                      info.task_num - getFinishedCount(info.level)
                     }}</span>
                     <span class="margin-lr-xs">/</span>
                     <span>{{ info.task_num }}</span>
@@ -133,7 +133,7 @@
               <van-button
                 class="margin-lr margin-bottom bg-primary font-bold fs-14 wrap-btn"
                 round
-                @click="$toRouter({ name: 'Task' })"
+                @click="$toRouter({ name: 'HomeTask' })"
                 >{{ $t("DO_TASK_NOW", "做任务") }}</van-button
               >
             </div>
@@ -315,7 +315,7 @@ export default {
       try {
         this.driver.reset();
       } catch (e) {}
-      this.$toRouter({ name: "Task" });
+      this.$toRouter({ name: "HomeTasks" });
     },
   },
 };
