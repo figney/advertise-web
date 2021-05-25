@@ -6,8 +6,8 @@
         <span class="fs-18 text-wrap">{{
           $t("FREE_GET_MONEY", "免费领钱")
         }}</span>
-        <span class="margin-lr-sm fc-primary fs-24">100</span>
-        <span class="fs-18">{{ $t("YEAR", "年") }}</span>
+        <!-- <span class="margin-lr-sm fc-primary fs-24">100</span> -->
+        <!-- <span class="fs-18">{{ $t("YEAR", "年") }}</span> -->
       </div>
 
       <!--      <div class="beginner-describe">{{$t('PROMOTE_BEGINNER_DESC','代言一个品牌即可获得 $20, 门槛低, 秒提现')}}</div>-->
