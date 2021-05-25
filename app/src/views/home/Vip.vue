@@ -562,7 +562,10 @@ export default {
       this.showBuySuccess = false;
       setTimeout(() => {
         localStorage.setItem("TaskBackHome", true);
-        this.$toRouter({ name: "Task", query: { lv: this.currentVip.level } });
+        this.$toRouter({
+          name: "HomeTask",
+          query: { lv: this.currentVip.level },
+        });
       }, 200);
     },
     formatBuyAmount(v) {

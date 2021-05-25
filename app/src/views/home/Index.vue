@@ -133,7 +133,7 @@
               <van-button
                 class="margin-lr margin-bottom bg-primary font-bold fs-14 wrap-btn"
                 round
-                @click="$toRouter({ name: 'Task' })"
+                @click="$toRouter({ name: 'HomeTask' })"
                 >{{ $t("DO_TASK_NOW", "做任务") }}</van-button
               >
             </div>

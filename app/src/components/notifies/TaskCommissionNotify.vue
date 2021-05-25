@@ -176,7 +176,7 @@ export default {
       ) {
         this.$toRouter({ name: "HomeVip" });
       } else {
-        this.$toRouter({ name: "Task" });
+        this.$toRouter({ name: "HomeTask" });
       }
     },
   },

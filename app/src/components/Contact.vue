@@ -1,7 +1,12 @@
 <template>
   <div class="contact-support">
     <div class="contact-img bounce" @click="contact">
-      <img src="../assets/images/chat-button-icon.svg" />
+      <template v-if="this.begginer">
+        <img src="../assets/images/contact number.png" />
+      </template>
+      <template v-else>
+        <img src="../assets/images/chat-button-icon.svg" />
+      </template>
     </div>
   </div>
 </template>
@@ -12,9 +17,18 @@ import { Base } from "../mixins";
 export default {
   name: "Contact",
   mixins: [Base],
+
+  data: () => {
+    return {};
+  },
+  props: ["begginer"],
   methods: {
     contact() {
-      this.$toRouter({ name: "HomeMessage", query: { type: "help" } });
+      if (this.begginer) {
+        this.$openLink(this.system.service.url);
+      } else {
+        this.$toRouter({ name: "HomeMessage", query: { type: "help" } });
+      }
     },
   },
 };
