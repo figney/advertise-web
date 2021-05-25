@@ -132,17 +132,15 @@
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_DAY_PROFIT", "预估日收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="free_task_num * free_task_money * amount || 0"
                   />
                 </div>
-                <div class="flex align-center" style="padding: 0.0667rem 0">
+                <!-- <div class="flex align-center" style="padding: 0.0667rem 0">
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_MONTH_PROFIT", "预估月收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="free_task_num * free_task_money * 30 * amount || 0"
@@ -152,17 +150,19 @@
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_YEAR_PROFIT", "预估年收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="free_task_num * free_task_money * 365 * amount || 0"
                   />
+                </div> -->
+                <div class="flex align-center" style="padding: 0.0667rem 0">
+                  <span class="fs-12 fc-secondary margin-right-sm"
+                    >{{ $t("PREDICT_TOTAL_PROFIT", "预估总收益") }}:</span
+                  >
+                  <span class="fs-16 font-bold">{{
+                    $t("UNLIMIT", "无上限")
+                  }}</span>
                 </div>
-                <!--                <div class="flex align-center" style="padding: 0.0667rem 0">-->
-                <!--                  <span class="fs-12 fc-secondary margin-right-sm">{{$t('PREDICT_TOTAL_PROFIT','预估总收益')}}:</span>-->
-                <!--&lt;!&ndash;                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>&ndash;&gt;-->
-                <!--                  <num-change class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>-->
-                <!--                </div>-->
               </div>
             </div>
           </template>
@@ -231,17 +231,15 @@
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_DAY_PROFIT", "预估日收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="vip.task_profit * vip.task_num * amount || 0"
                   />
                 </div>
-                <div class="flex align-center" style="padding: 0.0667rem 0">
+                <!-- <div class="flex align-center" style="padding: 0.0667rem 0">
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_MONTH_PROFIT", "预估月收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="vip.task_profit * 30 * vip.task_num * amount || 0"
@@ -251,17 +249,25 @@
                   <span class="fs-12 fc-secondary margin-right-sm"
                     >{{ $t("PREDICT_YEAR_PROFIT", "预估年收益") }}:</span
                   >
-                  <!--                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount) || 0"/>-->
                   <num-change
                     class="money-number fs-16 font-bold"
                     :value="vip.task_profit * 365 * vip.task_num * amount || 0"
                   />
+                </div> -->
+                <div class="flex align-center" style="padding: 0.0667rem 0">
+                  <span class="fs-12 fc-secondary margin-right-sm"
+                    >{{ $t("PREDICT_TOTAL_PROFIT", "预估总收益") }}:</span
+                  >
+                  <num-change
+                    class="money-number fs-16 font-bold"
+                    :value="
+                      vip.task_profit *
+                        vip.task_num *
+                        amount *
+                        currentTimeItem.day || 0
+                    "
+                  />
                 </div>
-                <!--                <div class="flex align-center" style="padding: 0.0667rem 0">-->
-                <!--                  <span class="fs-12 fc-secondary margin-right-sm">{{$t('PREDICT_TOTAL_PROFIT','预估总收益')}}:</span>-->
-                <!--&lt;!&ndash;                  <money-number class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>&ndash;&gt;-->
-                <!--                  <num-change class="money-number fs-16 font-bold" :value="(vip.task_profit * vip.task_num * amount * currentTimeItem.day) || 0"/>-->
-                <!--                </div>-->
               </div>
             </div>
           </template>
