@@ -569,7 +569,7 @@ export default {
       setTimeout(() => {
         localStorage.setItem("TaskBackHome", true);
         this.$toRouter({
-          name: "HomeTask",
+          name: "HomeTasks",
           query: { lv: this.currentVip.level },
         });
       }, 200);
