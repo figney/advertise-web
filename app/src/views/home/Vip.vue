@@ -32,15 +32,15 @@
               $t("HELLO_VIP_N", [myCurrentVip.level.toString()], "已开通 VIPN!")
             }}
           </span>
-          <div class="fs-12 fc-secondary">
+          <!-- <div class="fs-12 fc-secondary">
             <span class="margin-right-xs"
               >{{ $t("OWEN_DAY_TASK_AMOUNT", "已拥有每日任务次数") }}:</span
             >
             <span>{{ "10" }}</span>
-          </div>
+          </div> -->
         </div>
 
-        <van-icon name="arrow" />
+        <!-- <van-icon name="arrow" /> -->
       </template>
 
       <template v-else>
