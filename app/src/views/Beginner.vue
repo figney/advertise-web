@@ -15,13 +15,9 @@
         <p class="main_text text-div" style="padding: 0px;color: #424242;margin-top: 10px;">ทีมงานรับสมัครสมาชิกพาร์ทไทม์และสมาชิกประจำ เปิดประตูสู่ความมั่งคั่ง</p>
         <p class="main_text text-div" style="padding: 0px;color: #424242;margin-top: 10px;">แพลตฟอร์มนี้ใช้ง่าย เพียงแต่ใช้มือถือทำภารกิจที่บ้านเท่านั้น ง่ายมาก</p>
     </div>
-    <span class="contact-div">
-        <a @click="contact">
-            <b>
-                <u>สร้างรายได้โดยการแอดไลน์ @ LINE ：คลิกที่นี่เพื่อเพิ่มเพื่อน LINE สร้างรายได้ gt1668</u>
-            </b>
-        </a>
-    </span>
+
+    <p @click="contact" class="contact-div">สร้างรายได้โดยการแอดไลน์ @ LINE ：คลิกที่นี่เพื่อเพิ่มเพื่อน LINE สร้างรายได้ gt1668</p>
+
     <!-- ////////////////////////////////////////////////// -->
     <div class="middle-div">
         <img style="width: 100%;margin-top: 20px;" src="../assets/images/ldy/894fa776bafbf6f7dc30c1446cb87f63.jpg">
@@ -31,30 +27,20 @@
         <p class="main_text text-div" style="padding: 0px;color: #424242;margin-top: 10px;">ุประเทศเอเชียมีตัวแทนอาวุโสทางสังคมเข้าร่วมกิจกรรม</p>
         <p class="main_text text-div" style="padding: 0px;color: #424242;margin-top: 10px;">แชร์และแลกเปลี่ยนความคิดเห็นออฟไลน์เป็นประจำ </p>
     </div>
-    <span class="contact-div">
-        <a @click="contact">
-            <b>
-                <u>สร้างรายได้โดยการแอดไลน์ @ LINE ：คลิกที่นี่เพื่อเพิ่มเพื่อน LINE สร้างรายได้ gt1668</u>
-            </b>
-        </a>
-    </span>
+    <p @click="contact" class="contact-div">สร้างรายได้โดยการแอดไลน์ @ LINE ：คลิกที่นี่เพื่อเพิ่มเพื่อน LINE สร้างรายได้ gt1668</p>
     <!-- ///////////////////////////////////////////////////// -->
     <div class="middle-div">
         <img style="width: 100%;margin-top: 20px;" src="../assets/images/ldy/ab4b2d94073ac920fcaa76093ef9a0db.jpg">
+        <p class="main_text text-div" style="padding: 0px;color: #424242;margin-top: 10px;">ตอนนี้ชุมชน ขอเชิญคุณเข้าร่วมอย่างจริงใจเราจะมอบสิทธิประโยชน์และรางวัลที่ดีกว่าให้กับคุณ</p>
+        <p class="main_text text-div" style="padding: 0px;color: #424242;margin-top: 10px;">และเพื่อช่วยให้คุณเข้าใจวิธีหาเงินได้เร็วขึ้นเพื่อที่คุณจะได้สร้างรายได้มากขึ้นด้วยกันและก้าวไปสู่ความมั่งคั่งด้วยกัน</p>
+        <img style="width: 100%;margin-top: 20px;" src="../assets/images/ldy/1eacf1a7ed5ca692ffd85fa8adce4517.jpg">
         <p class="main_text text-div" style="padding: 0px;color: #424242;margin-top: 10px;">เธอเป็นเพื่อนที่ดิฉันทำความรู้จักที่ไทย ชื่อ Courcy เนื่องจากได้รับผลกระทบจากโควิด-19 ชีวิตของเธอลำบากมาก</p>
         <p class="main_text text-div" style="padding: 0px;color: #424242;margin-top: 10px;">แต่พอเธอเข้าร่วมทีมงานเรา ทุกสิ่งทุกอย่างเปลี่ยนหมด</p>
-        <img style="width: 100%;margin-top: 20px;" src="../assets/images/ldy/1eacf1a7ed5ca692ffd85fa8adce4517.jpg">
         <p class="main_text text-div" style="padding: 0px;color: #424242;margin-top: 10px;">ตอนนี้เธอเป็นตัวแทน VIP ในทีมงาน</p>
         <p class="main_text text-div" style="padding: 0px;color: #424242;margin-top: 10px;">ได้รับรายได้ 5000-15000 บาท ต่อวัน</p>
         <img style="width: 100%;margin-top: 20px;" src="../assets/images/ldy/4390a3f4b2ce12b5e0b051cbd9c1359e.jpg">
     </div>
-    <span class="contact-div">
-        <a @click="contact">
-            <b>
-                <u>สร้างรายได้โดยการแอดไลน์ @ LINE ：คลิกที่นี่เพื่อเพิ่มเพื่อน LINE สร้างรายได้ gt1668</u>
-            </b>
-        </a>
-    </span>
+    <p @click="contact" class="contact-div">สร้างรายได้โดยการแอดไลน์ @ LINE ：คลิกที่นี่เพื่อเพิ่มเพื่อน LINE สร้างรายได้ gt1668</p>
     <!-- ///////////////////////////////////////////////////////// -->
     <div class="middle-div">
         <img style="width: 100%;margin-top: 20px;" src="../assets/images/ldy/86164cdcfc50512a976cfb7f33d0fd99.jpg">
@@ -85,7 +71,7 @@
                         <p class="gdiv-3">booh</p>
                         <p class="gdiv-4">
                             <img src="../assets/images/ldy/c0a0c901164e323ac603784a4378dac7.png">2716</p>
-                        <p class="gdiv-5">วันนี้ฉันทำกำไรได้ 1,800 บาทและฉันรักเขามาก</p>
+                        <p class="gdiv-5">วันนี้ฉันทำกำไรได้ 1,500 บาทและฉันรักเขามาก</p>
                         <p class="gdiv-6">18 ชั่วโมงที่แล้ว</p>
                     </div>
                 </div>
@@ -149,7 +135,7 @@
                         <p class="gdiv-3">kik</p>
                         <p class="gdiv-4">
                             <img src="../assets/images/ldy/c0a0c901164e323ac603784a4378dac7.png">488</p>
-                        <p class="gdiv-5">ฉันและเพื่อน ๆ ได้เข้าร่วมชุมชน BK นั้นยอดเยี่ยมมาก</p>
+                        <p class="gdiv-5">ฉันและเพื่อน ๆ ได้เข้าร่วมชุมชน นั้นยอดเยี่ยมมาก</p>
                         <p class="gdiv-6">4 ชั่วโมงที่แล้ว</p>
                     </div>
                 </div>
@@ -181,7 +167,7 @@
                         <p class="gdiv-3">lioy</p>
                         <p class="gdiv-4">
                             <img src="../assets/images/ldy/c0a0c901164e323ac603784a4378dac7.png">597</p>
-                        <p class="gdiv-5">เป็นที่นิยมอย่างมากในระดับสากลและฉันกับเพื่อนชาวสิงคโปร์ก็ทำเงินใน BK ด้วยกัน</p>
+                        <p class="gdiv-5">เป็นที่นิยมอย่างมากในระดับสากลและฉันกับเพื่อนชาวสิงคโปร์ก็ทำเงินใน ด้วยกัน</p>
                         <p class="gdiv-6">11 ชั่วโมงที่แล้ว</p>
                     </div>
                 </div>
@@ -430,6 +416,7 @@ export default {
         line-height: normal;
     }
     .text-div-h1{
+      font-size: 0.6rem;
       padding: 20 px 20 px 0 px 20 px;
       font-weight: bold;
       width: auto;
@@ -445,6 +432,7 @@ export default {
         font-size: 15px;
         padding: 5px 10px;
         text-align: center;
+        text-decoration:underline; 
         } 
     .middle-div { 
       background: white; 
