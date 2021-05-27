@@ -950,7 +950,7 @@ export default {
       }
 
       if (this.shared || confirm) {
-        this.$toRouter({ name: "HomeTask" });
+        this.$toRouter({ name: "HomeTasks" });
       } else {
         this.showConfirmJump = true;
       }

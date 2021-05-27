@@ -49,13 +49,8 @@ export default {
   methods: {
     startNow() {
       this.$emit("read");
-      this.$toRouter({ name: "HomeTask" });
+      this.$toRouter({ name: "HomeTasks" });
     },
   },
 };
 </script>
-
-<style lang="scss">
-.task-finish-notify {
-}
-</style>

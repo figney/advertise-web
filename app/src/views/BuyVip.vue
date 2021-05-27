@@ -217,7 +217,7 @@
         <van-button
           class="bg-dark fc-fff border-radius-sm"
           block
-          @click="$toRouter({ name: 'HomeTask' })"
+          @click="$toRouter({ name: 'HomeTasks' })"
           >{{ $t("DO_TASK_NOW", "马上接取任务赚钱") }}</van-button
         >
       </div>
