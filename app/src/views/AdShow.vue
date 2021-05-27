@@ -8,14 +8,18 @@
       <div class="margin-bottom render-html" v-html="task.data.content"/>
     </div>
 
-    <!-- <div class="fixed-platform white-view shadow padding">
-      <div class="text-center font-bold fc-error margin-top-xs margin-bottom bounce">{{$t('CLICK_ABOVE_MAKE_MONEY','日赚1000超简单,免费领钱100年')}}</div>
-      <van-button class="bg-primary border-radius-sm font-bold breath-btn margin-bottom-xs" style="animation-delay:3s" block @click="startNow">{{$t('START_MAKE_MONEY_FREE','立刻开始免费赚钱')}}</van-button>
-    </div> -->
+    <div class="fixed-platform white-view shadow padding">
+      <div v-if="canGoback">
+        <van-button class="bg-primary border-radius-sm font-bold breath-btn margin-bottom-xs" style="animation-delay:3s" block @click="$router.go(-1)">{{$t('BACK','返回')}}</van-button>
+      </div>
+      <div v-else>
+        <div class="text-center font-bold fc-error margin-top-xs margin-bottom bounce">
+          {{this.timeRemain}} S
+        </div>              
+      </div>
+    </div>
 
-<!--    <div class="fixed-finger">-->
-<!--      <img src="../assets/images/icon_hand@2x.png" alt="">-->
-<!--    </div>-->
+
 
   </div>
 </template>
@@ -39,7 +43,9 @@ export default {
           title: '',
           content: '',
         }
-      }
+      },
+      canGoback: false,
+      timeRemain:15
     }
   },
   mixins: [Base],
@@ -50,6 +56,9 @@ export default {
     } else {
       this.$toRouter({name:'Beginner'})
     }
+    setTimeout(() => {
+          this.startTimer();
+        }, 1000);
   },
   methods: {
     getData(uat) {
@@ -69,6 +78,16 @@ export default {
         this.$toRouter({name:'HomeIndex'})
       } else {
         this.$toRouter({name:'Beginner'})
+      }
+    },
+    startTimer(){
+      this.timeRemain--;      
+      if(this.timeRemain <= 0){
+        this.canGoback = true;
+      }else{
+        setTimeout(() => {
+          this.startTimer();
+        }, 1000);
       }
     }
   }

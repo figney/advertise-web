@@ -29,7 +29,7 @@
       <zalo-share />
 
       <template
-        v-if="!['TaskShare', 'Beginner', 'HomeMessage'].includes($route.name)"
+        v-if="!['TaskShare', 'Beginner', 'HomeMessage', 'AdShow'].includes($route.name)"
       >
         <contact />
       </template>
