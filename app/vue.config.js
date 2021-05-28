@@ -11,7 +11,7 @@ module.exports = {
         disableHostCheck: true,
         proxy: {
             "/api": {
-                target: "https://dev---thailand-backend-ipit43q4oq-as.a.run.app",
+                target: "https://www.60s.la",
                 changeOrigin: true,
             }
         }
@@ -30,7 +30,7 @@ module.exports = {
                             rootValue: 75,
                             propWhiteList: [],
                             minPixelValue: 2
-                        } ),
+                        }),
                         "autoprefixer"
                     ])
                 ],
