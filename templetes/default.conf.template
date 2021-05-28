@@ -1,6 +1,0 @@
-# default configuration, if server name dosen't match then redirect to official site.
-server {
-    listen      80  default_server;
-    server_name __;
-    rewrite ^(.*) http://www.60s.asia/ permanent;
-}

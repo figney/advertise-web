@@ -66,6 +66,14 @@
   src: url("../assets/fonts/Montserrat-Bold.ttf") format('ttf');
 }
 
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../assets/fonts/Montserrat-ExtraBold.ttf") format('ttf');
+}
+
 html, body {
   font-family: 'Noto Sans SC', sans-serif;
   margin: 0 auto;
@@ -357,6 +365,10 @@ img {
 
 .shadow {
   box-shadow: 0 3px 23px 3px rgba(168, 166, 150, 0.25);
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 5px 1px rgba(168, 166, 150, 0.15);
 }
 
 /****************************/
@@ -756,10 +768,9 @@ img {
 }
 
 .snotifyToast {
-
-  background: linear-gradient(180deg, #FFFBDE 0%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #fffee1 0%, #FFFFFF 100%);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
-  border-radius: 10px;
+  border-radius: 8px;
 
   .snotifyToast__inner {
     min-height: auto;
@@ -786,10 +797,6 @@ img {
 
 .van-tabs__nav {
   background: unset !important;
-}
-
-.snotifyToast {
-  background: linear-gradient(180deg, #e6e8FF 0%, #FFFFFF 100%) !important;
 }
 
 .md-toast-content {

@@ -46,10 +46,12 @@ export default {
   },
   methods: {
     toBanner(item) {
-      if (item.link.startsWith('http')) {
-        this.$openLink(item.link)
-      } else {
-        this.$toRouter({name:item.link})
+      if (item.link) {
+        if (item.link.startsWith('http')) {
+          this.$openLink(item.link)
+        } else {
+          this.$toRouter({name:item.link})
+        }
       }
     }
   }

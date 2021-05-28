@@ -1,4 +1,4 @@
 export default {
-  version: "1.0.0",
-  app_name: 'ADTASK.CO',
+  version: "1.0.1",
+  app_name: "60'sec advertise",
 };
