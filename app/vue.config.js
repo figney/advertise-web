@@ -30,7 +30,7 @@ module.exports = {
                             rootValue: 75,
                             propWhiteList: [],
                             minPixelValue: 2
-                        }),
+                        } ),
                         "autoprefixer"
                     ])
                 ],
