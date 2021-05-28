@@ -11,7 +11,7 @@ module.exports = {
         disableHostCheck: true,
         proxy: {
             "/api": {
-                target: "https://www.60s.pw",
+                target: "https://dev---thailand-backend-ipit43q4oq-as.a.run.app",
                 changeOrigin: true,
             }
         }
