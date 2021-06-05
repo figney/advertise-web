@@ -10,7 +10,14 @@
       ref="baseSocketNotify"
     >
       <div
-        class="position-re flex flex-direction white-view vw-90 border-radius-sm bounceInDown"
+        class="
+          position-re
+          flex flex-direction
+          white-view
+          vw-90
+          border-radius-sm
+          bounceInDown
+        "
         style="overflow: visible"
       >
         <van-icon
@@ -176,8 +183,7 @@ export default {
       });
     },
     onNotify(msg) {
-      console.log(msg);
-      this.updateUserInfo(msg);
+      //this.updateUserInfo(msg);
 
       // 强弱提醒
       if (msg.forced) {
@@ -261,6 +267,7 @@ export default {
       }, 1000);
     },
     showLiteNotify(data) {
+      console.log(data);
       let html = `<div class="padding-sm line-height-15" >
                     <div class="fs-16 flex align-center">
                         <i class="van-icon van-icon-bell fc-432af5"></i>
@@ -314,6 +321,7 @@ export default {
       this.startGuide();
       delete this.forceMap[this.popData.id];
       this.popData = data;
+      console.log(data);
       if (data.type != "UserEarningsNotification") {
         this.notifyComponent = this.notifyModels.get(data.type);
         this.showPop = true;
@@ -332,8 +340,7 @@ export default {
   },
   sockets: {
     NotifyAsync(msg) {
-      console.log(msg);
-      this.onNotify();
+      this.onNotify(JSON.parse(msg));
     },
   },
 };

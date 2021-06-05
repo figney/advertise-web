@@ -2,10 +2,16 @@
   <div id="app" :class="system.default_currency">
     <nprogress-container />
     <install-pwa />
-
     <template v-if="isLoading">
       <div
-        class="flex flex-direction align-center justify-center vw-100 vh-100 bg-primary"
+        class="
+          flex flex-direction
+          align-center
+          justify-center
+          vw-100
+          vh-100
+          bg-primary
+        "
       >
         <div id="loader-wrapper">
           <div id="loader"></div>
@@ -25,8 +31,8 @@
       <first-task />
       <shares />
       <sign-in-up />
-      <base-socket />
       <zalo-share />
+      <base-socket />
 
       <template
         v-if="
@@ -83,6 +89,7 @@ export default {
     InstallPwa,
     NprogressContainer,
   },
+
   data: () => {
     return {
       isLoading: true,

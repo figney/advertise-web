@@ -14,12 +14,12 @@ export default {
       //window.deferredPrompt.prompt();
     });
   },
-  sockets: {
-    notifyAsync(msg) {
-      console.log(msg);
-      this.onNotify();
-    },
-  },
+  // sockets: {
+  //   notifyAsync(msg) {
+  //     console.log(msg);
+  //     this.onNotify();
+  //   },
+  // },
 };
 </script>
 
