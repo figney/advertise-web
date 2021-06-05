@@ -29,7 +29,11 @@
       <zalo-share />
 
       <template
-        v-if="!['TaskShare', 'Beginner', 'HomeMessage', 'AdShow'].includes($route.name)"
+        v-if="
+          !['TaskShare', 'Beginner', 'HomeMessage', 'AdShow'].includes(
+            $route.name
+          )
+        "
       >
         <contact />
       </template>
@@ -129,7 +133,6 @@ export default {
   },
   mounted() {
     this.registerDevice();
-    this.mountSocket();
     this.getVipList();
   },
   methods: {
@@ -151,14 +154,12 @@ export default {
         setTimeout(() => {
           this.$store.commit("setState", { key: "dynamic_init", value: true });
         }, 500);
-
         //注册用户
         if (this.user.hash) {
           this.$socket.emit("init-user", this.user.hash);
         }
         console.log("socket connect");
       });
-
       this.$socket.on("disconnect", () => {
         console.log("socket disconnect");
       });
@@ -271,6 +272,23 @@ export default {
         vips[i].task_num_money_list = [vips[i].task_num_money_list[0]];
       }
       return vips;
+    },
+  },
+  sockets: {
+    connectAsync(message) {
+      console.log("socket connect");
+      console.log(message);
+      this.$store.commit("setState", { key: "dynamic_init", value: false });
+      setTimeout(() => {
+        this.$store.commit("setState", { key: "dynamic_init", value: true });
+      }, 500);
+      //注册用户
+      if (this.user.hash) {
+        this.$socket.emit("init-user", this.user.hash);
+      }
+    },
+    disconnectAsync() {
+      console.log("socket disconnect");
     },
   },
 };

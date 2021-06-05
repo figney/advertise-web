@@ -15,7 +15,7 @@ import * as filters from "./plugins/filters";
 import setClip from "./plugins/clip";
 import { Toast } from "vant";
 import config from "./config";
-
+import signalR from './vue-signalr'
 
 Vue.prototype.$http = http;
 Vue.prototype.$setClip = setClip;
@@ -43,6 +43,8 @@ Vue.use(NProgress, {
   http: true,
   autoFinish: false,
 });
+
+Vue.use(signalR, 'http://localhost:5000/hubs/messager');
 
 Vue.prototype.$app_name = config.app_name
 
@@ -125,16 +127,16 @@ Vue.prototype.$fbq = (track, action, params) => {
 }
 
 // socket io
-Vue.prototype.$socket = require("socket.io-client")(
-  '',
-  // "ws://192.168.5.178:7001",
-  {
-    transports: ["websocket"]
-  },
-  {
-    reconnection: true
-  }
-);
+// Vue.prototype.$socket = require("socket.io-client")(
+//   '',
+//   // "ws://192.168.5.178:7001",
+//   {
+//     transports: ["websocket"]
+//   },
+//   {
+//     reconnection: true
+//   }
+// );
 
 // 跳转外部窗口
 Vue.prototype.$openLink = (link) => {
@@ -206,6 +208,11 @@ const app = new Vue({
   i18n,
   nprogress: new NProgress(),
   render: (h) => h(App),
+  created() {
+    this.$socket.start({
+      log: true // Active only in development for debugging.
+    });
+  }
 });
 
 app.$mount("#app");

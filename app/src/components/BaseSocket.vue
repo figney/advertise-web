@@ -47,6 +47,7 @@ import YesterdayProfitNotify from "./notifies/YesterdayProfitNotify";
 import TaskCommissionNotify from "./notifies/TaskCommissionNotify";
 import TaskFinishNotify from "./notifies/TaskFinishNotify";
 import { mapState } from "vuex";
+import Vue from "vue";
 
 export default {
   components: {
@@ -113,12 +114,12 @@ export default {
     this.$bus.on("refreshUserAndNotify", this.refreshUserAndNotify);
     this.$bus.on("readNotify", this.onReadNotify);
     this.$bus.on("getForceNotifications", this.getUnReadForceNotifications);
-    this.$socket.on("notification", this.onNotify);
-    this.$socket.on("user_invite", this.onInvite);
-    this.$socket.on("ad_task_click", this.onAdTaskClick);
-    this.$socket.on("rate_quotation", this.onRateQuotation);
-    this.$socket.on("reload", this.onReload);
-    this.$socket.on("version", this.onVersion);
+    // this.$socket.on("notifyAsync", this.onNotify);
+    // this.$socket.on("user_invite", this.onInvite);
+    // this.$socket.on("ad_task_click", this.onAdTaskClick);
+    // this.$socket.on("rate_quotation", this.onRateQuotation);
+    // this.$socket.on("reload", this.onReload);
+    // this.$socket.on("version", this.onVersion);
     this.startNotifyInterval();
   },
   methods: {
@@ -158,12 +159,12 @@ export default {
       }
       money = Math.floor(money * 0.15);
       let html = `<div class="padding-sm line-height-15" >
-<div class="fs-16 flex align-center">${this.$t(
-        "YOUR_NEW_FRIEND_JOINEDYOUR_NEW_FRIEND_JOINED",
-        [money.toString()],
-        "您有新的好友加入，开通VIP后即可获得 {0} 金额奖励"
-      )}</div>
-</div>`;
+        <div class="fs-16 flex align-center">${this.$t(
+          "YOUR_NEW_FRIEND_JOINEDYOUR_NEW_FRIEND_JOINED",
+          [money.toString()],
+          "您有新的好友加入，开通VIP后即可获得 {0} 金额奖励"
+        )}</div>
+        </div>`;
       this.$snotify.html(html, msg.title);
     },
     onAdTaskClick(msg) {
@@ -175,6 +176,7 @@ export default {
       });
     },
     onNotify(msg) {
+      console.log(msg);
       this.updateUserInfo(msg);
 
       // 强弱提醒
@@ -326,6 +328,12 @@ export default {
       setTimeout(() => {
         this.freezePop = false;
       }, 1000);
+    },
+  },
+  sockets: {
+    NotifyAsync(msg) {
+      console.log(msg);
+      this.onNotify();
     },
   },
 };

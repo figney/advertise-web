@@ -1,10 +1,10 @@
-import {mapGetters, mapState} from "vuex";
-import {Dialog, Toast} from "mand-mobile";
+import { mapGetters, mapState } from "vuex";
+import { Dialog, Toast } from "mand-mobile";
 
 
 const Base = {
     computed: {
-        ...mapState(['user', 'system', "money_bao","money_bao_rate","wallet","all_property","coin_unit","product_data","share","left_secs","productSep","free_task_num"]),
+        ...mapState(['user', 'system', "money_bao", "money_bao_rate", "wallet", "all_property", "coin_unit", "product_data", "share", "left_secs", "productSep", "free_task_num"]),
         ...mapGetters(['isLogin', 'version']),
     },
     filters: {
@@ -54,18 +54,18 @@ const Base = {
             return result + (nums[1] || "");
         },
         $startRecaptcha(action) {
-            return new Promise((resolve,reject)=>{
+            return new Promise((resolve, reject) => {
                 try {
                     if (this.system.open_recaptcha) {
-                        window.grecaptcha.ready(()=>{
-                            grecaptcha.execute(this.system.web_recaptcha_key,{action}).then(token=>{
+                        window.grecaptcha.ready(() => {
+                            grecaptcha.execute(this.system.web_recaptcha_key, { action }).then(token => {
                                 if (!token) {
-                                    Toast.failed(this.$t('PLEASE_CHECK_NETWORK','加载失败，请检查网络连接'))
-                                    this.$webEvent('获取 google token 失败: '+action)
+                                    Toast.failed(this.$t('PLEASE_CHECK_NETWORK', '加载失败，请检查网络连接'))
+                                    this.$webEvent('获取 google token 失败: ' + action)
                                 }
-                                resolve(token?token:false)
-                            }).catch(err=>{
-                                this.$webEvent('获取 google token 失败: '+action)
+                                resolve(token ? token : false)
+                            }).catch(err => {
+                                this.$webEvent('获取 google token 失败: ' + action)
                                 resolve(false)
                             })
                         })
@@ -73,7 +73,7 @@ const Base = {
                         resolve('null')
                     }
                 } catch (err) {
-                    Toast.failed(this.$t('PLEASE_CHECK_NETWORK','加载失败，请检查网络连接'))
+                    Toast.failed(this.$t('PLEASE_CHECK_NETWORK', '加载失败，请检查网络连接'))
                     resolve(false)
                 }
             })
@@ -127,25 +127,25 @@ const Base = {
             }
             return country_code
         },
-        $balanceFormat(value, zero=false) {
+        $balanceFormat(value, zero = false) {
             if (!value) {
                 return zero ? 0 : ''
             }
 
             let v = value.toString()
             if (v.indexOf('.') > -1) {
-                v = v.substring(0, v.indexOf('.')+this.coin_unit.balance+1)
+                v = v.substring(0, v.indexOf('.') + this.coin_unit.balance + 1)
             }
             return v
         },
-        $usdtFormat(value, zero=false) {
+        $usdtFormat(value, zero = false) {
             if (!value) {
                 return zero ? 0 : ''
             }
 
             let v = value.toString()
             if (v.indexOf('.') > -1) {
-                v = v.substring(0, v.indexOf('.')+this.coin_unit.usdt+1)
+                v = v.substring(0, v.indexOf('.') + this.coin_unit.usdt + 1)
             }
             return v
         }
@@ -175,23 +175,23 @@ const mobileApp = {
                 this.$webEvent('浏览器弹出点击保存到桌面', '-')
                 window.deferredPrompt.prompt();
                 window.deferredPrompt.userChoice
-                    .then(choice=>{
-                        if (choice.outcome=='accepted') {
+                    .then(choice => {
+                        if (choice.outcome == 'accepted') {
                             // 同意安装
-                            this.$bus.emit('showPwaBanner',false)
-                            Toast.info(this.$t('INSTALLED_SUCCESSED','安装成功，请查看手机'))
+                            this.$bus.emit('showPwaBanner', false)
+                            Toast.info(this.$t('INSTALLED_SUCCESSED', '安装成功，请查看手机'))
                         } else {
                             // 不同意安装
                         }
                     })
-                    .catch(e=>{
-                        console.log('pwa install error:',e)
+                    .catch(e => {
+                        console.log('pwa install error:', e)
                     })
             } catch (e) {
                 this.$webEvent('浏览器不支持点击保存到桌面', '-')
                 Dialog.failed({
-                    content: this.$t('BROWSER_NOT_SUPPORT','当前浏览器不支持，请使用Chrome浏览器'),
-                    confirmText: this.$t('SURE','确定'),
+                    content: this.$t('BROWSER_NOT_SUPPORT', '当前浏览器不支持，请使用Chrome浏览器'),
+                    confirmText: this.$t('SURE', '确定'),
                     cancelText: this.$t('CANCEL', '取消')
                 })
             }
