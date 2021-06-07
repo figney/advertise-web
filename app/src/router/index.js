@@ -54,6 +54,12 @@ const routes = [
     component: () => import("@/views/TaskShare"),
   },
   {
+    path: "/advertise",
+    name: "Advertise",
+    meta: { no_cache: true },
+    component: () => import("@/views/Advertise"),
+  },
+  {
     path: "/ad_show",
     name: "AdShow",
     meta: { no_cache: true },

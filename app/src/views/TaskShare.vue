@@ -41,7 +41,13 @@
 
     <div class="fixed-platform white-view shadow padding">
       <div
-        class="text-center font-bold fc-error margin-top-xs margin-bottom bounce"
+        class="
+          text-center
+          font-bold
+          fc-error
+          margin-top-xs margin-bottom
+          bounce
+        "
       >
         {{
           $t(
@@ -51,7 +57,13 @@
         }}
       </div>
       <van-button
-        class="bg-primary border-radius-sm font-bold breath-btn margin-bottom-xs"
+        class="
+          bg-primary
+          border-radius-sm
+          font-bold
+          breath-btn
+          margin-bottom-xs
+        "
         style="animation-delay: 3s"
         block
         @click="startNow"
@@ -101,7 +113,7 @@ export default {
   },
   methods: {
     getData(uat) {
-      Toast.loading("loading");
+      //Toast.loading("loading");
       this.$http
         .post("v1/adTaskCheck", {
           uat: uat,
@@ -109,11 +121,11 @@ export default {
         .then((res) => {
           this.task = res.data.user_ad_task.ad_task;
           this.task_user = res.data.user_ad_task.user;
-          Toast.hide();
+          //Toast.hide();
         })
         .catch((err) => {
           this.$toRouter({ name: "Beginner" });
-          Toast.hide();
+          //Toast.hide();
         });
     },
     startNow() {

@@ -136,7 +136,16 @@
 
         <contact :begginer="true" />
         <van-button
-          class="bg-primary fs-16 font-bold border-radius-sm no-border breath-btn wrap-btn beginner-btn"
+          class="
+            bg-primary
+            fs-16
+            font-bold
+            border-radius-sm
+            no-border
+            breath-btn
+            wrap-btn
+            beginner-btn
+          "
           @click="startNow"
         >
           {{ $t("REG_NOW_GET_MONEY", "立即开始领钱") }}
@@ -274,7 +283,7 @@ export default {
         this.$refs.password.focus();
         return;
       }
-      Toast.loading(this.$t("IS_GETTING", "正在领取中"));
+      //Toast.loading(this.$t("IS_GETTING", "正在领取中"));
       this.$startRecaptcha("register").then((g_token) => {
         if (g_token) {
           let inviteId = localStorage.getItem("Invitation") || 0;

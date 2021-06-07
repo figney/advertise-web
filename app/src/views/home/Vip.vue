@@ -5,7 +5,14 @@
     </div>
 
     <div
-      class="margin-lr margin-bottom-sm padding-sm border-radius bg-field flex align-stretch"
+      class="
+        margin-lr margin-bottom-sm
+        padding-sm
+        border-radius
+        bg-field
+        flex
+        align-stretch
+      "
       :style="
         currentVip.bg_image === undefined
           ? 'min-height:1.653rem;'
@@ -88,10 +95,19 @@
           </template>
           <template #default>
             <div
-              class="flex flex-direction border-radius overflow-hidden shadow-sm"
+              class="
+                flex flex-direction
+                border-radius
+                overflow-hidden
+                shadow-sm
+              "
             >
               <div
-                class="padding-tb-sm padding-lr-sm flex flex-direction border-radius"
+                class="
+                  padding-tb-sm padding-lr-sm
+                  flex flex-direction
+                  border-radius
+                "
                 style="background: #ff791a"
               >
                 <div class="flex align-stretch fc-fff">
@@ -111,7 +127,12 @@
                   ></div>
 
                   <div
-                    class="flex flex-direction justify-between padding-left-xs flex-sub"
+                    class="
+                      flex flex-direction
+                      justify-between
+                      padding-left-xs
+                      flex-sub
+                    "
                     style="width: 30%"
                   >
                     <span class="opacity-90 fs-12 margin-bottom-sm">{{
@@ -181,10 +202,19 @@
           </template>
           <template #default>
             <div
-              class="flex flex-direction border-radius overflow-hidden shadow-sm"
+              class="
+                flex flex-direction
+                border-radius
+                overflow-hidden
+                shadow-sm
+              "
             >
               <div
-                class="padding-tb-sm padding-lr-sm flex flex-direction border-radius"
+                class="
+                  padding-tb-sm padding-lr-sm
+                  flex flex-direction
+                  border-radius
+                "
                 style="background: #ff791a"
               >
                 <div class="flex align-stretch fc-fff">
@@ -210,7 +240,12 @@
                   ></div>
 
                   <div
-                    class="flex flex-direction justify-between padding-left-xs flex-sub"
+                    class="
+                      flex flex-direction
+                      justify-between
+                      padding-left-xs
+                      flex-sub
+                    "
                     style="width: 30%"
                   >
                     <span class="opacity-90 fs-12 margin-bottom-sm">{{
@@ -327,7 +362,13 @@
 
     <template v-if="currentVipTab != 'free'">
       <div
-        class="margin-lr margin-bottom-xs flex align-center justify-between padding-lr-xs"
+        class="
+          margin-lr margin-bottom-xs
+          flex
+          align-center
+          justify-between
+          padding-lr-xs
+        "
       >
         <span class="fs-12 fc-secondary">{{
           $t("AVAILABLE", "可用余额")
@@ -339,7 +380,14 @@
       </div>
 
       <div
-        class="margin-lr margin-bottom-xs flex align-center justify-between fc-accent padding-lr-xs"
+        class="
+          margin-lr margin-bottom-xs
+          flex
+          align-center
+          justify-between
+          fc-accent
+          padding-lr-xs
+        "
       >
         <span class="fs-12">{{ $t("NEED_PAY", "开通价格") }}</span>
         <money-number
@@ -365,7 +413,15 @@
     </div>
 
     <div
-      class="padding-sm fc-secondary bg-f1f1f1 margin-lr margin-bottom border-radius fs-12 render-html"
+      class="
+        padding-sm
+        fc-secondary
+        bg-f1f1f1
+        margin-lr margin-bottom
+        border-radius
+        fs-12
+        render-html
+      "
       v-html="buyVipRule.content"
       v-if="buyVipRule"
     />
@@ -591,7 +647,7 @@ export default {
     },
     getVipList() {
       if (!this.vips.length) {
-        Toast.loading("loading");
+        //Toast.loading("loading");
         this.$http
           .get("v1/getVipList")
           .then((res) => {
@@ -599,7 +655,7 @@ export default {
             this.$store.commit("setState", { key: "vips", value: vips });
             this.vipToMap();
             this.isLoading = false;
-            Toast.hide();
+            //Toast.hide();
           })
           .catch((err) => {
             Toast.failed(err.data.message);
@@ -648,7 +704,7 @@ export default {
         this.showShortBalance = true;
         return;
       }
-      Toast.loading("loading");
+      //Toast.loading("loading");
       this.$http
         .post("v1/userBuyVip", {
           id: this.currentVip.id,
@@ -659,7 +715,7 @@ export default {
           this.$store.dispatch("refreshVipInfo");
           this.$store.dispatch("updateUser", res.data.user);
           this.showBuySuccess = true;
-          Toast.hide();
+          //Toast.hide();
         })
         .catch((err) => {
           Toast.failed(err.data.message);

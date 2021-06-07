@@ -7,7 +7,15 @@
       class="no-bg"
     >
       <div
-        class="flex flex-direction border-radius white-view vw-80 bounceInDown overflow-hidden position-re"
+        class="
+          flex flex-direction
+          border-radius
+          white-view
+          vw-80
+          bounceInDown
+          overflow-hidden
+          position-re
+        "
         style="overflow: visible"
       >
         <div class="flex flex-direction padding bg-primary border-radius-top">
@@ -38,7 +46,14 @@
           </div>
 
           <div
-            class="flex align-center border-radius-sm bg-fef3ee padding-lr-sm padding-tb-sm margin-bottom margin-lr-sm"
+            class="
+              flex
+              align-center
+              border-radius-sm
+              bg-fef3ee
+              padding-lr-sm padding-tb-sm
+              margin-bottom margin-lr-sm
+            "
           >
             <img :src="task.icon" class="size-48 border-radius-xs" />
             <div class="flex flex-direction margin-left-sm">
@@ -55,7 +70,15 @@
         </div>
         <div class="padding-lr padding-bottom">
           <van-button
-            class="border-radius-sm bg-primary font-bold fs-16 breath-btn wrap-btn margin-bottom-sm"
+            class="
+              border-radius-sm
+              bg-primary
+              font-bold
+              fs-16
+              breath-btn
+              wrap-btn
+              margin-bottom-sm
+            "
             @click="startDoTask"
             block
           >
@@ -84,7 +107,15 @@
       class="no-bg"
     >
       <div
-        class="flex flex-direction border-radius white-view vw-80 overflow-hidden padding-lr padding-tb-sm fade-in-down"
+        class="
+          flex flex-direction
+          border-radius
+          white-view
+          vw-80
+          overflow-hidden
+          padding-lr padding-tb-sm
+          fade-in-down
+        "
         style="overflow: visible"
       >
         <div class="text-center">
@@ -102,7 +133,13 @@
           class="flex flex-direction border-radius-xs bg-fef3ee margin-bottom"
         >
           <div
-            class="flex align-center justify-between padding-lr-sm padding-tb-xs border-bottom"
+            class="
+              flex
+              align-center
+              justify-between
+              padding-lr-sm padding-tb-xs
+              border-bottom
+            "
           >
             <span class="fs-12 fc-secondary margin-right-sm-sm">{{
               $t("DAY_TASK_NUM", "每日任务次数")
@@ -110,7 +147,13 @@
             <money-number class="fs-16 font-bold" :value="free_task_num" />
           </div>
           <div
-            class="flex align-center justify-between padding-lr-sm padding-tb-xs border-bottom"
+            class="
+              flex
+              align-center
+              justify-between
+              padding-lr-sm padding-tb-xs
+              border-bottom
+            "
           >
             <span class="fs-12 fc-secondary margin-right-sm"
               >{{ $t("PREDICT_DAY_PROFIT", "预估日收益") }}:</span
@@ -122,7 +165,13 @@
             />
           </div>
           <div
-            class="flex align-center justify-between padding-lr-sm padding-tb-xs border-bottom"
+            class="
+              flex
+              align-center
+              justify-between
+              padding-lr-sm padding-tb-xs
+              border-bottom
+            "
           >
             <span class="fs-12 fc-secondary margin-right-sm"
               >{{ $t("PREDICT_MONTH_PROFIT", "预估月收益") }}:</span
@@ -134,7 +183,12 @@
             />
           </div>
           <div
-            class="flex align-center justify-between padding-lr-sm padding-tb-xs"
+            class="
+              flex
+              align-center
+              justify-between
+              padding-lr-sm padding-tb-xs
+            "
           >
             <span class="fs-12 fc-secondary margin-right-sm"
               >{{ $t("PREDICT_YEAR_PROFIT", "预估年收益") }}:</span
@@ -147,7 +201,13 @@
           </div>
         </div>
         <van-button
-          class="bg-primary font-bold border-radius-sm breath-btn margin-bottom-xs"
+          class="
+            bg-primary
+            font-bold
+            border-radius-sm
+            breath-btn
+            margin-bottom-xs
+          "
           @click="toMakeMoney"
           >{{ $t("START_MAKE_MONEY", "立即开始赚钱") }}</van-button
         >
@@ -192,7 +252,7 @@ export default {
   },
   methods: {
     getData() {
-      Toast.loading("loading");
+      //Toast.loading("loading");
       this.$http
         .get("v1/adTaskDetails", {
           params: { id: 0, free: true },
@@ -200,7 +260,7 @@ export default {
         .then((res) => {
           this.task = res.data.ad_task;
           this.show = true;
-          Toast.hide();
+          //Toast.hide();
         })
         .catch((err) => {
           Toast.failed(err.data.message);

@@ -18,7 +18,13 @@
 
     <div class="padding flex flex-direction">
       <div
-        class="white-view border-radius-sm padding flex flex-direction margin-bottom"
+        class="
+          white-view
+          border-radius-sm
+          padding
+          flex flex-direction
+          margin-bottom
+        "
       >
         <div class="fs-16 font-bold margin-bottom-sm">
           {{ $t("SELECT_PAYMENT", "选择充值方式") }}
@@ -126,11 +132,25 @@
     >
       <div class="flex flex-direction">
         <div
-          class="flex flex-direction white-view box-shadow margin-bottom-sm border-radius-sm van-overflow-hidden"
+          class="
+            flex flex-direction
+            white-view
+            box-shadow
+            margin-bottom-sm
+            border-radius-sm
+            van-overflow-hidden
+          "
           style="max-height: 80vh"
         >
           <div
-            class="fs-16 text-center font-bold white-view padding-top margin-bottom-sm"
+            class="
+              fs-16
+              text-center
+              font-bold
+              white-view
+              padding-top
+              margin-bottom-sm
+            "
           >
             {{ $t("SELECT_BANK", "选择银行") }}
           </div>
@@ -153,7 +173,12 @@
               >
             </div>
             <div
-              class="flex flex-direction padding-tb-sm padding-lr bank-btn border-top"
+              class="
+                flex flex-direction
+                padding-tb-sm padding-lr
+                bank-btn
+                border-top
+              "
               @click="bankPay(bank)"
               v-for="(bank, i) in currentChannel.channel_list"
               :key="'bank-pay' + i"
@@ -212,7 +237,14 @@
     <!-- 嵌入的 Youtube 视频 -->
     <van-popup position="bottom" v-model="showVideo">
       <div
-        class="white-view padding-top padding-lr flex flex-direction position-re vh-100 vw-100"
+        class="
+          white-view
+          padding-top padding-lr
+          flex flex-direction
+          position-re
+          vh-100
+          vw-100
+        "
       >
         <van-icon
           size="0.52rem"
@@ -228,7 +260,12 @@
           {{ $t("HOW_TO_DEPOSIT", "如何充值") }}
         </div>
         <div
-          class="border-radius-xs bg-f2f2f6 van-overflow-hidden flex flex-direction"
+          class="
+            border-radius-xs
+            bg-f2f2f6
+            van-overflow-hidden
+            flex flex-direction
+          "
         >
           <template>
             <iframe
@@ -266,7 +303,14 @@
           style="overflow: auto"
         >
           <div
-            class="flex align-center justify-between padding-tb padding-lr bank-btn border-bottom"
+            class="
+              flex
+              align-center
+              justify-between
+              padding-tb padding-lr
+              bank-btn
+              border-bottom
+            "
             v-for="(bank, i) in currentBank.son_bank_list"
             @click="startPay(currentBank.id, bank.code)"
             :key="'bank-pay' + i"
@@ -367,7 +411,7 @@ export default {
       }
     },
     getDepositInfo() {
-      Toast.loading("loading");
+      //Toast.loading("loading");
       this.$http
         .get("v1/rechargeBegin")
         .then((res) => {
@@ -377,7 +421,7 @@ export default {
 
           if (this.channel.length) {
             this.currentChannel = this.channel[0];
-            Toast.hide();
+            //Toast.hide();
           } else {
             Toast.failed(this.$t("NO_DEPOSIT_CHANNEL", "暂无可用充值渠道"));
           }
@@ -411,7 +455,7 @@ export default {
     },
     startQuickPay() {
       if (!this.currentChannel.select_bank) {
-        Toast.loading("loading");
+        //Toast.loading("loading");
         this.$http
           .post("v1/putInInOnlineOrder", {
             channel_id: this.currentChannel.id,
@@ -426,7 +470,7 @@ export default {
           .then((res) => {
             this.$fbq("InitiateCheckout");
             location.href = res.data.pay_url;
-            Toast.hide();
+            //Toast.hide();
           })
           .catch((err) => {
             Toast.failed(err.data.message);
@@ -474,7 +518,7 @@ export default {
       }
     },
     startPay(bankId, son_code = "") {
-      Toast.loading("loading");
+      //Toast.loading("loading");
       this.$http
         .post("v1/putInInOnlineOrder", {
           channel_id: this.currentChannel.id,
@@ -499,7 +543,7 @@ export default {
           this.showQuickPay = false;
           if (typeof res.data.pay_url == "string") {
             // 如果是字符串，跳转到支付地址
-            Toast.hide();
+            //Toast.hide();
             this.$openLink(res.data.pay_url);
           } else {
             // 如果是对象，提交支付表单
@@ -529,7 +573,7 @@ export default {
       document.body.appendChild(form);
       form.submit();
       document.body.removeChild(form);
-      Toast.hide();
+      //Toast.hide();
       this.$toRouter({ name: "Order" });
     },
   },

@@ -7,7 +7,13 @@
         </div>
         <div class="flex align-center margin-bottom">
           <div
-            class="padding-tb-sm padding-lr-sm bg-e8e8e8 border-radius-xs flex-sub margin-right-sm"
+            class="
+              padding-tb-sm padding-lr-sm
+              bg-e8e8e8
+              border-radius-xs
+              flex-sub
+              margin-right-sm
+            "
           >
             {{ share.url }}
           </div>
@@ -127,11 +133,11 @@ export default {
       }
     },
     getShareInfo() {
-      Toast.loading("loading");
+      //Toast.loading("loading");
       this.$http
         .get("v1/shareInfo")
         .then((res) => {
-          Toast.hide();
+          //Toast.hide();
           this.$store.commit("setState", {
             key: "share",
             value: {

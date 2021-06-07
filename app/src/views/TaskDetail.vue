@@ -24,10 +24,22 @@
 
     <div class="flex flex-direction" v-else>
       <div
-        class="padding-lr-sm padding-top white-view flex flex-direction margin-bottom-sm"
+        class="
+          padding-lr-sm padding-top
+          white-view
+          flex flex-direction
+          margin-bottom-sm
+        "
       >
         <div
-          class="border-radius-sm padding-tb-sm padding-lr bg-dark flex flex-direction fc-fff margin-bottom-sm"
+          class="
+            border-radius-sm
+            padding-tb-sm padding-lr
+            bg-dark
+            flex flex-direction
+            fc-fff
+            margin-bottom-sm
+          "
           id="guide-task-detail-step-1"
         >
           <div class="flex align-center margin-bottom-sm">
@@ -85,7 +97,14 @@
 
           <template v-else>
             <div
-              class="fs-20 fc-accent font-bold text-center padding-xs margin-bottom-xs"
+              class="
+                fs-20
+                fc-accent
+                font-bold
+                text-center
+                padding-xs
+                margin-bottom-xs
+              "
             >
               {{ $t("TASK_IS_ENDED", "任务已结束") }}
             </div>
@@ -108,7 +127,16 @@
             {{ $t("TASK_REQUIREMENTS", "任务要求") }}
           </div>
           <div
-            class="border-radius-sm padding-sm bg-f1f1f1 fs-12 fc-error flex align-center margin-bottom"
+            class="
+              border-radius-sm
+              padding-sm
+              bg-f1f1f1
+              fs-12
+              fc-error
+              flex
+              align-center
+              margin-bottom
+            "
           >
             <img
               src="../assets/images/icon_26@2x.png"
@@ -137,7 +165,17 @@
           >
             <div class="font-bold flex align-start margin-bottom">
               <div
-                class="size-18 bg-dark fc-fff border-radius-50 flex align-center justify-center fs-10 margin-right-xs"
+                class="
+                  size-18
+                  bg-dark
+                  fc-fff
+                  border-radius-50
+                  flex
+                  align-center
+                  justify-center
+                  fs-10
+                  margin-right-xs
+                "
                 style="margin-top: 0.04rem"
               >
                 1
@@ -168,7 +206,17 @@
           >
             <div class="font-bold flex align-start margin-bottom">
               <div
-                class="size-18 bg-dark fc-fff border-radius-50 flex align-center justify-center fs-10 margin-right-xs"
+                class="
+                  size-18
+                  bg-dark
+                  fc-fff
+                  border-radius-50
+                  flex
+                  align-center
+                  justify-center
+                  fs-10
+                  margin-right-xs
+                "
                 style="margin-top: 0.04rem"
               >
                 2
@@ -182,21 +230,43 @@
               }}</span>
             </div>
             <div
-              class="margin-bottom-sm border-radius-xs flex align-center justify-center overflow-hidden"
+              class="
+                margin-bottom-sm
+                border-radius-xs
+                flex
+                align-center
+                justify-center
+                overflow-hidden
+              "
               style="border: 1px solid #ddd"
             >
               <img :src="task.data.share_image" style="width: 100%" />
             </div>
             <!--            <div class="margin-bottom-sm text-center fc-accent font-bold">{{$t('LONG_TOUCH_IMG_TO_SAVE','长按此图保存宣传图片')}}</div>-->
             <div
-              class="border-radius-sm padding-sm bg-f1f1f1 fs-12 flex align-center margin-bottom"
+              class="
+                border-radius-sm
+                padding-sm
+                bg-f1f1f1
+                fs-12
+                flex
+                align-center
+                margin-bottom
+              "
             >
               <span v-if="task.data.share_content">{{
                 task.data.share_content.replace("{URL}", "")
               }}</span>
             </div>
             <van-button
-              class="bg-primary font-bold fs-16 no-border border-radius-xs position-re"
+              class="
+                bg-primary
+                font-bold
+                fs-16
+                no-border
+                border-radius-xs
+                position-re
+              "
               @click="startCopy('cp')"
               id="guide-task-detail-step-3"
             >
@@ -215,7 +285,17 @@
           >
             <div class="font-bold flex align-start margin-bottom-sm">
               <div
-                class="size-18 bg-dark fc-fff border-radius-50 flex align-center justify-center fs-10 margin-right-xs"
+                class="
+                  size-18
+                  bg-dark
+                  fc-fff
+                  border-radius-50
+                  flex
+                  align-center
+                  justify-center
+                  fs-10
+                  margin-right-xs
+                "
                 style="margin-top: 0.04rem"
               >
                 3
@@ -285,7 +365,17 @@
           >
             <div class="font-bold flex align-start margin-bottom">
               <div
-                class="size-18 bg-dark fc-fff border-radius-50 flex align-center justify-center fs-10 margin-right-xs"
+                class="
+                  size-18
+                  bg-dark
+                  fc-fff
+                  border-radius-50
+                  flex
+                  align-center
+                  justify-center
+                  fs-10
+                  margin-right-xs
+                "
                 style="margin-top: 0.04rem"
               >
                 4
@@ -300,11 +390,24 @@
             </div>
 
             <div
-              class="flex flex-direction align-center justify-center margin-lr-xs"
+              class="
+                flex flex-direction
+                align-center
+                justify-center
+                margin-lr-xs
+              "
               v-if="user_ad_task.status == 'InProgress'"
             >
               <div
-                class="flex align-center justify-between bg-fef3ee padding-tb-sm padding-lr-sm margin-bottom-xs border-radius-xs"
+                class="
+                  flex
+                  align-center
+                  justify-between
+                  bg-fef3ee
+                  padding-tb-sm padding-lr-sm
+                  margin-bottom-xs
+                  border-radius-xs
+                "
                 style="width: 100%"
               >
                 <span class="fc-secondary">{{
@@ -322,7 +425,15 @@
               </div>
 
               <div
-                class="flex align-center justify-between bg-fef3ee padding-tb-sm padding-lr-sm margin-bottom-xs border-radius-xs"
+                class="
+                  flex
+                  align-center
+                  justify-between
+                  bg-fef3ee
+                  padding-tb-sm padding-lr-sm
+                  margin-bottom-xs
+                  border-radius-xs
+                "
                 style="width: 100%"
               >
                 <span class="fc-secondary">{{
@@ -336,7 +447,15 @@
               </div>
 
               <div
-                class="flex align-center justify-between bg-fef3ee padding-tb-sm padding-lr-sm margin-bottom-xs border-radius-xs"
+                class="
+                  flex
+                  align-center
+                  justify-between
+                  bg-fef3ee
+                  padding-tb-sm padding-lr-sm
+                  margin-bottom-xs
+                  border-radius-xs
+                "
                 style="width: 100%"
               >
                 <span class="fc-secondary">{{
@@ -353,7 +472,14 @@
               <div class="margin-bottom" />
 
               <div
-                class="border-radius-sm padding-sm bg-f1f1f1 fs-12 fc-error margin-bottom"
+                class="
+                  border-radius-sm
+                  padding-sm
+                  bg-f1f1f1
+                  fs-12
+                  fc-error
+                  margin-bottom
+                "
               >
                 <span>{{
                   $t(
@@ -577,7 +703,16 @@
       class="no-bg vh-100 vw-100 flex align-center justify-center"
     >
       <div
-        class="padding flex flex-direction align-center position-re vw-80 border-radius-sm white-view bounceInDown"
+        class="
+          padding
+          flex flex-direction
+          align-center
+          position-re
+          vw-80
+          border-radius-sm
+          white-view
+          bounceInDown
+        "
       >
         <van-icon
           size="0.52rem"
@@ -901,7 +1036,7 @@ export default {
       this.getData(false);
     },
     getData(scroll = true) {
-      Toast.loading("loading");
+      //Toast.loading("loading");
       this.isLoading = true;
       this.$http
         .get("v1/adTaskDetails", {
@@ -931,7 +1066,7 @@ export default {
           setTimeout(() => {
             this.startGuide();
           }, 300);
-          Toast.hide();
+          //Toast.hide();
           this.isLoading = false;
         })
         .catch((err) => {
@@ -987,13 +1122,13 @@ export default {
       if (this.user_ad_task.status == "InProgress") {
         return;
       }
-      Toast.loading("loading");
+      //Toast.loading("loading");
       this.$http
         .post("v1/takeTheAdTask", {
           id: this.task.id,
         })
         .then((res) => {
-          Toast.hide();
+          //Toast.hide();
           this.user_ad_task = res.data.user_ad_task;
           if (this.showGuide) {
             // Toast.info(this.$t('RECEIVE_SUCCESS','接取成功'))
@@ -1011,10 +1146,10 @@ export default {
           }
           if (err.data.message == "10001") {
             this.showLessThenLevel = true;
-            Toast.hide();
+            //Toast.hide();
           } else if (err.data.message == "10002") {
             this.showShortCount = true;
-            Toast.hide();
+            //Toast.hide();
           } else {
             Toast.failed(err.data.message);
           }
@@ -1088,7 +1223,8 @@ export default {
         return;
       }
       let url = this.getShareUrl(type);
-
+      this.$openLink(url);
+      return;
       if (this.task.data.share_content.includes("{URL}")) {
         this.$copyText(this.task.data.share_content.replace("{URL}", url));
       } else {
@@ -1104,7 +1240,7 @@ export default {
       let lang = localStorage.getItem("language");
       let url = this.user_ad_task.url || "";
       url = `${url}${
-        url.includes("?") ? "&go_router=task_share" : "?go_router=task_share"
+        url.includes("?") ? "&go_router=advertise" : "?go_router=advertise"
       }`;
       url = `${url}&s=${type}&lang=${lang}`;
       if (this.user.c_id) {

@@ -100,7 +100,15 @@
     </div>
 
     <div
-      class="margin-lr margin-bottom border-radius-sm padding bg-ecd8af flex align-center justify-between"
+      class="
+        margin-lr margin-bottom
+        border-radius-sm
+        padding
+        bg-ecd8af
+        flex
+        align-center
+        justify-between
+      "
     >
       <div class="fs-24 font-bold">
         <span>{{
@@ -118,7 +126,14 @@
       <div class="fs-16 font-bold">{{ $t("PACKAGE_NUM", "套餐数量") }}</div>
       <div class="flex align-center">
         <div
-          class="flex align-center justify-center border-radius-xs bg-dark size-29"
+          class="
+            flex
+            align-center
+            justify-center
+            border-radius-xs
+            bg-dark
+            size-29
+          "
           @click="subAmount"
         >
           <van-icon color="#ffffff" name="minus" />
@@ -132,7 +147,14 @@
         />
 
         <div
-          class="flex align-center justify-center border-radius-xs bg-dark size-29"
+          class="
+            flex
+            align-center
+            justify-center
+            border-radius-xs
+            bg-dark
+            size-29
+          "
           @click="addAmount"
         >
           <van-icon color="#ffffff" name="plus" />
@@ -141,7 +163,15 @@
     </div>
 
     <div
-      class="margin-lr margin-bottom padding border-radius-sm bg-e8e8e8 fs-12 font-bold render-html"
+      class="
+        margin-lr margin-bottom
+        padding
+        border-radius-sm
+        bg-e8e8e8
+        fs-12
+        font-bold
+        render-html
+      "
       v-html="buyVipRule"
     ></div>
 
@@ -176,7 +206,14 @@
       </div>
 
       <div
-        class="margin-bottom-sm flex align-center justify-between fc-accent padding-lr-xs"
+        class="
+          margin-bottom-sm
+          flex
+          align-center
+          justify-between
+          fc-accent
+          padding-lr-xs
+        "
       >
         <span>{{ $t("NEED_PAY", "需支付") }}</span>
         <money-number
@@ -320,14 +357,14 @@ export default {
     },
     getVipList() {
       if (!this.vips.length) {
-        Toast.loading("loading");
+        //Toast.loading("loading");
         this.$http
           .get("v1/getVipList")
           .then((res) => {
             let vips = this.handleVipList(res.data.list);
             this.$store.commit("setState", { key: "vips", value: vips });
             this.currentVip = this.vips[this.options.start];
-            Toast.hide();
+            //Toast.hide();
           })
           .catch((err) => {
             Toast.failed(err.data.message);
@@ -361,7 +398,7 @@ export default {
         this.showShortBalance = true;
         return;
       }
-      Toast.loading("loading");
+      //Toast.loading("loading");
       this.$http
         .post("v1/userBuyVip", {
           id: this.currentVip.id,
@@ -370,7 +407,7 @@ export default {
         .then((res) => {
           this.$store.dispatch("updateUser", res.data.user);
           this.showBuySuccess = true;
-          Toast.hide();
+          //Toast.hide();
         })
         .catch((err) => {
           Toast.failed(err.data.message);

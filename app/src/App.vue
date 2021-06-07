@@ -2,6 +2,7 @@
   <div id="app" :class="system.default_currency">
     <nprogress-container />
     <install-pwa />
+    <base-socket />
     <template v-if="isLoading">
       <div
         class="
@@ -32,7 +33,6 @@
       <shares />
       <sign-in-up />
       <zalo-share />
-      <base-socket />
 
       <template
         v-if="
