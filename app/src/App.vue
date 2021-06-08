@@ -141,6 +141,7 @@ export default {
   mounted() {
     this.registerDevice();
     this.getVipList();
+    //this.mountSocket();
   },
   methods: {
     mounteRecaptcha() {
@@ -163,12 +164,14 @@ export default {
         }, 500);
         //注册用户
         if (this.user.hash) {
-          this.$socket.emit("init-user", this.user.hash);
+          this.$socket.invoke("SigninAsync", this.user.id);
         }
         console.log("socket connect");
       });
-      this.$socket.on("disconnect", () => {
-        console.log("socket disconnect");
+      this.$socket.on("reconnect", () => {
+        if (this.user.hash) {
+          this.$socket.invoke("SigninAsync", this.user.id);
+        }
       });
     },
     registerDevice() {
@@ -198,7 +201,7 @@ export default {
         .then((res) => {
           if (res.data.user && res.data.user.hash) {
             this.$store.dispatch("updateUser", res.data.user);
-            this.$socket.emit("init-user", res.data.user.hash);
+            this.$socket.invoke("SigninAsync", res.data.user.id);
           }
           this.$store.commit("setState", {
             key: "money_bao_rate",
@@ -283,15 +286,13 @@ export default {
   },
   sockets: {
     connectAsync(message) {
-      console.log("socket connect");
       console.log(message);
       this.$store.commit("setState", { key: "dynamic_init", value: false });
       setTimeout(() => {
         this.$store.commit("setState", { key: "dynamic_init", value: true });
       }, 500);
-      //注册用户
       if (this.user.hash) {
-        this.$socket.emit("init-user", this.user.hash);
+        this.$socket.invoke("SigninAsync", this.user.id);
       }
     },
     disconnectAsync() {

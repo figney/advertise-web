@@ -8,17 +8,110 @@
       @click="importAllLang"
       >Import</van-button
     >
+
     <van-button
       round
       class="bg-blue fc-fff font-bold size-72 margin-bottom"
       @click="getAllLang"
       >Get</van-button
     >
+
     <van-button
       round
       class="bg-error fc-fff font-bold size-72 margin-bottom"
       @click="updateLang"
       >Update</van-button
+    >
+
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('RechargeOrderSuccessNotification')"
+      >RechargeOrderSuccessNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('TransferVoucherRejectNotification')"
+      >TransferVoucherRejectNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('TransferVoucherPassNotification')"
+      >TransferVoucherPassNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserAwardNotification')"
+      >UserAwardNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserDeductAwardNotification')"
+      >UserDeductAwardNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserEarningsNotification')"
+      >UserEarningsNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserFriendDeductAwardNotification')"
+      >UserFriendDeductAwardNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserWithdrawRefundNotification')"
+      >UserWithdrawRefundNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserWithdrawRejectNotification')"
+      >UserWithdrawRejectNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserWithdrawToPayErrorNotification')"
+      >UserWithdrawToPayErrorNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserWithdrawToPayNotification')"
+      >UserWithdrawToPayNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserProductCommissionNotification')"
+      >UserProductCommissionNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserProductOverNotification')"
+      >UserProductOverNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserYesterdayProfitNotification')"
+      >UserYesterdayProfitNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserProductCommissionV2Notification')"
+      >UserProductCommissionV2Notification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserVipCommissionNotification')"
+      >UserVipCommissionNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserAdTaskCommissionNotification')"
+      >UserAdTaskCommissionNotification</van-button
+    >
+    <van-button
+      class="bg-error fc-fff font-bold margin-bottom"
+      @click="testNotify('UserAdTaskFinishedNotification')"
+      >UserAdTaskFinishedNotification</van-button
     >
   </div>
 </template>
@@ -457,6 +550,20 @@ export default {
             console.log("update failed:", err);
           });
       }
+    },
+    testNotify(type) {
+      this.$http
+        .get("v1/testNtf", {
+          params: {
+            type: type,
+          },
+        })
+        .then((res) => {
+          console.log(JSON.stringify(res));
+        })
+        .catch((err) => {
+          Toast.failed(err.data.message);
+        });
     },
   },
 };
