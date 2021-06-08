@@ -101,8 +101,7 @@ export default {
           uat: this.$route.query.uat,
         })
         .then((res) => {
-          this.task = res.data.user_ad_task.ad_task;
-          this.task_user = res.data.user_ad_task.user;
+          console.log(res)
         })
         .catch((err) => {
           console.log(err);
@@ -128,11 +127,8 @@ export default {
 
     startNow() {
       this.$webEvent(`点击加入我是代言人`, this.$route.name + "页面");
-      if (this.isLogin) {
-        this.$toRouter({ name: "HomeTasks" });
-      } else {
-        this.$toRouter({ name: "Beginner" });
-      }
+      this.getData();
+
     },
   },
   beforeDestroy() {
