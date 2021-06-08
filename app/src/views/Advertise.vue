@@ -1,9 +1,28 @@
 <template>
   <div class="task-share-page flex flex-direction">
     <div class="flex flex-direction ad-content overflow-hidden">
-      <div class="flex align-center margin-bottom" style="z-index: 2">
+      <div class="margin-top margin-lr-sm">
+        <!-- <img  @click-left="$router.go(-1)" src="../assets/images/icon_return@2x.png" alt="" style="width:0.75rem;"> -->
+        <van-nav-bar
+          class="no-border-bar shadow"
+          style="z-index: 3"
+          fixed
+          left-arrow
+          @click-left="$router.go(-1)"
+        >
+          <template #title>
+            <div class="fc-default">
+              {{ $t("ADVERTISE_DETAIL", "广告详情") }}
+            </div>
+          </template>
+        </van-nav-bar>
+      </div>
+      <div
+        class="flex align-center margin-bottom"
+        style="z-index: 2; margin-top: 1.2rem"
+      >
         <!-- <img :src="task.icon" class="margin-right-xs" style="height: 0.8rem" /> -->
-        <div class="font-bold fs-18">{{ advertise.title }}</div>
+        <div class="font-bold fs-18 padding-sm">{{ advertise.title }}</div>
       </div>
       <div
         class="padding-sm margin-bottom render-html"
@@ -25,9 +44,7 @@
         style="animation-delay: 3s"
         block
         @click="startNow"
-        >{{
-          time + "  " + $t("START_MAKE_MONEY_FREE", "立刻加入代言人")
-        }}</van-button
+        >{{ $t("START_MAKE_MONEY_FREE", "立刻加入代言人") }}</van-button
       >
     </div>
 
@@ -39,7 +56,7 @@
 
 <script>
 import utils from "@/utils";
-import { Button, Icon } from "vant";
+import { Button, Icon, NavBar } from "vant";
 import { Toast } from "mand-mobile";
 import { Base } from "../mixins";
 import MoneyNumber from "../components/MoneyNumber";
@@ -49,6 +66,7 @@ export default {
     MoneyNumber,
     [Button.name]: Button,
     [Icon.name]: Icon,
+    [NavBar.name]: NavBar,
   },
   data: () => {
     return {
@@ -64,7 +82,6 @@ export default {
   mounted() {
     this.getAdvertise();
     this.countdown();
-
   },
   methods: {
     countdown() {
@@ -86,10 +103,9 @@ export default {
         .then((res) => {
           this.task = res.data.user_ad_task.ad_task;
           this.task_user = res.data.user_ad_task.user;
-
         })
         .catch((err) => {
-
+          console.log(err);
         });
     },
     getAdvertise() {

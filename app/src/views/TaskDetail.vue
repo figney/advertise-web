@@ -225,7 +225,7 @@
                 $t(
                   "AFTER_RECEIVE_TASK_N_HOURS",
                   [task.valid_hour],
-                  "接受任务后请在N个小时内进行分享。保存宣传图 到手机，然后复制推广文案"
+                  "立即观看视频"
                 )
               }}</span>
             </div>
@@ -275,7 +275,7 @@
           </div>
 
           <!-- 步骤3 -->
-          <div
+          <!-- <div
             :class="[
               'task-step-item',
               { 'task-step-item__active': activeStep > 1 },
@@ -324,9 +324,7 @@
                   @click="copyPlat('fb')"
                 />
               </div>
-              <!--              <div class="border-radius-sm padding-sm margin-lr-sm bg-f1f1f1">-->
-              <!--                <img src="../assets/images/icon_18@2x.png" style="height:1.4rem" @click="copyPlat('wa')">-->
-              <!--              </div>-->
+
               <div class="border-radius-sm padding-sm margin-lr-sm bg-f1f1f1">
                 <img
                   src="../assets/images/line.jpg"
@@ -353,10 +351,10 @@
                 )
               }}
             </div>
-          </div>
+          </div> -->
 
           <!-- 步骤4 -->
-          <div
+          <!-- <div
             :class="[
               'task-step-item',
               { 'task-step-item__active': activeStep > 1 },
@@ -489,7 +487,7 @@
                 }}</span>
               </div>
             </div>
-          </div>
+          </div> -->
         </template>
         <div class="margin-bottom margin-lr-xs">
           <van-button
