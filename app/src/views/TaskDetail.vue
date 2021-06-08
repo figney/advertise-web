@@ -1175,7 +1175,7 @@ export default {
       }
       this.shared = true;
       this.removeStyle("#task-step-3", "flash-card");
-      let url = this.getShareUrl(plat);
+      //let url = this.getShareUrl(plat);
       if (this.task.data.share_content.includes("{URL}")) {
         this.$copyText(this.task.data.share_content.replace("{URL}", url));
       } else {
@@ -1217,13 +1217,22 @@ export default {
 
       this.toStep(4);
     },
-    startCopy(type) {
+    startCopy() {
       if (this.activeStep == 1) {
         this.scrollToTop();
         return;
       }
-      let url = this.getShareUrl(type);
-      this.$openLink(url);
+      console.log(this.user_ad_task.id)
+      this.$router.push({ path: "/advertise", query: {uat: this.user_ad_task.id} });
+
+      //let url = this.getShareUrl();
+      //let url = this.user_ad_task.url || "";
+      
+      
+      //let endUrl = url + "#/advertise"
+      //console.log(endUrl)
+      //this.$openLink(endUrl);
+      
       return;
       if (this.task.data.share_content.includes("{URL}")) {
         this.$copyText(this.task.data.share_content.replace("{URL}", url));
@@ -1236,24 +1245,24 @@ export default {
         this.driver2.moveNext();
       }
     },
-    getShareUrl(type = "cp") {
-      let lang = localStorage.getItem("language");
-      let url = this.user_ad_task.url || "";
-      url = `${url}${
-        url.includes("?") ? "&go_router=advertise" : "?go_router=advertise"
-      }`;
-      url = `${url}&s=${type}&lang=${lang}`;
-      if (this.user.c_id) {
-        url += `&ch=${this.user.c_id}`;
-      }
-      if (this.user.l_id) {
-        url += `&cl=${this.user.l_id}`;
-      }
-      if (this.user.id) {
-        url += `&t=${this.user.id}`;
-      }
-      return url;
-    },
+    // getShareUrl(type = "cp") {
+    //   let lang = localStorage.getItem("language");
+    //   let url = this.user_ad_task.url || "";
+    //   url = `${url}${
+    //     url.includes("?") ? "&go_router=advertise" : "?go_router=advertise"
+    //   }`;
+    //   url = `${url}&s=${type}&lang=${lang}`;
+    //   if (this.user.c_id) {
+    //     url += `&ch=${this.user.c_id}`;
+    //   }
+    //   if (this.user.l_id) {
+    //     url += `&cl=${this.user.l_id}`;
+    //   }
+    //   if (this.user.id) {
+    //     url += `&t=${this.user.id}`;
+    //   }
+    //   return url;
+    // },
     toStep(n) {
       if (n <= 5) {
         if (this.showGuide) {

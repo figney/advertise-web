@@ -2,13 +2,13 @@
   <div class="task-share-page flex flex-direction">
     <div class="flex flex-direction ad-content overflow-hidden">
       <div class="flex align-center margin-bottom" style="z-index: 2">
-        <img :src="task.icon" class="margin-right-xs" style="height: 0.8rem" />
-        <div class="font-bold fs-18">{{ task.data.title }}</div>
+        <!-- <img :src="task.icon" class="margin-right-xs" style="height: 0.8rem" /> -->
+        <div class="font-bold fs-18">{{ advertise.title }}</div>
       </div>
       <div
         class="padding-sm margin-bottom render-html"
         style="z-index: 2"
-        v-html="task.data.content"
+        v-html="advertise.content"
       />
     </div>
 
@@ -20,11 +20,14 @@
           font-bold
           breath-btn
           margin-bottom-xs
+          clickdown
         "
         style="animation-delay: 3s"
         block
         @click="startNow"
-        >{{ $t("START_MAKE_MONEY_FREE", "立刻加入代言人") }}</van-button
+        >{{
+          time + "  " + $t("START_MAKE_MONEY_FREE", "立刻加入代言人")
+        }}</van-button
       >
     </div>
 
@@ -49,50 +52,75 @@ export default {
   },
   data: () => {
     return {
-      task_user: {},
-      task: {
-        icon: "",
-        data: {
-          title: "",
-          content: "",
-        },
+      advertise: {
+        title: "",
+        content: "",
       },
+      time: 15,
+      clockInterval: {},
     };
   },
   mixins: [Base],
   mounted() {
-    let urlInfo = utils.getUrlKey(location.href);
-    if (urlInfo.uat) {
-      this.getData(urlInfo.uat);
-    } else {
-      this.$toRouter({ name: "Beginner" });
-    }
+    this.getAdvertise();
+    this.countdown();
+
   },
   methods: {
-    getData(uat) {
+    countdown() {
+      window.clearInterval(this.clockInterval);
+      this.clockInterval = setInterval(() => {
+        if (--this.time <= 0) {
+          window.clearInterval(this.clockInterval);
+          this.getData();
+        }
+      }, 1000);
+    },
+
+    getData() {
       //Toast.loading("loading");
       this.$http
         .post("v1/adTaskCheck", {
-          uat: uat,
+          uat: this.$route.query.uat,
         })
         .then((res) => {
           this.task = res.data.user_ad_task.ad_task;
           this.task_user = res.data.user_ad_task.user;
-          //Toast.hide();
+
         })
         .catch((err) => {
-          this.$toRouter({ name: "Beginner" });
-          //Toast.hide();
+
         });
     },
+    getAdvertise() {
+      let lang = window.localStorage.getItem("language");
+      this.$http
+        .get("v1/at1", {
+          params: {
+            uat: this.$route.query.uat,
+            lang: lang,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          this.advertise = res;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     startNow() {
       this.$webEvent(`点击加入我是代言人`, this.$route.name + "页面");
       if (this.isLogin) {
-        this.$toRouter({ name: "HomeIndex" });
+        this.$toRouter({ name: "HomeTasks" });
       } else {
         this.$toRouter({ name: "Beginner" });
       }
     },
+  },
+  beforeDestroy() {
+    window.clearInterval(this.clockInterval);
   },
 };
 </script>
