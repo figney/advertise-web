@@ -1,4 +1,5 @@
 <template>
+<div>
   <div
     class="white-view ad-card border-radius flex position-re"
     @click="getTaskTheAdTask"
@@ -101,15 +102,13 @@
       </div>
     </div>
 
-    <!-- 等级不足 -->
+
+  </div>
+  <div class="white-view">
+      <!-- 等级不足 -->
     <van-popup v-model="showLessThenLevel" class="vw-80 border-radius-sm">
       <div class="padding flex flex-direction align-center position-re">
-        <van-icon
-          size="0.52rem"
-          name="cross"
-          class="position-ab close-icon"
-          @click="showLessThenLevel = false"
-        />
+         <!-- @click="showLessThenLevel = false" -->
 
         <!--        <img src="../assets/images/icon_10@2x.png" alt="" class="margin-bottom-sm size-52">-->
         <img
@@ -155,12 +154,8 @@
     <!-- 次数不足 -->
     <van-popup v-model="showShortCount" class="vw-80 border-radius-sm">
       <div class="padding flex flex-direction align-center position-re">
-        <van-icon
-          size="0.52rem"
-          name="cross"
-          class="position-ab close-icon"
-          @click="showShortCount = false"
-        />
+        
+        <!-- @click="showShortCount = false" -->
 
         <img
           src="../assets/images/icon_10@2x.png"
@@ -181,7 +176,7 @@
         <van-button
           class="bg-dark fc-fff border-radius-sm"
           block
-          @click="toBuyTaskNum"
+          @click="toBuyTaskNum(ad.vip_level)"
           >{{ $t("BUY_COUNT", "购买次数") }}</van-button
         >
       </div>
@@ -216,6 +211,8 @@
         >
       </div>
     </van-popup>
+  </div>
+
   </div>
 </template>
 
@@ -277,9 +274,9 @@ export default {
       this.showLessThenLevel = false;
       this.$toRouter({ name: "HomeVip", query: { lv: level } });
     },
-    toBuyTaskNum() {
+    toBuyTaskNum(level) {
       this.showShortCount = false;
-      this.$toRouter({ name: "HomeVip" });
+      this.$toRouter({ name: "HomeVip", query: { lv: level } });
     },
     getTaskTheAdTask() {
       this.$http

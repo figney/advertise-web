@@ -182,15 +182,15 @@ export default {
 
   },
   methods: {
-    countdown() {
-      window.clearInterval(this.clockInterval);
-      this.clockInterval = setInterval(() => {
-        if (--this.time <= 0) {
-          window.clearInterval(this.clockInterval);
-          this.getData();
-        }
-      }, 1000);
-    },
+    // countdown() {
+    //   window.clearInterval(this.clockInterval);
+    //   this.clockInterval = setInterval(() => {
+    //     if (--this.time <= 0) {
+    //       window.clearInterval(this.clockInterval);
+    //       this.getData();
+    //     }
+    //   }, 1000);
+    // },
 
     getData() {
       //Toast.loading("loading");
@@ -200,10 +200,6 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          setInterval(() =>{
-            this.$toRouter({ name: "HomeTasks" });
-          },6000)
-          clearInterval();
         })
         .catch((err) => {
           console.log(err);
@@ -230,6 +226,7 @@ export default {
     startNow() {
       this.$webEvent(`点击加入我是代言人`, this.$route.name + "页面");
       this.getData();
+      this.$toRouter({ name: "HomeTasks" });
     },
   },
   beforeDestroy() {
