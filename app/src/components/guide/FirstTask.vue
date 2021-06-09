@@ -276,7 +276,7 @@ export default {
     toMakeMoney() {
       this.$webEvent(`立刻开始赚钱`, this.$route.name + "页面");
       this.show2 = false;
-      this.$toRouter({ name: "TaskDetail", query: { id: this.task.id } });
+      this.$toRouter({ name: "HomeTasks", query: { id: this.task.id } });
     },
   },
 };
