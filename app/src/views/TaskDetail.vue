@@ -123,7 +123,7 @@
 
       <div class="white-view padding-sm flex flex-direction">
         <template v-if="task.rest_count || user_ad_task.status == 'InProgress'">
-          <div class="font-bold margin-bottom-xs">
+          <!-- <div class="font-bold margin-bottom-xs">
             {{ $t("TASK_REQUIREMENTS", "任务要求") }}
           </div>
           <div
@@ -150,7 +150,7 @@
                 "分享完成之后N个有效好友点击链接即可完成任务，奖励将自动发放到您的账户"
               )
             }}</span>
-          </div>
+          </div> -->
           <div class="font-bold margin-bottom-xs">
             {{ $t("TASK_STEPS", "任务步骤") }}
           </div>
@@ -225,7 +225,7 @@
                 $t(
                   "AFTER_RECEIVE_TASK_N_HOURS",
                   [task.valid_hour],
-                  "立即观看视频"
+                  "开始代理任务后，请在1个小时内观看视频，点击下方按钮进行观看"
                 )
               }}</span>
             </div>
@@ -1221,6 +1221,7 @@ export default {
         return;
       }
       console.log(this.user_ad_task.id)
+      console.log(this.task.id)
       this.$router.push({ path: "/advertise", query: {uat: this.user_ad_task.id} });
 
       //let url = this.getShareUrl();
