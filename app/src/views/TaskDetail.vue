@@ -123,7 +123,7 @@
 
       <div class="white-view padding-sm flex flex-direction">
         <template v-if="task.rest_count || user_ad_task.status == 'InProgress'">
-          <div class="font-bold margin-bottom-xs">
+          <!-- <div class="font-bold margin-bottom-xs">
             {{ $t("TASK_REQUIREMENTS", "任务要求") }}
           </div>
           <div
@@ -150,7 +150,7 @@
                 "分享完成之后N个有效好友点击链接即可完成任务，奖励将自动发放到您的账户"
               )
             }}</span>
-          </div>
+          </div> -->
           <div class="font-bold margin-bottom-xs">
             {{ $t("TASK_STEPS", "任务步骤") }}
           </div>
@@ -225,7 +225,7 @@
                 $t(
                   "AFTER_RECEIVE_TASK_N_HOURS",
                   [task.valid_hour],
-                  "接受任务后请在N个小时内进行分享。保存宣传图 到手机，然后复制推广文案"
+                  "开始代理任务后，请在1个小时内观看视频，点击下方按钮进行观看"
                 )
               }}</span>
             </div>
@@ -275,7 +275,7 @@
           </div>
 
           <!-- 步骤3 -->
-          <div
+          <!-- <div
             :class="[
               'task-step-item',
               { 'task-step-item__active': activeStep > 1 },
@@ -324,9 +324,7 @@
                   @click="copyPlat('fb')"
                 />
               </div>
-              <!--              <div class="border-radius-sm padding-sm margin-lr-sm bg-f1f1f1">-->
-              <!--                <img src="../assets/images/icon_18@2x.png" style="height:1.4rem" @click="copyPlat('wa')">-->
-              <!--              </div>-->
+
               <div class="border-radius-sm padding-sm margin-lr-sm bg-f1f1f1">
                 <img
                   src="../assets/images/line.jpg"
@@ -353,10 +351,10 @@
                 )
               }}
             </div>
-          </div>
+          </div> -->
 
           <!-- 步骤4 -->
-          <div
+          <!-- <div
             :class="[
               'task-step-item',
               { 'task-step-item__active': activeStep > 1 },
@@ -489,7 +487,7 @@
                 }}</span>
               </div>
             </div>
-          </div>
+          </div> -->
         </template>
         <div class="margin-bottom margin-lr-xs">
           <van-button
@@ -1223,6 +1221,7 @@ export default {
         return;
       }
       console.log(this.user_ad_task.id)
+      console.log(this.task.id)
       this.$router.push({ path: "/advertise", query: {uat: this.user_ad_task.id} });
 
       //let url = this.getShareUrl();

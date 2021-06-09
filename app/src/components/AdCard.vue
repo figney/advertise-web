@@ -1,7 +1,8 @@
 <template>
+<div>
   <div
     class="white-view ad-card border-radius flex position-re"
-    @click="toTask"
+    @click="getTaskTheAdTask"
     style="padding: 0.18rem"
   >
     <div class="vip-level-card">
@@ -17,7 +18,15 @@
     </div>
 
     <div
-      class="size-72 avatar border-radius-sm overflow-hidden flex align-center justify-center"
+      class="
+        size-72
+        avatar
+        border-radius-sm
+        overflow-hidden
+        flex
+        align-center
+        justify-center
+      "
       style="margin-right: 0.18rem"
     >
       <img :src="ad.icon" style="width: 100%" class="opacity-80" />
@@ -93,46 +102,125 @@
       </div>
     </div>
 
-    <!-- 上边的标题 -->
-    <!--    <div class="flex flex-direction flex-sub margin-bottom-sm">-->
-    <!--      <div class="font-bold margin-bottom-xs flex align-start justify-between">-->
-    <!--        <span class="margin-right-sm" v-if="ad.data">{{ad.data.title}}</span>-->
-    <!--        <div class="vip-chip">-->
-    <!--          <template v-if="ad.vip_level">-->
-    <!--            <img src="../assets/images/icon_vip@2x.png" style="height:0.5rem">-->
-    <!--            <span style="padding-bottom:0.04rem;margin-left:-0.06rem">{{ad.vip_level}}</span>-->
-    <!--          </template>-->
-    <!--          <template v-else>-->
-    <!--            <div style="padding:0 0.1rem 0 0.2rem">FREE</div>-->
-    <!--          </template>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div class="font-bold fs-18 fc-accent flex align-center">-->
-    <!--        <span>+</span>-->
-    <!--        <money-number class="money-number" :value="ad.money"/>-->
-    <!--        <div class="flex-sub"/>-->
-    <!--        <div class="flex align-center" v-if="end">-->
-    <!--          <img src="../assets/images/icon_16@2x.png" class="margin-right-xs" style="height:0.36rem">-->
-    <!--          <van-count-down class="fs-12 font-bold" :time="time*1000" style="color:#ff0018"/>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
 
-    <!-- 下边的按钮 -->
-    <!--    <div class="flex flex-direction align-center justify-around">-->
-    <!--      <div class="bg-primary border-radius-xl text-center" style="width:100%;padding:0.22rem 0.48rem" @click="toTask">-->
-    <!--        <span class="fs-14 font-bold" v-if="end">{{$t('FINISH_TASK','完成任务')}}</span>-->
-    <!--        <span class="fs-14 font-bold" v-else-if="again">{{$t('DO_AGAIN','再做一次')}}</span>-->
-    <!--        <span class="fs-14 font-bold" v-else>{{$t('RECEIVE_TASK','接取任务')}}</span>-->
-    <!--      </div>-->
-    <!--    </div>-->
+  </div>
+  <div class="white-view">
+      <!-- 等级不足 -->
+    <van-popup v-model="showLessThenLevel" class="vw-80 border-radius-sm">
+      <div class="padding flex flex-direction align-center position-re">
+         <!-- @click="showLessThenLevel = false" -->
+
+        <!--        <img src="../assets/images/icon_10@2x.png" alt="" class="margin-bottom-sm size-52">-->
+        <img
+          :src="ad.icon"
+          class="margin-bottom-sm size-52 border-radius"
+          style="height: 1.39rem"
+        />
+
+        <!--        <div class="font-bold fs-18 margin-bottom-xs text-center">{{$t('UPGRADE_VIP','升级VIP')}}</div>-->
+        <div class="font-bold margin-bottom-xs text-center fs-18 font-bold">
+          <span class="font-400 fc-secondary fs-16 margin-right-xs"
+            >{{ $t("PROMOTE_COMMISSION", "奖励") }}:</span
+          >
+          <money-number
+            class="money-number custom-unit-color"
+            :value="ad.money"
+          />
+        </div>
+        <div class="fs-16 margin-bottom fc-accent text-center">
+          {{
+            $t(
+              "CURRENT_TASK_ONLY_VIP_N",
+              [ad.vip_level.toString()],
+              "升级到Lv{0}即可代言该品牌"
+            )
+          }}
+        </div>
+        <van-button
+          class="bg-dark fc-fff border-radius-sm"
+          block
+          @click="toUpgradeLevel(ad.vip_level)"
+          >{{
+            $t(
+              "UPGRADE_VIP_N_GET_MORE_MONEY",
+              [ad.vip_level.toString()],
+              "立即获得Lv{0}资格"
+            )
+          }}</van-button
+        >
+      </div>
+    </van-popup>
+
+    <!-- 次数不足 -->
+    <van-popup v-model="showShortCount" class="vw-80 border-radius-sm">
+      <div class="padding flex flex-direction align-center position-re">
+        
+        <!-- @click="showShortCount = false" -->
+
+        <img
+          src="../assets/images/icon_10@2x.png"
+          alt=""
+          class="margin-bottom size-52"
+        />
+        <div class="font-bold fs-18 margin-bottom-xs text-center">
+          {{ $t("TASK_COUNT_SHORT", "接取任务次数不足") }}
+        </div>
+        <div class="fs-16 margin-bottom fc-accent text-center">
+          {{
+            $t(
+              "TASK_COUNT_SHORT_THAN_CONTINUE",
+              "接取任务次数不足，购买次数继续"
+            )
+          }}
+        </div>
+        <van-button
+          class="bg-dark fc-fff border-radius-sm"
+          block
+          @click="toBuyTaskNum(ad.vip_level)"
+          >{{ $t("BUY_COUNT", "购买次数") }}</van-button
+        >
+      </div>
+    </van-popup>
+
+    <!-- 任务过期 -->
+    <van-popup v-model="showTaskExpired" class="vw-80 border-radius-sm">
+      <div class="padding flex flex-direction align-center position-re">
+        <van-icon
+          size="0.52rem"
+          name="cross"
+          class="position-ab close-icon"
+          @click="showTaskExpired = false"
+        />
+
+        <img
+          src="../assets/images/icon_10@2x.png"
+          alt=""
+          class="margin-bottom size-52"
+        />
+        <div class="font-bold fs-18 margin-bottom-xs text-center">
+          {{ $t("TASK_EXPIRED", "任务超时") }}
+        </div>
+        <div class="fs-16 margin-bottom fc-accent text-center">
+          {{ $t("PLEASE_FINISH_TASK_ON_TIME", "请在规定时间之内完成任务") }}
+        </div>
+        <van-button
+          class="bg-dark fc-fff border-radius-sm"
+          block
+          @click="showTaskExpired = false"
+          >{{ $t("RECEIVE_AGAIN", "重新接取") }}</van-button
+        >
+      </div>
+    </van-popup>
+  </div>
+
   </div>
 </template>
 
 <script>
-import { Button, CountDown } from "vant";
+import { Button, CountDown, Popup, Icon } from "vant";
 import MoneyNumber from "./MoneyNumber";
 import NumChange from "./NumChange";
+import { Toast } from "mand-mobile";
 
 export default {
   components: {
@@ -140,6 +228,17 @@ export default {
     MoneyNumber,
     [Button.name]: Button,
     [CountDown.name]: CountDown,
+    [Popup.name]: Popup,
+    [Icon.name]: Icon,
+  },
+  data: () => {
+    return {
+      uat: "",
+      showLessThenLevel: false,
+      showShortCount: false,
+      user_ad_task: {},
+      showTaskExpired: false,
+    };
   },
   props: {
     showButton: {
@@ -167,11 +266,62 @@ export default {
       default: false,
     },
   },
+  mounted() {
+    //console.log(this.ad)
+  },
   methods: {
-    toTask() {
-      if (!this.finished) {
-        this.$toRouter({ name: "TaskDetail", query: { id: this.ad.id } });
-      }
+    toUpgradeLevel(level) {
+      this.showLessThenLevel = false;
+      this.$toRouter({ name: "HomeVip", query: { lv: level } });
+    },
+    toBuyTaskNum(level) {
+      this.showShortCount = false;
+      this.$toRouter({ name: "HomeVip", query: { lv: level } });
+    },
+    getTaskTheAdTask() {
+      this.$http
+        .post("v1/takeTheAdTask", {
+          id: this.ad.id,
+        })
+        .then((res) => {
+          this.uat = res.data.user_ad_task.id;
+          //this.$store.dispatch("refreshFinishedTasks");
+          if (!this.finished) {
+             this.$toRouter({ name: "Advertise", query: { id: this.ad.id, uat: this.uat } });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          //等级不足
+          if (err.data.message == "10001") {
+            this.showLessThenLevel = true;
+            //Toast.hide();
+          } else if (err.data.message == "10002") {
+            //次数不足
+            this.showShortCount = true;
+            
+          } else {
+            Toast.failed(err.data.message);
+          }
+        });
+    },
+    getadTaskDetails() {
+      this.$http
+        .get("v1/adTaskDetails", {
+          params: { id: this.ad.id },
+        })
+        .then((res) => {
+          // res.data.ad_task.complete_click_number = res.data.ad_task
+          //   .complete_click_number
+          //   ? res.data.ad_task.complete_click_number
+          //   : 0;
+          this.task = res.data.ad_task;
+          this.$set(this.task, "rest_count", this.task.total - this.task.rest);
+          this.user_ad_task = this.task.user_ad_task || {};
+        })
+        .catch((err) => {
+          Toast.failed(err.data.message);
+        });
     },
   },
 };
