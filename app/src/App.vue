@@ -155,25 +155,25 @@ export default {
         document.head.appendChild(script);
       }
     },
-    mountSocket() {
-      //socket
-      this.$socket.on("connect", () => {
-        this.$store.commit("setState", { key: "dynamic_init", value: false });
-        setTimeout(() => {
-          this.$store.commit("setState", { key: "dynamic_init", value: true });
-        }, 500);
-        //注册用户
-        if (this.user.hash) {
-          this.$socket.invoke("SigninAsync", this.user.id);
-        }
-        console.log("socket connect");
-      });
-      this.$socket.on("reconnect", () => {
-        if (this.user.hash) {
-          this.$socket.invoke("SigninAsync", this.user.id);
-        }
-      });
-    },
+    // mountSocket() {
+    //   //socket
+    //   this.$socket.on("connect", () => {
+    //     this.$store.commit("setState", { key: "dynamic_init", value: false });
+    //     setTimeout(() => {
+    //       this.$store.commit("setState", { key: "dynamic_init", value: true });
+    //     }, 500);
+    //     //注册用户
+    //     if (this.user.hash) {
+    //       this.$socket.invoke("SigninAsync", this.user.id);
+    //     }
+    //     console.log("socket connect");
+    //   });
+    //   this.$socket.on("reconnect", () => {
+    //     if (this.user.hash) {
+    //       this.$socket.invoke("SigninAsync", this.user.id);
+    //     }
+    //   });
+    // },
     registerDevice() {
       if (!localStorage.getItem("isRegisterd")) {
         this.$http
