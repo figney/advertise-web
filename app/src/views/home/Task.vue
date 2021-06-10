@@ -193,7 +193,7 @@ export default {
       }
     },
     toMyTasks() {
-      this.$toRouter({ name: "MyTask" });
+      this.$toRouter({ name: "MyTask"});
     },
     startGuide() {
       if (!localStorage.getItem("GuideMoreTask")) {

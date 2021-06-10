@@ -16,6 +16,7 @@
       class="white-view"
       @change="currentTabChange"
     >
+    <!-- 进行中 -->
       <van-tab :title="$t('INPROGRESS', '进行中')" name="InProgress">
         <div
           class="flex flex-direction padding"
@@ -29,6 +30,8 @@
               :end="true"
               :ad="ad.ad_task"
               :time="ad.expired_time"
+              :status="currentTab"
+              :uatid="ad.id"
             />
           </template>
           <template v-else>
@@ -41,6 +44,8 @@
         </div>
       </van-tab>
 
+
+      <!-- 已完成 -->
       <van-tab :title="$t('FINISHED', '已完成')" name="Finished">
         <div
           class="flex flex-direction padding"
@@ -111,6 +116,8 @@ export default {
         })
         .then((res) => {
           this.myTasks[status] = res.data.list;
+          console.log(res)
+          
           //Toast.hide();
         })
         .catch((err) => {

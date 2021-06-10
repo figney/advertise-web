@@ -41,18 +41,18 @@
           id="guide-task-detail-step-1"
         >
           <div class="flex align-center margin-bottom-sm">
-            <img :src="task.icon" class="size-32 margin-right-sm" />
+            <img :src="ad_task.ad_task.icon" class="size-32 margin-right-sm" />
             <span class="fs-14 font-bold flex-sub margin-right-sm">{{
               task.data.title
             }}</span>
             <div class="vip-chip">
-              <template v-if="task.vip_level">
+              <template v-if="ad_task.ad_task.vip_level">
                 <img
                   src="../assets/images/icon_vip@2x.png"
                   style="height: 0.5rem"
                 />
-                <span style="padding-bottom: 0.04rem; margin-left: -0.06rem">{{
-                  task.vip_level
+                <span style="padding-bottom: 0.04rem; margin-left:0.05rem;font-size:0.4rem;">{{
+                  ad_task.ad_task.vip_level
                 }}</span>
               </template>
               <span v-else style="padding-left: 0.1rem">FREE</span>
@@ -63,32 +63,32 @@
             <span class="fs-12">{{ $t("TASK_AWARD", "任务奖励") }}</span>
             <span class="font-bold fc-accent3 fs-19">
               <!-- <money-number class="money-number" :value="task.money"/> -->
-              <num-change class="money-number" :value="task.money" />
+              <num-change class="money-number" :value="ad_task.ad_task.money" />
             </span>
           </div>
 
          
           <div class="flex justify-between align-center margin-bottom-xs" >
             <span class="fs-12">{{ $t("TOTAL_TASK", "需要人数") }}</span>
-            <span class="font-bold" v-if="task.total">{{ task.total }}</span>
+            <span class="font-bold" v-if="ad_task.ad_task.total">{{ ad_task.ad_task.total }}</span>
             <span class="font-bold" v-else>{{
               $t("NOT_LIMIT", "无限制")
             }}</span>
           </div>
           <div
             class="flex justify-between align-center margin-bottom-xs"
-            v-if="task.rest_count > 0"
+            v-if="ad_task.ad_task.rest > 0"
           >
             <span class="fs-12">{{ $t("REST_TASK", "剩余人数") }}</span>
-            <span class="font-bold">{{ task.rest_count }}</span>
+            <span class="font-bold">{{ ad_task.ad_task.rest }}</span>
           </div>
-          <div class="flex justify-between align-center">
+          <!-- <div class="flex justify-between align-center">
             <span class="fs-12">{{ $t("TASK_TIME", "代言时间") }}</span>
             <span class="font-bold">
-              <span>{{ task.valid_hour }}</span>
+              <span>{{ ad_task.ad_task.valid_hour }}</span>
               <span style="margin-left: 0.05rem">h</span>
             </span>
-          </div>   
+          </div>    -->
         </div>
 
         <template v-if="task.data.describe">
@@ -130,7 +130,7 @@
         style="animation-delay: 3s"
         block
         @click="startNow"
-        >{{ $t("START_MAKE_MONEY_FREE", "立刻加入代言人") }}</van-button
+        >{{ $t("START_MAKE_MONEY_FREE", "继续赚钱") }}</van-button
       >
     </div>
 
@@ -173,6 +173,11 @@ export default {
         money: "",
         data: {},
       },
+      ad_task: {
+
+      }
+
+
     };
   },
   mixins: [Base],
@@ -199,6 +204,8 @@ export default {
           uat: this.$route.query.uat,
         })
         .then((res) => {
+          console.log(res.data.user_ad_task)
+          this.ad_task = res.data.user_ad_task
           if(res.data.user_ad_task.status == 'Finished'){
             
           }
@@ -245,15 +252,6 @@ export default {
     position: relative;
     padding-bottom: 3.36rem;
 
-    //&::before {
-    //  position: absolute;
-    //  content: "";
-    //  left: 0;
-    //  right: 0;
-    //  top: 0;
-    //  bottom: 0;
-    //  background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.08) 100%);
-    //}
   }
 
   .fixed-platform {

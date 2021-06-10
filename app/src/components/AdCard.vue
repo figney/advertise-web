@@ -2,7 +2,7 @@
 <div>
   <div
     class="white-view ad-card border-radius flex position-re"
-    @click="getTaskTheAdTask"
+    @click="getTaskTheAdTask(status,uatid)"
     style="padding: 0.18rem"
   >
     <div class="vip-level-card">
@@ -238,6 +238,7 @@ export default {
       showShortCount: false,
       user_ad_task: {},
       showTaskExpired: false,
+      
     };
   },
   props: {
@@ -261,13 +262,19 @@ export default {
       type: Number,
       default: 0,
     },
+    uatid: {
+      type: Number,
+      default: 0
+    },
     finished: {
       type: Boolean,
       default: false,
     },
+    status: '',
+    
   },
   mounted() {
-    //console.log(this.ad)
+   
   },
   methods: {
     toUpgradeLevel(level) {
@@ -278,20 +285,27 @@ export default {
       this.showShortCount = false;
       this.$toRouter({ name: "HomeVip", query: { lv: level } });
     },
-    getTaskTheAdTask() {
+    getTaskTheAdTask(status,uatid) {
+      if(status == 'InProgress'){
+        this.$toRouter({ name: "Advertise", query: { id: this.ad.id, uat: uatid } });
+        return 
+      }
       this.$http
         .post("v1/takeTheAdTask", {
           id: this.ad.id,
         })
         .then((res) => {
           this.uat = res.data.user_ad_task.id;
-          //this.$store.dispatch("refreshFinishedTasks");
+          //this.$toRouter({ name: "Advertise", query: { id: this.ad.id, uat: this.uat } });
           if (!this.finished) {
              this.$toRouter({ name: "Advertise", query: { id: this.ad.id, uat: this.uat } });
           }
+          else{
+            console.log(res);
+            this.$toRouter({ name: "Advertise", query: { id: this.ad.id, uat: this.uat } });
+          }
         })
         .catch((err) => {
-          console.log(err);
           //等级不足
           if (err.data.message == "10001") {
             this.showLessThenLevel = true;
@@ -299,8 +313,8 @@ export default {
           } else if (err.data.message == "10002") {
             //次数不足
             this.showShortCount = true;
-            
-          } else {
+          }
+          else {
             Toast.failed(err.data.message);
           }
         });

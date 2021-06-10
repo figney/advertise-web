@@ -44,7 +44,7 @@ Vue.use(NProgress, {
   autoFinish: false,
 });
 
-Vue.use(signalR, '/hubs/messager');
+Vue.use(signalR, 'http://192.168.6.106:5000/hubs/messager');
 
 Vue.prototype.$app_name = config.app_name
 
