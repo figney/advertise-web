@@ -281,7 +281,7 @@
             <iframe
               :key="'Pay_video'"
               width="100%"
-              height="195px"
+              height="250px"
               src="https://www.youtube.com/embed/-tP15UUXoFA"
               title="YouTube video player"
               frameborder="0"
@@ -292,7 +292,7 @@
             <iframe
               :key="'Pay_video'"
               width="100%"
-              height="195px"
+              height="250px"
               src="https://www.youtube.com/embed/kY8aN3YsJjQ"
               title="YouTube video player"
               frameborder="0"
@@ -303,7 +303,7 @@
             <iframe
               :key="'Pay_video'"
               width="100%"
-              height="195px"
+              height="250px"
               src="https://www.youtube.com/embed/jqe-Jm4T0sc"
               title="YouTube video player"
               frameborder="0"
