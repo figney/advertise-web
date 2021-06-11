@@ -2,13 +2,15 @@
   <div class="index-page flex flex-direction">
     <div class="primary-wrap flex flex-direction padding">
       <div
-        class="flex align-center margin-bottom justify-between"
+        class="flex align-center margin-bottom-sm justify-between"
         style="z-index: 2"
       >
-        <balance-banner />
-        <div class="flex align-center text-nowrap margin-left">
-          <select-lang />
-        </div>
+        <template>
+          <balance-banner />
+          <div class="flex align-center text-nowrap margin-left">
+            <select-lang />
+          </div>
+        </template>
       </div>
 
       <base-swipe-ad-banner
@@ -34,7 +36,16 @@
     </div>
 
     <div
-      class="margin-lr margin-bottom-sm border-radius bg-dark fc-primary font-bold fs-12 padding-lr padding-tb-sm position-re"
+      class="
+        margin-lr margin-bottom-sm
+        border-radius
+        bg-dark
+        fc-primary
+        font-bold
+        fs-12
+        padding-lr padding-tb-sm
+        position-re
+      "
       style="min-height: 1.52rem"
     >
       <loading-view v-if="loadingAbout" iconTheme="light" :vertical="false" />
@@ -91,7 +102,14 @@
                 {{ $t("YOU_NOT_BUY_VIP", "您暂未开通VIP") }}
               </div>
               <van-button
-                class="bg-primary font-bold fs-14 padding-tb-xs line-height-15 wrap-btn"
+                class="
+                  bg-primary
+                  font-bold
+                  fs-14
+                  padding-tb-xs
+                  line-height-15
+                  wrap-btn
+                "
                 style="min-height: 1.17334rem; height: unset"
                 round
                 @click="$toRouter({ name: 'HomeVip' })"
@@ -131,7 +149,13 @@
                 </div>
               </div>
               <van-button
-                class="margin-lr margin-bottom bg-primary font-bold fs-14 wrap-btn"
+                class="
+                  margin-lr margin-bottom
+                  bg-primary
+                  font-bold
+                  fs-14
+                  wrap-btn
+                "
                 round
                 @click="$toRouter({ name: 'HomeTasks' })"
                 >{{ $t("DO_TASK_NOW", "做任务") }}</van-button

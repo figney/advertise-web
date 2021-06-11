@@ -1,5 +1,5 @@
 <template>
-  <div class="base-swipe-ad-banner position-re" style="height:2.5rem">
+  <div class="base-swipe-ad-banner position-re" >
 
     <!--    class="bg-432af5"-->
     <md-swiper
