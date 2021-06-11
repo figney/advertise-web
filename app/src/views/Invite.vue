@@ -52,7 +52,7 @@
         <div class="flex-sub flex flex-direction padding-sm border-radius-xs" style="width:30%;background:#FFEBE3">
           <div class="margin-bottom-xs">{{$t('TOTAL_PROFIT','累计收益')}}</div>
           <div class="fs-16 fc-ec4416 font-bold">
-            <money-number :value="user.invite_award" class="money-number"/>
+            <money-number :value="user.invite_commission" class="money-number"/>
           </div>
         </div>
       </div>

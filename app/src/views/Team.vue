@@ -27,7 +27,7 @@
         <div class="fs-20 font-bold">
           <money-number
             class="money-number"
-            :value="user.invite_award"
+            :value="user.invite_commission"
           />
         </div>
       </div>
@@ -98,7 +98,7 @@
             <span class="fs-14 font-bold fc-default margin-right-xs text-nowrap text-ellipsis overflow-hidden">{{friend.name}}</span>
             <div class="vip-chip">
               <img src="../assets/images/icon_vip@2x.png" style="height:0.5rem">
-              <span style="padding-bottom:0.04rem;margin-left:-0.06rem">{{friend.vip_level || 0}}</span>
+              <span style="padding-bottom:0.04rem;margin-left:-0.06rem">{{friend.level || 0}}</span>
             </div>
           </div>
         </template>
@@ -112,7 +112,7 @@
             <div class="flex flex-direction align-center">
               <money-number
                   class="fs-17 font-bold fc-accent money-number"
-                  :value="friend.invite_award"
+                  :value="friend.invite_commission"
                   :precision="coin_unit.balance"
               />
               <span class="fc-888 fs-10">{{$t('CONTRIBUTE_AMOUNT','贡献金额')}}</span>
