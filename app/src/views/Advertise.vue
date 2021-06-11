@@ -28,6 +28,7 @@
           margin-bottom-sm
         "
         style="margin-top:1rem;"
+        v-if="ad_task.ad_task"
       >
         <div
           class="
@@ -102,18 +103,18 @@
       </div>
 
 
-<!-- 后台获取广告信息 check-->
+<!-- 获取视频广告信息-->
       <div
         class="flex align-center margin-bottom"
-        style="z-index: 2; "
+        style="z-index: 2; margin-top:0.5rem;"
       >
         <!-- <img :src="task.icon" class="margin-right-xs" style="height: 0.8rem" /> -->
-        <div class="font-bold fs-18 padding-sm">{{ advertise.title }}</div>
+        <div class="font-bold fs-18 padding-sm">{{ this.at1.title }}</div>
       </div>
       <div
         class="padding-sm margin-bottom render-html"
-        style="z-index: 2"
-        v-html="advertise.content"
+        style="z-index: 2;"
+        v-html="this.at1.content"
       />
     </div>
 
@@ -161,10 +162,7 @@ export default {
   },
   data: () => {
     return {
-      advertise: {
-        title: "",
-        content: "",
-      },
+      at1: {},
       time: 15,
       clockInterval: {},
       task: {
@@ -173,18 +171,15 @@ export default {
         money: "",
         data: {},
       },
-      ad_task: {
-
-      }
-
-
+      ad_task: {}
     };
   },
   mixins: [Base],
-  mounted() {
+  created() {
     this.getAdvertise();
-    this.countdown();
-
+  },
+  mounted() {
+   this.countdown();
   },
   methods: {
     countdown() {
@@ -224,8 +219,8 @@ export default {
           },
         })
         .then((res) => {
-         
-          this.advertise = res;
+          this.at1 = res;
+          console.log(this.at1)
         })
         .catch((err) => {
           
