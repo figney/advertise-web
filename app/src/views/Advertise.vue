@@ -49,7 +49,7 @@
               <template v-if="ad_task.ad_task.vip_level">
                 <img
                   src="../assets/images/icon_vip@2x.png"
-                  style="height: 0.5rem"
+                  style="height: 0.5rem;margin-bottom:0.1rem;"
                 />
                 <span style="padding-bottom: 0.04rem; margin-left:0.05rem;font-size:0.4rem;">{{
                   ad_task.ad_task.vip_level
