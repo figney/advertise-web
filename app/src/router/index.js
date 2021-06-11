@@ -69,7 +69,7 @@ const routes = [
     path: "/beginner",
     name: "Beginner",
     // meta: { no_cache: true },
-    component: () => import("@/views/Beginner.bak2"),
+    component: () => import("@/views/NewBeginner"),
   },
   {
     path: "/team",

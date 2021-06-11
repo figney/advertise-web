@@ -5,8 +5,8 @@
         <div class="text-center margin-bottom">
           {{ $t("CLICK_BTN_AUTO_COPY", "点击按钮自动复制分享链接") }}
         </div>
-        <div class="flex align-center margin-bottom">
-          <div
+        <div class="flex align-center margin-bottom ">
+          <!-- <div
             class="
               padding-tb-sm padding-lr-sm
               bg-e8e8e8
@@ -16,7 +16,10 @@
             "
           >
             {{ share.url }}
-          </div>
+          </div> -->
+
+          <van-field class="padding-tb-sm padding-lr-sm bg-e8e8e8 border-radius-xs flex-sub margin-right-sm"  :value='share.url' readonly  />
+        
           <div
             class="bg-primary padding-tb-sm padding-lr-lg border-radius-xs"
             @click="startCopy('cp')"
@@ -49,7 +52,7 @@
 </template>
 
 <script>
-import { Button, Popup } from "vant";
+import { Button, Popup, Field  } from "vant";
 import { Toast } from "mand-mobile";
 import { Base } from "../mixins";
 
@@ -57,10 +60,12 @@ export default {
   components: {
     [Popup.name]: Popup,
     [Button.name]: Button,
+    [Field.name]: Field 
   },
   data: () => {
     return {
       show: false,
+      value:'',
       options: [
         // {
         //   name: 'Whatsapp',
@@ -188,4 +193,12 @@ export default {
 </script>
 
 <style lang="scss">
+.share-com {
+  .van-field__control:disabled {
+    color: #c8c9cc;
+    cursor: not-allowed;
+    opacity: 1;
+    -webkit-text-fill-color: #000;
+  }
+}
 </style>
