@@ -144,7 +144,7 @@
             <span class="fs-12 fc-secondary margin-right-sm-sm">{{
               $t("DAY_TASK_NUM", "每日任务次数")
             }}</span>
-            <money-number class="fs-16 font-bold" :value="free_task_num" />
+            <num-change class="fs-16 font-bold" :value="free_task_num" />
           </div>
           <div
             class="
@@ -219,12 +219,14 @@
 <script>
 import { Button, CountDown, Icon, Popup } from "vant";
 import MoneyNumber from "../MoneyNumber";
+import NumChange from "../NumChange";
 import { Toast } from "mand-mobile";
 import { mapState } from "vuex";
 
 export default {
   components: {
     MoneyNumber,
+    NumChange,
     [CountDown.name]: CountDown,
     [Popup.name]: Popup,
     [Icon.name]: Icon,
