@@ -27,8 +27,8 @@
           flex flex-direction
           margin-bottom-sm
         "
-        style="margin-top:1rem;"
-        v-if="ad_task.ad_task"
+        style="margin-top: 1rem"
+        v-if="ad"
       >
         <div
           class="
@@ -42,19 +42,24 @@
           id="guide-task-detail-step-1"
         >
           <div class="flex align-center margin-bottom-sm">
-            <img :src="ad_task.ad_task.icon" class="size-32 margin-right-sm" />
+            <img :src="ad.icon" class="size-32 margin-right-sm" />
             <span class="fs-14 font-bold flex-sub margin-right-sm">{{
               task.data.title
             }}</span>
             <div class="vip-chip">
-              <template v-if="ad_task.ad_task.vip_level">
+              <template v-if="ad.vip_level">
                 <img
                   src="../assets/images/icon_vip@2x.png"
-                  style="height: 0.5rem;margin-bottom:0.1rem;"
+                  style="height: 0.5rem; margin-bottom: 0.1rem"
                 />
-                <span style="padding-bottom: 0.04rem; margin-left:0.05rem;font-size:0.4rem;">{{
-                  ad_task.ad_task.vip_level
-                }}</span>
+                <span
+                  style="
+                    padding-bottom: 0.04rem;
+                    margin-left: 0.05rem;
+                    font-size: 0.4rem;
+                  "
+                  >{{ ad.vip_level }}</span
+                >
               </template>
               <span v-else style="padding-left: 0.1rem">FREE</span>
             </div>
@@ -64,24 +69,23 @@
             <span class="fs-12">{{ $t("TASK_AWARD", "任务奖励") }}</span>
             <span class="font-bold fc-accent3 fs-19">
               <!-- <money-number class="money-number" :value="task.money"/> -->
-              <num-change class="money-number" :value="ad_task.ad_task.money" />
+              <num-change class="money-number" :value="ad.money" />
             </span>
           </div>
 
-         
-          <div class="flex justify-between align-center margin-bottom-xs" >
+          <div class="flex justify-between align-center margin-bottom-xs">
             <span class="fs-12">{{ $t("TOTAL_TASK", "需要人数") }}</span>
-            <span class="font-bold" v-if="ad_task.ad_task.total">{{ ad_task.ad_task.total }}</span>
+            <span class="font-bold" v-if="ad.total">{{ ad.total }}</span>
             <span class="font-bold" v-else>{{
               $t("NOT_LIMIT", "无限制")
             }}</span>
           </div>
           <div
             class="flex justify-between align-center margin-bottom-xs"
-            v-if="ad_task.ad_task.rest > 0"
+            v-if="ad.rest > 0"
           >
             <span class="fs-12">{{ $t("REST_TASK", "剩余人数") }}</span>
-            <span class="font-bold">{{ ad_task.ad_task.rest }}</span>
+            <span class="font-bold">{{ ad.total - ad.rest }}</span>
           </div>
           <!-- <div class="flex justify-between align-center">
             <span class="fs-12">{{ $t("TASK_TIME", "代言时间") }}</span>
@@ -102,18 +106,17 @@
         </template>
       </div>
 
-
-<!-- 获取视频广告信息-->
+      <!-- 获取视频广告信息-->
       <div
         class="flex align-center margin-bottom"
-        style="z-index: 2; margin-top:0.5rem;"
+        style="z-index: 2; margin-top: 0.5rem"
       >
         <!-- <img :src="task.icon" class="margin-right-xs" style="height: 0.8rem" /> -->
         <div class="font-bold fs-18 padding-sm">{{ this.at1.title }}</div>
       </div>
       <div
         class="padding-sm margin-bottom render-html"
-        style="z-index: 2;"
+        style="z-index: 2"
         v-html="this.at1.content"
       />
     </div>
@@ -163,7 +166,7 @@ export default {
   data: () => {
     return {
       at1: {},
-      time: 15,
+      time: 5,
       clockInterval: {},
       task: {
         vip_level: "",
@@ -171,20 +174,22 @@ export default {
         money: "",
         data: {},
       },
-      ad_task: {}
+      ad: {},
     };
   },
   mixins: [Base],
   created() {
+    this.ad = this.$route.query.ad;
     this.getAdvertise();
   },
   mounted() {
-   this.countdown();
+    this.countdown();
   },
   methods: {
     countdown() {
       window.clearInterval(this.clockInterval);
       this.clockInterval = setInterval(() => {
+        console.log(this.time);
         if (--this.time <= 0) {
           window.clearInterval(this.clockInterval);
           this.getData();
@@ -199,10 +204,9 @@ export default {
           uat: this.$route.query.uat,
         })
         .then((res) => {
-          
-         // console.log(res.data.user_ad_task)
-          this.ad_task = res.data.user_ad_task
-          if(res.data.user_ad_task.status == 'Finished'){
+          // console.log(res.data.user_ad_task)
+          if (res.data.user_ad_task.status == "Finished") {
+            this.$store.dispatch("refreshUser");
             this.$store.dispatch("refreshFinishedTasks");
           }
         })
@@ -221,18 +225,30 @@ export default {
         })
         .then((res) => {
           this.at1 = res;
-          
-          console.log(this.at1)
+          console.log(this.at1);
         })
-        .catch((err) => {
-          
-        });
+        .catch((err) => {});
     },
 
     startNow() {
-      //this.$webEvent(`点击加入我是代言人`, this.$route.name + "页面");
-      this.getData();
-      this.$toRouter({ name: "HomeTasks" });
+      this.$http
+        .post("v1/adTaskCheck", {
+          uat: this.$route.query.uat,
+        })
+        .then((res) => {
+          // console.log(res.data.user_ad_task)
+          if (res.data.user_ad_task.status == "Finished") {
+            this.$store.dispatch("refreshUser");
+            this.$store.dispatch("refreshFinishedTasks");
+            this.$toRouter({
+              name: "HomeTasks",
+              query: { lv: this.ad.vip_level },
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   beforeDestroy() {
@@ -248,7 +264,6 @@ export default {
   .ad-content {
     position: relative;
     padding-bottom: 3.36rem;
-
   }
 
   .fixed-platform {
