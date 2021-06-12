@@ -199,10 +199,11 @@ export default {
           uat: this.$route.query.uat,
         })
         .then((res) => {
-          console.log(res.data.user_ad_task)
+          
+         // console.log(res.data.user_ad_task)
           this.ad_task = res.data.user_ad_task
           if(res.data.user_ad_task.status == 'Finished'){
-            
+            this.$store.dispatch("refreshFinishedTasks");
           }
         })
         .catch((err) => {
@@ -220,6 +221,7 @@ export default {
         })
         .then((res) => {
           this.at1 = res;
+          
           console.log(this.at1)
         })
         .catch((err) => {
