@@ -93,11 +93,11 @@
           style="width: 30%; flex-grow: 1"
         >
           <div class="fs-19 margin-bottom-xs text-nowrap">
-            <num-change
+            <!-- <num-change
               class="font-bold money-number"
               :value="wallet.wallet_count.balance_earnings"
-            />
-            <!--            <money-number class="font-bold money-number" :value="wallet.wallet_count.balance_earnings"/>-->
+            /> -->
+            <money-number class="font-bold money-number" :value="wallet.wallet_count.balance_earnings"/>
           </div>
           <div class="margin-bottom-sm fc-secondary">
             {{ $t("TOTAL_EARNINGS", "累计收益") }}
