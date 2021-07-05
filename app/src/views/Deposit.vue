@@ -282,7 +282,7 @@
               :key="'Pay_video'"
               width="100%"
               height="250px"
-              src="https://www.youtube.com/embed/-tP15UUXoFA"
+              src="https://www.youtube.com/embed/imF2WV_YBlc"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -293,22 +293,12 @@
               :key="'Pay_video'"
               width="100%"
               height="250px"
-              src="https://www.youtube.com/embed/kY8aN3YsJjQ"
+              src="https://www.youtube.com/embed/TH76FEUMZq0"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
               class="margin-bottom"
-            ></iframe>
-            <iframe
-              :key="'Pay_video'"
-              width="100%"
-              height="250px"
-              src="https://www.youtube.com/embed/jqe-Jm4T0sc"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
             ></iframe>
             <!-- <iframe width="100%" height="195px" src="https://www.youtube.com/embed/-tP15UUXoFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <iframe width="100%" height="195px" src="https://www.youtube.com/embed/kY8aN3YsJjQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
