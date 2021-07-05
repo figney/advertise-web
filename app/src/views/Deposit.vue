@@ -279,7 +279,7 @@
               allowfullscreen
             ></iframe> -->
             <iframe
-              :key="'Pay_video'"
+              
               width="100%"
               height="250px"
               src="https://www.youtube.com/embed/imF2WV_YBlc"
@@ -290,7 +290,7 @@
               class="margin-bottom"
             ></iframe>
             <iframe
-              :key="'Pay_video'"
+              
               width="100%"
               height="250px"
               src="https://www.youtube.com/embed/TH76FEUMZq0"
