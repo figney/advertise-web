@@ -96,10 +96,9 @@
         <template #title>
           <div class="flex align-center" style="max-width:5rem">
             <span class="fs-14 font-bold fc-default margin-right-xs text-nowrap text-ellipsis overflow-hidden">{{friend.name}}</span>
-            <!-- <div class="vip-chip">
+            <div v-if="friend.invite_commission" class="vip-chip">
               <img src="../assets/images/icon_vip@2x.png" style="height:0.5rem">
-              <span style="padding-bottom:0.04rem;margin-left:-0.06rem">{{friend.level || 0}}</span>
-            </div> -->
+            </div>
           </div>
         </template>
         <template #label>
